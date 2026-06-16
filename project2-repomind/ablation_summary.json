@@ -1,0 +1,98 @@
+{
+  "results": {
+    "①  基线 DeepSeek（无PE/RAG）": {
+      "pct": 68.7,
+      "model": "DeepSeek-671B"
+    },
+    "②  PE only": {
+      "pct": 80.3,
+      "model": "DeepSeek-671B"
+    },
+    "③  RAG only": {
+      "pct": 94.2,
+      "model": "DeepSeek-671B"
+    },
+    "④  PE + RAG": {
+      "pct": 93.9,
+      "model": "DeepSeek-671B"
+    },
+    "⑤  基线 Qwen-1.5B（无PE/RAG/FT）": {
+      "pct": 26.2,
+      "model": "Qwen-1.5B"
+    },
+    "⑥  Fine-tune only": {
+      "pct": 67.0,
+      "model": "Qwen-1.5B+LoRA"
+    },
+    "⑦  PE + Fine-tune": {
+      "pct": 66.7,
+      "model": "Qwen-1.5B+LoRA"
+    },
+    "⑧  RAG + Fine-tune": {
+      "pct": 48.0,
+      "model": "Qwen-1.5B+LoRA"
+    },
+    "⑨  All（PE+RAG+FT）": {
+      "pct": 77.2,
+      "model": "Qwen-1.5B+LoRA"
+    }
+  },
+  "by_category": {
+    "①基线": [
+      90.0,
+      100.0,
+      83.3,
+      87.5,
+      57.2
+    ],
+    "②PE": [
+      96.7,
+      96.7,
+      95.8,
+      100.0,
+      71.6
+    ],
+    "③RAG": [
+      90.0,
+      100.0,
+      83.3,
+      81.2,
+      96.4
+    ],
+    "④PE+RAG": [
+      86.7,
+      100.0,
+      87.5,
+      100.0,
+      94.3
+    ],
+    "⑥FT": [
+      83.3,
+      76.7,
+      75.0,
+      50.0,
+      63.4
+    ],
+    "⑦PE+FT": [
+      83.3,
+      76.7,
+      75.0,
+      50.0,
+      62.9
+    ],
+    "⑧RAG+FT": [
+      60.0,
+      43.3,
+      8.3,
+      31.2,
+      53.1
+    ],
+    "⑨All": [
+      73.3,
+      80.0,
+      54.2,
+      56.2,
+      82.0
+    ]
+  }
+}

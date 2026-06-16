@@ -1,0 +1,1337 @@
+{
+  "summary": {
+    "percentage": 94.2,
+    "by_category": {
+      "A_simple": 90.0,
+      "B_cross_file": 100.0,
+      "C_fuzzy": 83.3,
+      "D_edge": 81.2,
+      "auto_generated": 96.4
+    }
+  },
+  "details": [
+    {
+      "id": "A01",
+      "category": "A_simple",
+      "query": "requests库里发送GET请求的核心函数在哪里？",
+      "expected_file": "requests/api.py",
+      "expected_function": "get",
+      "score": 2,
+      "response": "根据检索到的代码片段，requests库中发送GET请求的核心函数位于以下位置：\n\n1. **顶层函数**：`requests/api.py` 中的 `get` 函数\n   - 文件：`requests/api.py`\n   - 函数名：`get`\n   - 这是用户直接调用 `requests.get()` 时使用的入口函数\n\n2. **底层实现**：`requests/api.py` 中的 `request` 函数\n   - 文件：`requests/api.py`\n   - 函数名：`request`\n   - `get` 函数内部调用 `request(\"get\", url, params=params, **kwargs)`，这是实际构造和发送请求的核心函数\n\n3. **Session方法**：`requests/sessions.py` 中的 `Session.get` 方法\n   - 文件：`requests/sessions.py`\n   - 类：`Session`\n   - 方法名：`get`\n   - 当使用 `requests.Session()` 时，通过 `session.get()` 调用此方法，它内部调用 `self.request(\"GET\", url, params=params, **kwargs)`\n\n**核心函数总结**：\n- 最常用的入口：`requests/api.py` → `get`\n- 实际执行请求的核心：`requests/api.py` → `request`\n- Session模式下的入口：`requests/sessions.py` → `Session.get`"
+    },
+    {
+      "id": "A02",
+      "category": "A_simple",
+      "query": "如何在requests中设置请求超时时间？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "request",
+      "score": 2,
+      "response": "根据检索到的代码，在requests中设置请求超时时间的方法如下：\n\n## 设置超时的方法\n\n### 1. 在Session级别设置（推荐）\n**文件**: `requests/sessions.py`\n**类**: `Session`\n**方法**: `request`\n\n```python\nimport requests\n\n# 创建Session并设置默认超时\nsession = requests.Session()\nsession.request(\n    method='GET',\n    url='https://example.com',\n    timeout=5.0  # 设置5秒超时\n)\n```\n\n### 2. 在Session.send()方法中设置\n**文件**: `requests/sessions.py`\n**类**: `Session`\n**方法**: `send`\n\n```python\nsession = requests.Session()\nrequest = requests.Request('GET', 'https://example.com')\nprepared = session.prepare_request(request)\n\n# 通过kwargs传递超时参数\nsession.send(prepared, timeout=5.0)\n```\n\n### 3. 在Adapter级别设置\n**文件**: `requests/adapters.py`\n**类**: `HTTPAdapter`\n**方法**: `send`\n\n```python\nfrom requests.adapters import HTTPAdapter\n\nadapter = HTTPAdapter()\n# 在发送请求时设置超时\nadapter.send(\n    request=prepared_request,\n    timeout=5.0  # 设置超时\n)\n```\n\n### 4. 设置连接超时和读取超时（元组形式）\n```python\n# 设置连接超时3秒，读取超时5秒\nsession.get('https://example.com', timeout=(3.0, 5.0))\n```\n\n## 关键参数说明\n\n- **timeout**: 可以是float或tuple类型\n  - float: 同时应用于连接和读取超时\n  - tuple: (connect_timeout, read_timeout) 分别设置连接和读取超时\n- 默认值: `None`（不超时）\n- 支持类型: `float` 或 `tuple` 或 `urllib3 Timeout object`\n\n## 最佳实践\n\n```python\nimport requests\n\n# 推荐方式：使用Session并设置合理的超时\nwith requests.Session() as session:\n    # 设置连接超时3秒，读取超时10秒\n    response = session.get(\n        'https://api.example.com/data',\n        timeout=(3.0, 10.0)\n    )\n```\n\n超时参数在"
+    },
+    {
+      "id": "A03",
+      "category": "A_simple",
+      "query": "POST请求的实现函数是什么？",
+      "expected_file": "requests/api.py",
+      "expected_function": "post",
+      "score": 2,
+      "response": "根据检索到的代码片段，POST请求的实现函数有两个：\n\n1. **文件**: `requests/api.py` → **函数**: `post`\n   - 这是一个顶层函数，直接调用 `request(\"post\", url, data=data, json=json, **kwargs)`\n\n2. **文件**: `requests/sessions.py` → **类**: `Session` → **方法**: `post`\n   - 这是 `Session` 类的方法，调用 `self.request(\"POST\", url, data=data, json=json, **kwargs)`\n\n这两个函数/方法都是POST请求的实现入口，其中 `requests.post()` 是直接调用的顶层函数，而 `Session.post()` 是会话对象的方法，支持会话持久化功能。"
+    },
+    {
+      "id": "A04",
+      "category": "A_simple",
+      "query": "请求响应的状态码在哪个类里存储？",
+      "expected_file": "requests/models.py",
+      "expected_function": "Response",
+      "score": 2,
+      "response": "根据检索到的代码片段，请求响应的状态码存储在 **`requests/models.py`** 文件中的 **`Response`** 类里。\n\n具体来说，`Response` 类中有一个名为 **`status_code`** 的属性（类型为 `int`），用于存储 HTTP 响应的状态码。该属性在类的属性定义中明确列出：\n\n```python\nclass Response:\n    status_code: int\n```\n\n此外，在 `__repr__` 方法中也可以看到对该属性的引用：\n```python\ndef __repr__(self) -> str:\n    return f\"<Response [{self.status_code}]>\"\n```\n\n**总结：**\n- **文件名**：`requests/models.py`\n- **类名**：`Response`\n- **属性名**：`status_code`"
+    },
+    {
+      "id": "A05",
+      "category": "A_simple",
+      "query": "如何获取响应体的文本内容？",
+      "expected_file": "requests/models.py",
+      "expected_function": "text",
+      "score": 2,
+      "response": "根据代码片段，获取响应体文本内容的方法是：\n\n**文件名**: `requests/models.py`\n**类名**: `Response`\n**方法名**: `text`\n\n具体使用方式：\n```python\nresponse = requests.get('http://example.com')\ntext_content = response.text  # 返回字符串类型的文本内容\n```\n\n`text` 属性会自动处理编码问题：\n1. 如果 `Response.encoding` 已设置，使用该编码解码\n2. 如果未设置，会自动检测编码（使用 `charset_normalizer` 或 `chardet`）\n3. 解码失败时会使用 `errors=\"replace\"` 替换无法解码的字符\n\n另外，也可以使用 `response.content` 获取原始字节内容，然后自行解码。"
+    },
+    {
+      "id": "A06",
+      "category": "A_simple",
+      "query": "HTTP Basic Auth认证是怎么实现的？",
+      "expected_file": "requests/auth.py",
+      "expected_function": "HTTPBasicAuth",
+      "score": 2,
+      "response": "根据检索到的代码，HTTP Basic Auth认证的实现主要涉及以下两个类：\n\n## 1. HTTPBasicAuth 类\n**文件**: `requests/auth.py`\n**类名**: `HTTPBasicAuth`\n\n这是实现HTTP Basic认证的核心类，继承自`AuthBase`。主要实现方式：\n\n### 初始化方法 `__init__`\n- 接收`username`和`password`参数（支持`str`或`bytes`类型）\n- 将用户名和密码存储在实例属性中\n\n### 核心认证方法 `__call__`\n```python\ndef __call__(self, r: PreparedRequest) -> PreparedRequest:\n    r.headers[\"Authorization\"] = _basic_auth_str(self.username, self.password)\n    return r\n```\n- 当请求对象被调用时，自动在请求头中添加`Authorization`字段\n- 使用`_basic_auth_str`函数将用户名和密码编码为Base64格式的认证字符串\n\n### 比较方法 `__eq__`\n- 实现了对象比较功能，用于判断两个认证对象是否相等\n\n## 2. HTTPProxyAuth 类\n**文件**: `requests/auth.py`\n**类名**: `HTTPProxyAuth`\n\n这是HTTPBasicAuth的子类，用于代理认证：\n```python\nclass HTTPProxyAuth(HTTPBasicAuth):\n    def __call__(self, r: PreparedRequest) -> PreparedRequest:\n        r.headers[\"Proxy-Authorization\"] = _basic_auth_str(self.username, self.password)\n        return r\n```\n- 与HTTPBasicAuth类似，但将认证信息添加到`Proxy-Authorization`头中\n\n## 认证流程\n1. 创建`HTTPBasicAuth`实例，传入用户名和密码\n2. 当请求发送时，`__call__`方法被自动调用\n3. 方法内部调用`_basic_auth_str`函数，将用户名和密码编码为`Basic base64(username:password)`格式\n4. 将编码后的字符串设置到请求头的`Authorization`字段\n5. 服务器收到请求后，解析该头部信息进行身份验证"
+    },
+    {
+      "id": "A07",
+      "category": "A_simple",
+      "query": "请求头Headers是在哪里被设置的？",
+      "expected_file": "requests/models.py",
+      "expected_function": "prepare_headers",
+      "score": 2,
+      "response": "根据代码片段，请求头Headers的设置涉及以下几个关键位置：\n\n1. **`requests/utils.py` → `default_headers()` 函数**（片段1）\n   - 定义了默认的请求头，包括 `User-Agent`、`Accept-Encoding`、`Accept` 和 `Connection`。\n\n2. **`requests/models.py` → `PreparedRequest.prepare_headers()` 方法**（片段3）\n   - 负责将用户传入的 `headers` 参数转换为 `CaseInsensitiveDict` 并赋值给 `self.headers`。\n\n3. **`requests/adapters.py` → `HTTPAdapter.add_headers()` 方法**（片段2）\n   - 用于添加连接所需的额外请求头，但当前版本中该方法为空（`pass`），留给子类重写。\n\n4. **`requests/adapters.py` → `HTTPAdapter.proxy_headers()` 方法**（片段4）\n   - 当使用代理时，生成代理认证相关的请求头（如 `Proxy-Authorization`）。\n\n5. **`requests/api.py` → `request()` 函数**（片段5）\n   - 作为顶层入口函数，接收用户传入的 `headers` 参数，并将其传递给内部的 `Request` 对象，最终由 `PreparedRequest.prepare_headers()` 处理。"
+    },
+    {
+      "id": "A08",
+      "category": "A_simple",
+      "query": "Cookie是如何被处理和存储的？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "RequestsCookieJar",
+      "score": 2,
+      "response": "根据提供的代码片段，Cookie的处理和存储涉及以下几个关键函数和类：\n\n## 1. Cookie的创建\n**文件**: `requests/cookies.py`\n**函数**: `create_cookie`（顶级函数）\n\n```python\ndef create_cookie(name: str, value: str, **kwargs: Any) -> Cookie:\n```\n- 创建一个标准的`http.cookiejar.Cookie`对象\n- 默认设置：domain为空字符串，path为\"/\"，secure为False\n- 支持通过kwargs自定义cookie属性（如domain、path、expires等）\n\n## 2. Cookie的合并与存储\n**文件**: `requests/cookies.py`\n**函数**: `merge_cookies`（顶级函数）\n\n```python\ndef merge_cookies(cookiejar: CookieJar, cookies: dict[str, str] | CookieJar | None) -> CookieJar:\n```\n- 将新的cookies合并到已有的CookieJar中\n- 支持从字典或另一个CookieJar添加cookies\n- 返回合并后的CookieJar对象\n\n## 3. Cookie的提取（从响应中）\n**文件**: `requests/cookies.py`\n**函数**: `extract_cookies_to_jar`（顶级函数）\n\n```python\ndef extract_cookies_to_jar(jar: CookieJar, request: PreparedRequest, response: Any) -> None:\n```\n- 从HTTP响应中提取cookies并存入CookieJar\n- 使用`MockRequest`包装请求对象\n- 使用`MockResponse`包装响应头\n- 调用`jar.extract_cookies(res, req)`进行实际提取\n\n## 4. Cookie的请求准备\n**文件**: `requests/models.py`\n**类**: `PreparedRequest`\n**方法**: `prepare_cookies`\n\n```python\ndef prepare_cookies(self, cookies: RequestsCookieJar | CookieJar | dict[str, str] | None) -> None:\n```\n- 将cookies转换为CookieJar并存储到`self._cookies`\n- 生成Cookie HTTP头并添加到请求头中\n- 注意：该方法只能调用一次，后续调用无效（除非先移除Cookie头）\n\n## 5. 辅助类\n**文件**: `requests/cookies.py`\n**类**: `MockRequest`\n\n- 包装`PreparedRequest`以模拟`urllib2.Request`接口\n- 用于`http.cookiejar.Cookie"
+    },
+    {
+      "id": "A09",
+      "category": "A_simple",
+      "query": "如何把响应内容解析成JSON格式？",
+      "expected_file": "requests/models.py",
+      "expected_function": "json",
+      "score": 2,
+      "response": "根据您的查询，要将响应内容解析成JSON格式，可以使用以下方法：\n\n**文件名：** `requests/models.py`\n**类名：** `Response`\n**方法名：** `json`\n\n**具体用法：**\n```python\nimport requests\n\nresponse = requests.get('https://api.example.com/data')\ndata = response.json()  # 将响应内容解析为JSON格式\n```\n\n**方法说明：**\n- `response.json()` 方法会自动将HTTP响应体中的JSON数据解码为Python对象（字典、列表等）\n- 如果响应体不包含有效的JSON，会抛出 `requests.exceptions.JSONDecodeError` 异常\n- 该方法内部会处理编码检测，自动识别UTF-8、UTF-16或UTF-32编码\n\n**完整示例：**\n```python\nimport requests\n\ntry:\n    response = requests.post('https://httpbin.org/post', json={'key': 'value'})\n    json_data = response.json()  # 解析JSON响应\n    print(json_data)\nexcept requests.exceptions.JSONDecodeError as e:\n    print(f\"JSON解析失败: {e}\")\n```"
+    },
+    {
+      "id": "A10",
+      "category": "A_simple",
+      "query": "Session对象是在哪里定义的？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "Session",
+      "score": 2,
+      "response": "根据检索到的代码片段，`Session`对象是在以下文件中定义的：\n\n**文件名**: `requests/sessions.py`\n**类名**: `Session`\n\n该类继承自`SessionRedirectMixin`，定义在`requests/sessions.py`文件的第1行（根据片段1的类定义）。"
+    },
+    {
+      "id": "A11",
+      "category": "A_simple",
+      "query": "URL参数是如何编码和拼接到请求里的？",
+      "expected_file": "requests/models.py",
+      "expected_function": "prepare_url",
+      "score": 2,
+      "response": "根据您提供的代码片段，URL参数的编码和拼接主要涉及以下两个文件中的类和方法：\n\n1. **文件**: `requests/models.py`\n   - **类**: `RequestEncodingMixin`\n   - **方法**: `path_url` (属性方法)\n   - **说明**: 这个属性方法负责构建路径URL。它从完整的URL中提取路径和查询字符串，并将它们拼接成最终的路径URL。具体实现中，它使用`urlsplit`解析URL，然后组合路径和查询参数。\n\n2. **文件**: `requests/models.py`\n   - **类**: `PreparedRequest`\n   - **方法**: `prepare_url`\n   - **说明**: 这是URL准备的核心方法。它接收URL和params参数，执行以下操作：\n     - 处理URL字符串（解码bytes、去除前导空格）\n     - 验证URL方案（scheme）和主机（host）\n     - 支持国际化域名（IDNA编码）\n     - 将params参数编码并拼接到URL中（虽然代码片段被截断，但该方法会处理params的编码和拼接）\n\n此外，在`requests/api.py`中：\n- **函数**: `get` 和 `patch`\n- **说明**: 这些顶层函数接收`params`参数，并将其传递给底层的`request`函数，最终由`PreparedRequest.prepare_url`方法处理参数的编码和拼接。\n\n**总结流程**：\n1. 用户调用`requests.get(url, params=...)`等函数\n2. 这些函数将params传递给`PreparedRequest.prepare_url`方法\n3. `prepare_url`方法解析URL，对params进行编码（通常使用`urllib.parse.urlencode`），然后将编码后的查询字符串拼接到URL的查询部分\n4. 最终通过`RequestEncodingMixin.path_url`属性获取完整的路径URL（包含编码后的查询参数）"
+    },
+    {
+      "id": "A12",
+      "category": "A_simple",
+      "query": "怎么上传文件（multipart/form-data）？",
+      "expected_file": "requests/models.py",
+      "expected_function": "prepare_body",
+      "score": 1,
+      "response": "根据您提供的代码片段，上传文件（multipart/form-data）主要通过以下方式实现：\n\n## 核心函数/方法\n\n### 1. **`requests/api.py` → `request` 函数**\n这是最顶层的上传入口，通过 `files` 参数上传文件：\n```python\nimport requests\nrequests.request('POST', url, files={'file': open('test.txt', 'rb')})\n```\n\n### 2. **`requests/sessions.py` → `Session.request` 方法**\nSession 类中的核心请求方法，同样通过 `files` 参数处理：\n```python\nsession = requests.Session()\nsession.request('POST', url, files={'file': open('test.txt', 'rb')})\n```\n\n### 3. **`requests/sessions.py` → `Session.post` 方法**\n便捷的 POST 方法，内部调用 `self.request(\"POST\", ...)`：\n```python\nsession.post(url, files={'file': open('test.txt', 'rb')})\n```\n\n### 4. **`requests/models.py` → `RequestEncodingMixin._encode_files` 方法**\n这是实际编码 multipart/form-data 的核心方法，支持多种文件元组格式：\n- 2-tuple: `('filename', fileobj)`\n- 3-tuple: `('filename', fileobj, content_type)`\n- 4-tuple: `('filename', fileobj, content_type, custom_headers)`\n\n### 5. **`requests/models.py` → `Request` 类**\n用户创建的请求对象，`files` 参数最终会传递给 `_encode_files` 进行编码。\n\n## 使用示例\n\n```python\nimport requests\n\n# 简单文件上传\nresponse = requests.post('https://httpbin.org/post', files={'file': open('test.txt', 'rb')})\n\n# 指定文件名和内容类型\nresponse = requests.post('https://httpbin.org/post', files={\n    'file': ('report.pdf', open('report.pdf', 'rb'), 'application/pdf')\n})\n\n# 使用 Session\nsession = requests.Session()\nresponse = session.post('https://httpbin.org/post', files={\n    'file': ('photo.jpg', open('photo.jpg', 'rb'), 'image/jpeg', {'Expires': '0'})\n})\n```\n\n**关键点**：`files` 参数可以是字典或元组列表，每个文件项可以是 2-4 元组，最终"
+    },
+    {
+      "id": "A13",
+      "category": "A_simple",
+      "query": "DELETE请求的函数实现在哪？",
+      "expected_file": "requests/api.py",
+      "expected_function": "delete",
+      "score": 2,
+      "response": "根据检索到的代码片段，DELETE请求的函数实现在以下两个位置：\n\n1. **文件：`requests/api.py`**，函数名：`delete`\n   - 这是一个顶层函数，可以直接通过 `requests.delete(url, **kwargs)` 调用。\n\n2. **文件：`requests/sessions.py`**，类：`Session`，方法名：`delete`\n   - 这是 `Session` 类的一个方法，可以通过 `session.delete(url, **kwargs)` 调用。\n\n这两个实现都最终调用了 `request` 函数/方法（`requests.api.request` 或 `Session.request`）来处理实际的请求。"
+    },
+    {
+      "id": "A14",
+      "category": "A_simple",
+      "query": "如何检查HTTP响应是否成功（2xx状态码）？",
+      "expected_file": "requests/models.py",
+      "expected_function": "raise_for_status",
+      "score": 2,
+      "response": "根据您提供的代码片段，要检查HTTP响应是否成功（2xx状态码），可以使用以下方法：\n\n**文件：** `requests/models.py`\n**类：** `Response`\n**方法：** `ok`\n\n具体来说，`Response` 类的 `ok` 属性（在片段3中定义）会返回 `True` 如果状态码小于400（即200-399范围），这包括了所有2xx成功状态码。虽然文档说明它检查的是状态码是否小于400，但实际实现中它通过 `raise_for_status()` 方法来判断，如果状态码在400-600之间会抛出异常并返回 `False`，否则返回 `True`。\n\n**使用示例：**\n```python\nimport requests\n\nresponse = requests.get('https://api.example.com/data')\nif response.ok:  # 这会检查状态码是否在200-399之间\n    print(\"请求成功！\")\nelse:\n    print(\"请求失败\")\n```\n\n**注意：** 虽然 `ok` 属性会返回 `True` 给所有2xx和3xx状态码，但如果您需要严格检查2xx状态码，可以手动检查状态码：\n```python\nif 200 <= response.status_code < 300:\n    print(\"请求成功（2xx）\")\n```\n\n另外，`__bool__` 和 `__nonzero__` 方法（片段1和2）也提供了类似的功能，它们直接返回 `self.ok` 的值，所以您也可以直接使用 `if response:` 来检查响应是否成功。"
+    },
+    {
+      "id": "A15",
+      "category": "A_simple",
+      "query": "代理设置是在哪里被应用到请求里的？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "rebuild_proxies",
+      "score": 0,
+      "response": "根据代码片段，代理设置主要在两个地方被应用到请求中：\n\n1. **`requests/adapters.py` → `HTTPAdapter.proxy_manager_for`** (片段5)\n   - 这个方法创建并返回代理管理器（ProxyManager），它根据代理URL配置代理连接\n   - 对于SOCKS代理，创建`SOCKSProxyManager`\n   - 对于HTTP/HTTPS代理，调用`proxy_from_url()`创建代理管理器\n   - 同时会调用`self.proxy_headers(proxy)`获取代理认证头\n\n2. **`requests/adapters.py` → `HTTPAdapter.proxy_headers`** (片段1)\n   - 这个方法生成代理认证头（Proxy-Authorization）\n   - 从代理URL中提取用户名和密码\n   - 如果存在认证信息，添加`Proxy-Authorization`头\n\n3. **`requests/adapters.py` → `HTTPAdapter.get_connection_with_tls_context`** (片段3)\n   - 这个方法中调用了`select_proxy(request.url, proxies)`来选择适用的代理\n   - 然后使用选中的代理来获取连接\n\n代理设置的完整流程是：\n1. 用户通过`Session`或`request`函数传入`proxies`字典\n2. 在发送请求时，`get_connection_with_tls_context`方法会调用`select_proxy`选择合适的代理\n3. 然后通过`proxy_manager_for`方法创建或获取对应的代理管理器\n4. 代理管理器会使用`proxy_headers`方法添加认证头\n5. 最终通过代理管理器发送请求到目标服务器"
+    },
+    {
+      "id": "B01",
+      "category": "B_cross_file",
+      "query": "当我调用requests.get()时，底层完整的调用链是什么？",
+      "expected_file": "requests/api.py → requests/sessions.py",
+      "expected_function": "get → request → send",
+      "score": 2,
+      "response": "根据您提供的代码片段，当调用 `requests.get()` 时，底层完整的调用链如下：\n\n## 调用链路径\n\n1. **`requests/api.py` → `get` 函数**（顶层入口）\n   - 文件：`requests/api.py`\n   - 名称：`get`\n   - 类型：函数\n   - 调用 `request(\"get\", url, params=params, **kwargs)`\n\n2. **`requests/sessions.py` → `Session` 类 → `get` 方法**\n   - 文件：`requests/sessions.py`\n   - 类：`Session`\n   - 名称：`get`\n   - 类型：方法\n   - 设置 `allow_redirects=True` 后调用 `self.request(\"GET\", url, params=params, **kwargs)`\n\n3. **`requests/sessions.py` → `Session` 类 → `get_adapter` 方法**\n   - 文件：`requests/sessions.py`\n   - 类：`Session`\n   - 名称：`get_adapter`\n   - 类型：方法\n   - 根据 URL 前缀匹配返回合适的适配器（如 `HTTPAdapter`）\n\n4. **`requests/adapters.py` → `HTTPAdapter` 类 → `get_connection` 方法**（已弃用）\n   - 文件：`requests/adapters.py`\n   - 类：`HTTPAdapter`\n   - 名称：`get_connection`\n   - 类型：方法\n   - 返回 urllib3 连接池对象\n\n## 完整调用链总结\n\n```\nrequests.get()                          # requests/api.py → get 函数\n  └─ request(\"get\", url, ...)           # 内部调用\n       └─ Session.get()                 # requests/sessions.py → Session.get 方法\n            └─ Session.request(\"GET\")   # 内部调用\n                 └─ Session.get_adapter() # requests/sessions.py → Session.get_adapter 方法\n                      └─ HTTPAdapter.get_connection() # requests/adapters.py → HTTPAdapter.get_connection 方法\n                           └─ urllib3 连接池\n```\n\n**注意**：`get_connection` 方法已被标记为弃用，建议使用 `get_connection_with_tls_context` 方法。"
+    },
+    {
+      "id": "B02",
+      "category": "B_cross_file",
+      "query": "HTTP连接池是如何被Session管理的？",
+      "expected_file": "requests/sessions.py → requests/adapters.py",
+      "expected_function": "HTTPAdapter → get_connection",
+      "score": 2,
+      "response": "根据您提供的代码片段，HTTP连接池是通过`Session`类与`HTTPAdapter`类的协作来管理的。以下是具体的实现细节：\n\n## 关键类和文件\n\n### 1. Session 类\n**文件**: `requests/sessions.py`  \n**类名**: `Session`\n\nSession类在初始化时（`__init__`方法）会设置各种配置，但连接池的管理实际上委托给了HTTPAdapter。Session通过`mount()`方法将协议（如'http://'）与特定的Adapter绑定。\n\n### 2. HTTPAdapter 类\n**文件**: `requests/adapters.py`  \n**类名**: `HTTPAdapter`\n\n这是连接池管理的核心类，它内部维护了：\n- `poolmanager`：用于管理普通HTTP/HTTPS连接的连接池\n- `proxy_manager`：用于管理代理连接的连接池\n\n## 管理机制\n\n### 连接池的创建\n当Session发送请求时，它会根据URL的协议找到对应的HTTPAdapter，然后由HTTPAdapter使用`init_poolmanager()`方法初始化连接池。\n\n### 连接池的配置\nHTTPAdapter的构造函数接受以下参数来控制连接池行为：\n- `pool_connections`：缓存的连接池数量\n- `pool_maxsize`：每个池中最大连接数\n- `max_retries`：最大重试次数\n- `pool_block`：是否阻塞等待连接\n\n### 连接池的清理\nHTTPAdapter的`close()`方法（`requests/adapters.py`）负责清理连接池：\n```python\ndef close(self) -> None:\n    self.poolmanager.clear()\n    for proxy in self.proxy_manager.values():\n        proxy.clear()\n```\n\n### 序列化支持\nHTTPAdapter的`__setstate__()`方法（`requests/adapters.py`）确保在反序列化时能正确重建连接池。\n\n## 使用示例\n```python\nimport requests\ns = requests.Session()\na = requests.adapters.HTTPAdapter(max_retries=3)\ns.mount('http://', a)  # 将HTTPAdapter绑定到http协议\n```\n\n这样，所有通过Session发起的HTTP请求都会使用这个HTTPAdapter管理的连接池。"
+    },
+    {
+      "id": "B03",
+      "category": "B_cross_file",
+      "query": "SSL证书验证是在哪个环节、哪些文件里处理的？",
+      "expected_file": "requests/adapters.py → requests/utils.py",
+      "expected_function": "send → get_environ_proxies",
+      "score": 2,
+      "response": "根据检索到的代码片段，SSL证书验证主要在以下文件和函数/类中处理：\n\n## 1. 核心验证方法\n**文件**: `requests/adapters.py`\n**类**: `HTTPAdapter`\n**方法**: `cert_verify`\n\n这是SSL证书验证的核心实现方法，负责：\n- 检查URL是否为HTTPS\n- 处理用户指定的CA证书路径\n- 设置连接对象的证书验证要求（`CERT_REQUIRED`或`CERT_NONE`）\n- 配置CA证书文件或目录\n\n## 2. 验证参数的传递入口\n**文件**: `requests/adapters.py`\n**类**: `HTTPAdapter`\n**方法**: `send`\n\n这是SSL验证的调用入口，`send`方法接收`verify`和`cert`参数，并在内部调用`cert_verify`方法进行实际验证。\n\n## 3. 验证参数的默认设置\n**文件**: `requests/sessions.py`\n**类**: `Session`\n**方法**: `__init__`\n\n在Session初始化时设置默认的SSL验证参数：\n- `self.verify = True`（默认启用证书验证）\n- `self.cert = None`（默认无客户端证书）\n\n## 4. 抽象基类定义\n**文件**: `requests/adapters.py`\n**类**: `BaseAdapter`\n**方法**: `send`\n\n定义了SSL验证的接口规范，`HTTPAdapter`继承并实现了具体逻辑。\n\n## 验证流程总结\n1. **Session层**：设置默认验证参数（`verify=True`）\n2. **Adapter层**：`send`方法接收验证参数\n3. **Adapter层**：`cert_verify`方法执行实际验证逻辑\n4. **urllib3连接层**：通过`conn.cert_reqs`、`conn.ca_certs`等属性配置底层SSL验证"
+    },
+    {
+      "id": "B04",
+      "category": "B_cross_file",
+      "query": "请求重定向是怎么被检测和处理的？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "resolve_redirects",
+      "score": 2,
+      "response": "根据您提供的代码片段，请求重定向的检测和处理主要涉及以下文件和函数/类：\n\n## 1. 重定向检测\n\n**文件：** `requests/models.py`\n**类：** `Response`\n**方法：** `is_redirect`\n\n该方法通过检查响应头中是否包含 `location` 字段以及状态码是否在重定向状态码列表中来判断是否为重定向：\n```python\ndef is_redirect(self) -> bool:\n    return \"location\" in self.headers and self.status_code in REDIRECT_STATI\n```\n\n## 2. 重定向处理核心逻辑\n\n**文件：** `requests/sessions.py`\n**类：** `SessionRedirectMixin`\n**方法：** `resolve_redirects`\n\n这是处理重定向的核心方法，它：\n- 接收原始响应和请求\n- 通过 `get_redirect_target` 获取重定向目标URL\n- 循环处理重定向，直到没有更多重定向或达到最大重定向次数\n- 更新请求历史记录\n- 处理各种重定向场景（如无scheme的URL、片段标识符等）\n\n## 3. 获取重定向目标\n\n**文件：** `requests/sessions.py`\n**类：** `SessionRedirectMixin`\n**方法：** `get_redirect_target`\n\n该方法从响应中提取重定向目标URL：\n```python\ndef get_redirect_target(self, resp: Response) -> str | None:\n    if resp.is_redirect:\n        location = resp.headers[\"location\"]\n        location = location.encode(\"latin1\")\n        return to_native_string(location, \"utf8\")\n    return None\n```\n\n## 4. 重定向时的方法调整\n\n**文件：** `requests/sessions.py`\n**类：** `SessionRedirectMixin`\n**方法：** `rebuild_method`\n\n根据HTTP规范调整重定向时的请求方法（如将POST转为GET）：\n- 303 See Other：非HEAD请求转为GET\n- 302 Found：非HEAD请求转为GET\n- 301 Moved Permanently：POST请求转为GET\n\n## 5. 重定向时的请求体重置\n\n**文件：** `requests/utils.py`\n**函数：** `rewind_body`\n\n在重定向时，需要将请求体指针重置到起始位置，以便重新发送请求体：\n```python\ndef rewind_body(prepared_request: PreparedRequest) -> None:\n    body_se"
+    },
+    {
+      "id": "B05",
+      "category": "B_cross_file",
+      "query": "PreparedRequest和Request这两个类有什么关系？",
+      "expected_file": "requests/models.py",
+      "expected_function": "Request.prepare → PreparedRequest",
+      "score": 2,
+      "response": "根据检索到的代码片段，`PreparedRequest`和`Request`这两个类的关系如下：\n\n## 关系概述\n\n`Request`是用户创建的请求对象，而`PreparedRequest`是经过准备、包含实际发送字节的请求对象。`Request`通过其`prepare()`方法生成`PreparedRequest`。\n\n## 具体文件和类\n\n### 1. `Request` 类\n- **文件**: `requests/models.py`\n- **类名**: `Request`\n- **作用**: 用户创建的请求对象，包含方法、URL、头、参数等原始信息\n- **关键方法**: `prepare()` - 生成`PreparedRequest`对象\n\n### 2. `PreparedRequest` 类\n- **文件**: `requests/models.py`\n- **类名**: `PreparedRequest`\n- **作用**: 完全可变的请求对象，包含将要发送到服务器的确切字节\n- **文档说明**: \"不应手动实例化，否则可能产生不良效果\"\n\n### 3. `Session.prepare_request()` 方法\n- **文件**: `requests/sessions.py`\n- **类名**: `Session`\n- **方法名**: `prepare_request`\n- **作用**: 将`Request`对象与Session的设置合并，生成`PreparedRequest`\n\n## 关系流程\n\n```\n用户创建 Request 对象\n    ↓\n调用 Request.prepare() 或 Session.prepare_request()\n    ↓\n生成 PreparedRequest 对象\n    ↓\n通过 Session.send() 发送 PreparedRequest\n```\n\n## 关键区别\n\n| 特性 | Request | PreparedRequest |\n|------|---------|-----------------|\n| 可变性 | 用户可修改 | 完全可变，但通常不手动修改 |\n| 用途 | 用户输入 | 实际发送 |\n| 生成方式 | 用户直接创建 | 由Request生成 |\n| 包含内容 | 原始参数 | 合并Session设置后的最终数据 |\n\n## 代码示例\n\n```python\n# 用户创建 Request\nreq = requests.Request('GET', 'https://httpbin.org/get')\n\n# 方式1: 直接通过Request生成PreparedRequest\nprepared = req.prepare()\n\n# 方式2: 通过Session生成PreparedRequest（会合并Session设置）\nsession = requests.Session()\nprepared = session.prepare_request(req)\n\n# 发送PreparedRequest\nresponse = session.send(prepared)\n```"
+    },
+    {
+      "id": "B06",
+      "category": "B_cross_file",
+      "query": "Session的Cookie是如何在多次请求之间自动保持的？",
+      "expected_file": "requests/sessions.py → requests/cookies.py",
+      "expected_function": "Session → merge_cookies",
+      "score": 2,
+      "response": "根据提供的代码片段，Session的Cookie在多次请求之间自动保持的机制主要涉及以下两个关键方法：\n\n## 1. `prepare_request` 方法\n**文件**: `requests/sessions.py`  \n**类**: `Session`  \n**方法名**: `prepare_request`\n\n```python\ndef prepare_request(self, request: Request) -> PreparedRequest:\n```\n\n**关键代码**（第3-4个代码片段）：\n```python\n# Bootstrap CookieJar.\nif not isinstance(cookies, cookielib.CookieJar):\n    cookies = cookiejar_from_dict(cookies)\n\n# Merge with session cookies\nmerged_cookies = merge_cookies(\n    merge_cookies(RequestsCookieJar(), self.cookies), cookies\n)\n```\n\n**作用**：在每次请求准备时，将Session中已有的cookies（`self.cookies`）与请求自带的cookies合并，确保Session的cookies被包含在请求中。\n\n## 2. `send` 方法\n**文件**: `requests/sessions.py`  \n**类**: `Session`  \n**方法名**: `send`\n\n```python\ndef send(self, request: PreparedRequest, **kwargs: Any) -> Response:\n```\n\n**关键代码**（第3个代码片段）：\n```python\n# Persist cookies\nif r.history:\n    # If the hooks create history then we want those cookies too\n    for resp in r.history:\n        extract_cookies_to_jar(self.cookies, resp.request, resp.raw)\n\nextract_cookies_to_jar(self.cookies, request, r.raw)\n```\n\n**作用**：在每次请求完成后，从响应中提取新的cookies并存储到Session的`self.cookies`中，这样后续请求就能自动携带这些cookies。\n\n## 完整流程\n\n1. **初始化**：`Session.__init__` 中初始化 `self.cookies`（虽然代码片段中未完整显示，但Session类会初始化一个`RequestsCookieJar`对象）\n2. **请求准备**：`prepare_request` 将Session的cookies合并到请求中\n3. **请求发送**：`send` 发送请求并处理响应\n4. **Cookie持久化**：`send` 方法末尾调用 `extract_cookies_to_jar` 将响应中的新cookies保存到Session的cookies中\n\n这样，通过 `prepare_request` 和 `send`"
+    },
+    {
+      "id": "B07",
+      "category": "B_cross_file",
+      "query": "HTTPDigestAuth的工作原理是什么，涉及哪些文件？",
+      "expected_file": "requests/auth.py",
+      "expected_function": "HTTPDigestAuth",
+      "score": 2,
+      "response": "根据您提供的代码片段，HTTPDigestAuth 的工作原理如下：\n\n## 核心文件\n**文件：`requests/auth.py`**\n\n## 核心类\n**类名：`HTTPDigestAuth`**\n\n## 工作原理\n\n### 1. 初始化阶段 (`__init__`)\n- 接收用户名和密码\n- 使用 `threading.local()` 创建线程本地存储，确保多线程安全\n\n### 2. 请求预处理 (`__call__`)\n- 调用 `init_per_thread_state()` 初始化线程状态\n- 如果已有缓存的 nonce，直接构建 Digest 认证头并添加到请求中\n- 记录请求体的位置（用于重试时回退）\n- 注册 `handle_401` 和 `handle_redirect` 作为响应钩子\n\n### 3. 401 响应处理 (`handle_401`)\n- 检查响应状态码是否为 4xx\n- 解析 `WWW-Authenticate` 头中的 digest 参数\n- 调用 `build_digest_header()` 构建认证头\n- 重新发送请求并返回新的响应\n\n### 4. 构建 Digest 头 (`build_digest_header`)\n- 从挑战参数中提取 realm、nonce、qop、algorithm 等\n- 根据算法（MD5、SHA、SHA-256、SHA-512）选择哈希函数\n- 计算响应值（response value）\n- 生成完整的 Authorization 头\n\n### 5. 线程安全 (`init_per_thread_state`)\n- 确保每个线程只初始化一次状态\n- 维护 last_nonce、nonce_count、chal 等状态变量\n\n## 关键方法列表\n\n| 方法名 | 类型 | 说明 |\n|--------|------|------|\n| `__init__` | 构造函数 | 初始化用户名密码和线程本地存储 |\n| `init_per_thread_state` | 方法 | 初始化线程本地状态 |\n| `__call__` | 方法 | 预处理请求，添加认证头 |\n| `handle_401` | 方法 | 处理 401 响应，重试认证 |\n| `build_digest_header` | 方法 | 构建 Digest 认证头 |\n\n## 工作流程\n\n1. 用户创建 `HTTPDigestAuth(username, password)` 实例\n2. 发送请求时，`__call__` 被调用，尝试添加认证头\n3."
+    },
+    {
+      "id": "B08",
+      "category": "B_cross_file",
+      "query": "异常体系是怎么组织的，ConnectionError和Timeout是什么关系？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "ConnectionError, Timeout",
+      "score": 2,
+      "response": "根据检索到的代码片段，requests库的异常体系组织如下：\n\n## 异常类层次结构\n\n### 1. `ConnectTimeout` - 连接超时异常\n- **文件**: `requests/exceptions.py`\n- **类型**: 类\n- **继承关系**: 同时继承 `ConnectionError` 和 `Timeout`\n- **说明**: 当尝试连接远程服务器时请求超时，此异常是安全的，可以重试\n\n### 2. `Timeout` - 超时异常基类\n- **文件**: `requests/exceptions.py`\n- **类型**: 类\n- **继承关系**: 继承自 `RequestException`\n- **说明**: 捕获此异常会同时捕获 `ConnectTimeout` 和 `ReadTimeout`\n\n## ConnectionError和Timeout的关系\n\n从代码片段可以看出：\n\n1. **`ConnectTimeout`** 是一个多重继承的类，同时继承自：\n   - `ConnectionError` - 连接错误\n   - `Timeout` - 超时错误\n\n2. **`Timeout`** 继承自 `RequestException`，是超时相关异常的基类\n\n3. **层次关系**：\n   ```\n   RequestException\n       └── Timeout\n             └── ConnectTimeout (同时继承 ConnectionError)\n   ```\n\n这意味着：\n- `ConnectTimeout` 既是连接错误（ConnectionError）又是超时错误（Timeout）\n- 捕获 `Timeout` 可以同时捕获 `ConnectTimeout` 和 `ReadTimeout`\n- 捕获 `ConnectionError` 可以捕获所有连接相关的错误，包括 `ConnectTimeout`"
+    },
+    {
+      "id": "B09",
+      "category": "B_cross_file",
+      "query": "请求体（body）从用户传入data参数到最终发出经过哪些处理步骤？",
+      "expected_file": "requests/models.py → requests/adapters.py",
+      "expected_function": "prepare_body → send",
+      "score": 2,
+      "response": "根据检索到的代码，请求体（body）从用户传入data参数到最终发出的处理步骤如下：\n\n1. **Session.request 方法**（`requests/sessions.py` → `Session.request`）\n   - 用户通过`data`参数传入请求体数据\n   - 该方法构造`Request`对象并调用`prepare()`方法\n\n2. **PreparedRequest.__init__ 方法**（`requests/models.py` → `PreparedRequest.__init__`）\n   - 初始化`self.body = None`，准备接收处理后的请求体\n\n3. **PreparedRequest.prepare_body 方法**（`requests/models.py` → `PreparedRequest.prepare_body`）\n   - 处理`data`参数，主要逻辑：\n     - 如果`data`为空且`json`不为空，将JSON序列化为字节串，设置`content_type = \"application/json\"`\n     - 如果`data`是可迭代对象（非字符串、字节、列表、元组、映射），直接作为body\n     - 记录文件位置（如果body有`tell`方法），用于重定向时回退\n     - 检查`files`参数与流式body是否互斥\n\n4. **PreparedRequest.prepare_content_length 方法**（`requests/models.py` → `PreparedRequest.prepare_content_length`）\n   - 根据body计算Content-Length：\n     - 如果body不为空，计算长度并设置`Content-Length`头\n     - 如果body为空且方法不是GET/HEAD，设置`Content-Length: 0`\n\n最终，处理后的body存储在`PreparedRequest.body`属性中，随请求发送到服务器。"
+    },
+    {
+      "id": "B10",
+      "category": "B_cross_file",
+      "query": "环境变量（如HTTP_PROXY）是如何被requests自动读取并应用的？",
+      "expected_file": "requests/utils.py → requests/sessions.py",
+      "expected_function": "get_environ_proxies → merge_environment_settings",
+      "score": 2,
+      "response": "根据提供的代码片段，requests库自动读取并应用环境变量（如HTTP_PROXY）的流程涉及以下关键函数和类：\n\n## 1. 环境变量读取入口\n\n**文件**: `requests/sessions.py`  \n**类**: `Session`  \n**方法**: `merge_environment_settings`  \n\n该方法在发送请求时被调用，负责检查环境变量并合并到请求设置中。关键代码在第8-18行：\n```python\nif self.trust_env:\n    # 读取环境代理\n    env_proxies = get_environ_proxies(url, no_proxy=no_proxy)\n    if proxies is not None:\n        for k, v in env_proxies.items():\n            proxies.setdefault(k, v)\n    \n    # 读取SSL证书环境变量\n    if verify is True or verify is None:\n        verify = (\n            os.environ.get(\"REQUESTS_CA_BUNDLE\")\n            or os.environ.get(\"CURL_CA_BUNDLE\")\n            or verify\n        )\n```\n\n## 2. 环境代理获取函数\n\n**文件**: `requests/utils.py`  \n**函数**: `get_environ_proxies`  \n\n该函数负责从环境变量中获取代理配置：\n```python\ndef get_environ_proxies(url: str, no_proxy: str | None = None) -> dict[str, str]:\n    if should_bypass_proxies(url, no_proxy=no_proxy):\n        return {}\n    else:\n        return getproxies()  # 从环境变量读取HTTP_PROXY, HTTPS_PROXY等\n```\n\n## 3. 代理解析函数\n\n**文件**: `requests/utils.py`  \n**函数**: `resolve_proxies`  \n\n该函数进一步处理代理配置，考虑NO_PROXY设置：\n```python\ndef resolve_proxies(request, proxies, trust_env=True):\n    if trust_env and not should_bypass_proxies(url, no_proxy=no_proxy):\n        environ_proxies = get_environ_proxies(url, no_proxy=no_proxy)\n        proxy = environ_proxies.get(scheme, environ_proxies.get(\"all\"))\n        if proxy:\n            new_proxies.setdefault(scheme, proxy)\n```\n\n## 4. 代理应用\n\n**文件**: `requests/adapters.py`  \n**类**: `HTTPAdapter`  \n**方法**: `request_url`"
+    },
+    {
+      "id": "B11",
+      "category": "B_cross_file",
+      "query": "HTTPAdapter是如何与urllib3交互来实际发送HTTP请求的？",
+      "expected_file": "requests/adapters.py",
+      "expected_function": "HTTPAdapter.send",
+      "score": 2,
+      "response": "根据提供的代码片段，HTTPAdapter与urllib3交互的核心机制如下：\n\n## 主要交互类和方法\n\n### 1. **HTTPAdapter类** (requests/adapters.py)\n- **类名**: `HTTPAdapter`\n- **文件**: `requests/adapters.py`\n- 这是与urllib3交互的主要适配器类，继承自`BaseAdapter`\n\n### 2. **连接池管理方法**\n\n#### `get_connection` 方法 (已废弃)\n- **文件**: `requests/adapters.py`\n- **类**: `HTTPAdapter`\n- **方法名**: `get_connection`\n- **功能**: 返回urllib3的`HTTPConnectionPool`对象，用于管理HTTP连接\n- **交互方式**: \n  - 通过`proxy_manager_for(proxy)`获取代理管理器\n  - 通过`connection_from_url(url)`从连接池获取连接\n\n#### `__getstate__` 和 `__setstate__` 方法\n- **文件**: `requests/adapters.py`\n- **类**: `HTTPAdapter`\n- **方法名**: `__getstate__` 和 `__setstate__`\n- **功能**: 序列化和反序列化适配器状态，确保连接池配置在pickle过程中正确恢复\n- **交互方式**: \n  - `__getstate__` 保存`__attrs__`中定义的属性\n  - `__setstate__` 恢复状态后调用`init_poolmanager()`重新初始化连接池\n\n### 3. **代理相关方法**\n\n#### `proxy_headers` 方法\n- **文件**: `requests/adapters.py`\n- **类**: `HTTPAdapter`\n- **方法名**: `proxy_headers`\n- **功能**: 生成发送给代理服务器的认证头\n- **交互方式**: \n  - 使用`get_auth_from_url(proxy)`从代理URL提取用户名和密码\n  - 生成`Proxy-Authorization`头，通过urllib3发送给代理\n\n## 交互流程总结\n\n1. **初始化**: HTTPAdapter通过`init_poolmanager()`创建urllib3的`PoolManager`实例\n2. **连接获取**: 通过`get_connection()`（或新的`get_connection_with_tls_context()`）从连接池获取urllib3的`HTTPConnectionPool`\n3. **请求发送**: 实际请求通过urllib3的`urlopen"
+    },
+    {
+      "id": "B12",
+      "category": "B_cross_file",
+      "query": "响应内容的字符编码是如何自动检测的？",
+      "expected_file": "requests/models.py → requests/utils.py",
+      "expected_function": "Response.text → get_encoding_from_headers",
+      "score": 2,
+      "response": "根据您提供的代码片段，响应内容的字符编码自动检测是通过以下函数实现的：\n\n**文件名**: `requests/models.py`\n**类名**: `Response`\n**函数名**: `apparent_encoding`\n\n该函数位于 `requests/models.py` 文件的 `Response` 类中，具体实现如下：\n\n```python\ndef apparent_encoding(self) -> str | None:\n    \"\"\"The apparent encoding, provided by the charset_normalizer or chardet libraries.\"\"\"\n    if chardet is not None:\n        return chardet.detect(self.content)[\"encoding\"]\n    else:\n        # If no character detection library is available, we'll fall back\n        # to a standard Python utf-8 str.\n        return \"utf-8\"\n```\n\n**工作原理**：\n1. 当 `Response.encoding` 为 `None` 时，`text` 属性会调用 `self.apparent_encoding` 来获取自动检测的编码\n2. 该函数使用 `chardet` 库（或 `charset_normalizer`）对响应内容进行字符编码检测\n3. 如果检测库不可用，则默认返回 `\"utf-8\"`\n\n**调用链**：\n- 在 `text` 属性中（同一文件、同一类），当 `self.encoding is None` 时，会使用 `self.apparent_encoding` 作为编码来解码响应内容"
+    },
+    {
+      "id": "B13",
+      "category": "B_cross_file",
+      "query": "Session的mount机制是如何决定用哪个adapter处理请求的？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "get_adapter",
+      "score": 2,
+      "response": "根据您提供的代码片段，Session的mount机制通过以下方式决定用哪个adapter处理请求：\n\n## 核心机制\n\n1. **注册适配器**：通过 `mount()` 方法注册适配器到特定前缀\n2. **匹配适配器**：通过 `get_adapter()` 方法根据URL前缀匹配适配器\n3. **使用适配器**：在 `send()` 方法中调用 `get_adapter()` 获取适配器并发送请求\n\n## 具体实现\n\n### 1. 注册适配器 - `mount()` 方法\n**文件**: `requests/sessions.py`  \n**类**: `Session`  \n**方法**: `mount`\n\n```python\ndef mount(self, prefix: str, adapter: BaseAdapter) -> None:\n    self.adapters[prefix] = adapter\n    keys_to_move = [k for k in self.adapters if len(k) < len(prefix)]\n    for key in keys_to_move:\n        self.adapters[key] = self.adapters.pop(key)\n```\n\n- 将适配器注册到指定前缀\n- 按前缀长度降序排序（长前缀优先匹配）\n\n### 2. 匹配适配器 - `get_adapter()` 方法\n**文件**: `requests/sessions.py`  \n**类**: `Session`  \n**方法**: `get_adapter`\n\n```python\ndef get_adapter(self, url: str) -> BaseAdapter:\n    for prefix, adapter in self.adapters.items():\n        if url.lower().startswith(prefix.lower()):\n            return adapter\n    raise InvalidSchema(f\"No connection adapters were found for {url!r}\")\n```\n\n- 遍历所有已注册的适配器\n- 检查URL是否以某个前缀开头（不区分大小写）\n- 返回第一个匹配的适配器\n- 如果没有匹配则抛出 `InvalidSchema` 异常\n\n### 3. 使用适配器 - `send()` 方法\n**文件**: `requests/sessions.py`  \n**类**: `Session`  \n**方法**: `send`\n\n```python\ndef send(self, request: PreparedRequest, **kwargs: Any) -> Response:\n    # ...\n    adapter = self.get_adapter(url=request.url)\n    r = adapter.send(request, **kwargs)\n    # ...\n```\n\n- 在发送请求时调用 `get_adapter()` 获取适配器\n- 使用获取到的适配器发送请求\n\n## 匹配"
+    },
+    {
+      "id": "B14",
+      "category": "B_cross_file",
+      "query": "钩子（hooks）系统是如何实现的，response钩子在哪里被触发？",
+      "expected_file": "requests/models.py → requests/sessions.py → requests/hooks.py",
+      "expected_function": "dispatch_hook",
+      "score": 2,
+      "response": "根据代码片段，requests库的钩子系统实现如下：\n\n## 钩子系统的核心实现\n\n### 1. 钩子注册机制\n**文件**: `requests/models.py`\n**类**: `RequestHooksMixin`\n**方法**: `register_hook` 和 `deregister_hook`\n\n钩子通过 `register_hook` 方法注册到 `self.hooks` 字典中，支持的事件类型（如 `'response'`）必须预先定义在 `self.hooks` 字典的键中。\n\n### 2. 钩子合并机制\n**文件**: `requests/sessions.py`\n**函数**: `merge_hooks`\n\n当同时存在请求级别的钩子和会话级别的钩子时，通过 `merge_hooks` 函数进行合并，使用 `merge_setting` 确保两者不会相互覆盖。\n\n### 3. 钩子触发机制\n**文件**: `requests/hooks.py`\n**函数**: `dispatch_hook`\n\n这是钩子触发的核心函数，它：\n- 从 `hooks` 字典中获取指定 `key`（如 `'response'`）对应的钩子列表\n- 依次执行每个钩子函数，传入 `hook_data`（Response对象）和额外的关键字参数\n- 如果钩子函数返回非None值，则更新 `hook_data`\n\n## response钩子的触发位置\n\n**文件**: `requests/sessions.py`\n**类**: `Session`\n**方法**: `request`\n\nresponse钩子在 `Session.request` 方法中被触发。具体流程是：\n\n1. 在发送请求并获取响应后\n2. 调用 `dispatch_hook('response', hooks, response, **kwargs)` \n3. 这里的 `hooks` 是合并后的请求级和会话级钩子\n4. 传入的 `hook_data` 是 `Response` 对象\n\n**关键代码路径**：\n```\nSession.request() \n  → 构建Request对象\n  → 准备请求（prep_request）\n  → 发送请求（send）\n  → 获取Response\n  → dispatch_hook('response', hooks, response)  ← 这里触发response钩子\n  → 返回最终的Response对象\n```\n\n## 总结\n\n钩子系统的工作流程：\n1. **注册**：通过 `RequestHooksMixin.register_hook` 注册钩子函数\n2. **合并**：通过 `merge_hooks` 合并请求级和"
+    },
+    {
+      "id": "B15",
+      "category": "B_cross_file",
+      "query": "流式响应（stream=True）和普通响应在处理上有什么区别？",
+      "expected_file": "requests/models.py → requests/adapters.py",
+      "expected_function": "iter_content, Response",
+      "score": 2,
+      "response": "根据检索到的代码片段，流式响应（stream=True）和普通响应的主要区别体现在以下文件、类和方法中：\n\n## 1. **requests/models.py → Response.iter_lines** (片段1)\n- **流式响应**：当 `stream=True` 时，`iter_lines` 方法会逐行迭代响应数据，避免将整个响应内容一次性读入内存，适合处理大型响应。\n- **普通响应**：当 `stream=False` 时，响应内容会一次性全部加载到内存中。\n\n## 2. **requests/models.py → Response.iter_content** (片段3)\n- **流式响应**：当 `stream=True` 时，`iter_content` 方法会按数据到达时的实际大小分块读取数据，`chunk_size=None` 时行为不同。\n- **普通响应**：当 `stream=False` 时，数据会作为一个单独的块返回（即使 `chunk_size=None`）。\n\n## 3. **requests/adapters.py → HTTPAdapter.send** (片段4)\n- **流式响应**：`send` 方法中的 `stream` 参数控制是否流式传输请求内容。当 `stream=True` 时，响应体不会立即被读取，而是保持连接打开以便后续按需读取。\n- **普通响应**：当 `stream=False` 时，响应体会在发送请求后立即被完全读取并关闭连接。\n\n## 4. **requests/sessions.py → SessionRedirectMixin.resolve_redirects** (片段5)\n- **流式响应**：在重定向处理中，`stream` 参数被传递到后续请求中。当 `stream=True` 时，重定向响应也会以流式方式处理。\n- **普通响应**：当 `stream=False` 时，重定向响应会立即被完全消费。\n\n## 核心区别总结：\n| 特性 | 流式响应 (stream=True) | 普通响应 (stream=False) |\n|------|------------------------|------------------------|\n| **内存使用** | 低（逐块/逐行处理） | 高（一次性加载全部内容） |\n| **响应体访问** | 需要通过 `iter_content()` 或 `iter_lines()` 迭代读取 | 可以直接通过 `.content` 或 `.text` 访问 |\n| **连接管理** | 保持连接打开直到数据读取完毕 | 数据读取后立即关闭连接 |\n| **适用场景"
+    },
+    {
+      "id": "C01",
+      "category": "C_fuzzy",
+      "query": "我想让requests记住我登录的状态，用哪个功能？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "Session",
+      "score": 2,
+      "response": "根据您的需求，您应该使用 **`requests.Session`** 类，具体是以下文件中的类和方法：\n\n**文件**: `requests/sessions.py`\n**类**: `Session`\n**关键方法**:\n- `__init__` - 初始化会话对象\n- `__enter__` - 支持上下文管理器（with语句）\n\n**使用方式**:\n```python\nimport requests\n\n# 创建Session对象\nsession = requests.Session()\n\n# 或者使用上下文管理器\nwith requests.Session() as session:\n    # 先登录\n    login_data = {'username': 'your_username', 'password': 'your_password'}\n    session.post('https://example.com/login', data=login_data)\n    \n    # 后续请求会自动携带登录后的cookie\n    response = session.get('https://example.com/protected-page')\n```\n\n**核心原理**:\n- `Session` 对象会自动保存和发送 cookies\n- 登录后，服务器返回的 cookie 会被自动存储\n- 后续所有通过该 session 发起的请求都会自动携带这些 cookie\n- 从而保持登录状态\n\n**相关辅助方法**（在同一个文件中）:\n- `__getstate__` - 序列化会话状态（用于保存/恢复）\n- `__setstate__` - 反序列化恢复会话状态\n\n这样您就可以通过同一个 `Session` 对象保持登录状态，无需手动处理 cookie。"
+    },
+    {
+      "id": "C02",
+      "category": "C_fuzzy",
+      "query": "网络请求卡住了怎么让它自动停止？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "request",
+      "score": 2,
+      "response": "根据您的查询“网络请求卡住了怎么让它自动停止”，在requests库中，可以通过设置超时参数来实现自动停止。以下是相关的代码位置：\n\n**文件：** `requests/sessions.py`\n**类：** `Session`\n**方法：** `request`\n\n**说明：** 在`Session.request()`方法中，有一个`timeout`参数，用于设置请求的超时时间。当网络请求卡住时，超过设定的时间后请求会自动停止并抛出超时异常。\n\n**使用示例：**\n```python\nimport requests\n\ns = requests.Session()\n# 设置超时时间为5秒\nresponse = s.get('https://httpbin.org/get', timeout=5)\n```\n\n**参数说明：**\n- `timeout`参数可以是：\n  - 一个浮点数：表示连接和读取的总超时时间\n  - 一个元组 `(connect_timeout, read_timeout)`：分别设置连接超时和读取超时\n\n**注意：** 超时设置会传递给底层的`HTTPAdapter.send()`方法（位于`requests/adapters.py`），最终由urllib3库实现实际的超时控制。"
+    },
+    {
+      "id": "C03",
+      "category": "C_fuzzy",
+      "query": "怎么让所有请求都走代理服务器？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "Session.request / proxies",
+      "score": 2,
+      "response": "根据您提供的代码片段，要让所有请求都走代理服务器，您需要在创建 `Session` 对象后设置 `proxies` 属性。以下是具体的实现方法：\n\n## 关键代码位置\n\n**文件**: `requests/sessions.py`\n**类**: `Session`\n**方法**: `__init__`（初始化时设置 `self.proxies` 属性）\n\n## 实现方法\n\n```python\nimport requests\n\n# 创建 Session 对象\nsession = requests.Session()\n\n# 设置代理，让所有请求都走代理服务器\nsession.proxies = {\n    'http': 'http://your-proxy-address:port',\n    'https': 'http://your-proxy-address:port',\n    # 或者使用 'all' 键来匹配所有协议\n    'all': 'http://your-proxy-address:port'\n}\n\n# 现在所有通过这个 session 发出的请求都会使用代理\nresponse = session.get('https://httpbin.org/get')\n```\n\n## 代理配置说明\n\n从代码片段中可以看到，`Session.__init__` 方法中 `self.proxies` 初始化为空字典 `{}`（片段1第17行）。您需要手动设置这个属性来启用代理。\n\n代理配置支持以下格式（参考 `requests/utils.py` 中的 `select_proxy` 函数，片段5）：\n- `'http': 'http://proxy:port'` - 仅匹配 HTTP 请求\n- `'https': 'http://proxy:port'` - 仅匹配 HTTPS 请求\n- `'http://hostname': 'http://proxy:port'` - 匹配特定主机的 HTTP 请求\n- `'all': 'http://proxy:port'` - 匹配所有协议和主机\n\n## 完整示例\n\n```python\nimport requests\n\n# 创建 session 并配置代理\nsession = requests.Session()\nsession.proxies = {\n    'http': 'http://10.10.1.10:3128',\n    'https': 'http://10.10.1.10:1080',\n}\n\n# 所有请求都会自动使用代理\nresponse1 = session.get('http://example.com')\nresponse2 = session.get('https://api.example.com')\n```\n\n这样配置后，所有通过该 `Session` 对象发出的请求都会自动使用您指定的代理服务器。"
+    },
+    {
+      "id": "C04",
+      "category": "C_fuzzy",
+      "query": "服务器返回的数据我想一边下载一边处理，不想等全部下完",
+      "expected_file": "requests/models.py",
+      "expected_function": "iter_content / iter_lines",
+      "score": 2,
+      "response": "根据您的需求，您需要使用流式下载功能，相关代码如下：\n\n**文件名：** `requests/models.py`\n**类名：** `Response`\n**方法名：** `iter_content`\n\n**说明：**\n- 该方法允许您以流式方式迭代处理响应数据\n- 当设置 `stream=True` 时，可以避免将整个响应内容一次性读入内存\n- 您可以通过 `chunk_size` 参数控制每次读取的数据块大小\n\n**使用示例：**\n```python\nimport requests\n\nresponse = requests.get('https://example.com/large-file', stream=True)\nfor chunk in response.iter_content(chunk_size=8192):\n    # 在这里处理每个数据块\n    process_chunk(chunk)\n```\n\n另外，`iter_lines` 方法（同一文件、同一类）也可以用于逐行处理文本数据，适合处理行式数据流。"
+    },
+    {
+      "id": "C05",
+      "category": "C_fuzzy",
+      "query": "我不想让requests自动跳转到新地址",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "request / resolve_redirects",
+      "score": 1,
+      "response": "根据您的需求，您不希望 requests 库自动跟随重定向。以下是相关的函数和类：\n\n1. **`requests/api.py` → `head` 函数**\n   - 该函数默认将 `allow_redirects` 设置为 `False`，因此使用 `head()` 方法时不会自动跟随重定向。\n\n2. **`requests/sessions.py` → `SessionRedirectMixin` 类**\n   - 该类中的 `send` 方法负责处理请求和重定向逻辑。如果您自定义会话并重写 `send` 方法，可以控制是否跟随重定向。\n\n3. **`requests/sessions.py` → `rebuild_auth` 方法**\n   - 该方法在重定向时处理认证信息，但如果您禁用重定向，则不会调用此方法。\n\n4. **`requests/sessions.py` → `should_strip_auth` 方法**\n   - 该方法决定是否在重定向时移除 Authorization 头，同样仅在重定向发生时使用。\n\n**关键点**：要完全禁用自动重定向，您可以在发起请求时设置 `allow_redirects=False` 参数，例如：\n```python\nimport requests\nresponse = requests.get(url, allow_redirects=False)\n```\n或者使用 `head()` 方法，它默认不跟随重定向。"
+    },
+    {
+      "id": "C06",
+      "category": "C_fuzzy",
+      "query": "怎么给每个请求都加上同样的请求头，比如API key？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "Session",
+      "score": 2,
+      "response": "根据您的查询，要给每个请求都加上同样的请求头（如API key），您可以通过以下几种方式实现：\n\n## 方法1：使用Session对象（推荐）\n\n**文件：** `requests/sessions.py`\n**类：** `Session`\n**方法：** `__init__`\n\n在创建Session后，直接设置默认headers：\n\n```python\nimport requests\n\n# 创建Session并设置默认headers\nsession = requests.Session()\nsession.headers.update({'X-API-Key': 'your-api-key-here'})\n\n# 之后的所有请求都会自动带上这个header\nresponse = session.get('https://api.example.com/data')\nresponse = session.post('https://api.example.com/submit', json={'key': 'value'})\n```\n\n## 方法2：自定义HTTPAdapter（高级用法）\n\n**文件：** `requests/adapters.py`\n**类：** `HTTPAdapter`\n**方法：** `add_headers`\n\n通过继承HTTPAdapter并重写`add_headers`方法：\n\n```python\nimport requests\nfrom requests.adapters import HTTPAdapter\n\nclass CustomAdapter(HTTPAdapter):\n    def add_headers(self, request, **kwargs):\n        # 添加自定义headers\n        request.headers['X-API-Key'] = 'your-api-key-here'\n        # 调用父类方法（虽然默认什么都不做）\n        super().add_headers(request, **kwargs)\n\n# 使用自定义Adapter\nsession = requests.Session()\nsession.mount('https://', CustomAdapter())\nsession.mount('http://', CustomAdapter())\n\nresponse = session.get('https://api.example.com/data')\n```\n\n## 方法3：使用`headers`参数（每次请求单独设置）\n\n**文件：** `requests/api.py`\n**函数：** `request`\n\n```python\nimport requests\n\n# 每次请求都手动传入headers\nheaders = {'X-API-Key': 'your-api-key-here'}\nresponse = requests.get('https://api.example.com/data', headers=headers)\nresponse = requests.post('https://api.example.com/submit', headers=headers, json={'key': 'value'})\n```\n\n## 推荐方案\n\n**使用Session对象（方法1）**是最简单且推荐的方式，因为：\n1. 代码简洁，只需设置一次\n2. 自动管理cookie和连接池\n3. 可以结合其他Session特性（如代理、认证等）\n\n```python\nimport requests\n\nsession = requests.Session()\nsession.headers"
+    },
+    {
+      "id": "C07",
+      "category": "C_fuzzy",
+      "query": "请求失败的时候能不能自动重试？",
+      "expected_file": "requests/adapters.py",
+      "expected_function": "HTTPAdapter",
+      "score": 2,
+      "response": "根据您提供的代码片段，要实现请求失败时的自动重试功能，您需要关注以下关键位置：\n\n## 1. 重试异常类\n**文件**: `requests/exceptions.py`  \n**类**: `RetryError`  \n**说明**: 这是自定义重试逻辑失败时抛出的异常类，继承自`RequestException`。当重试次数耗尽或重试条件不满足时，会抛出此异常。\n\n## 2. 会话初始化（配置重试策略）\n**文件**: `requests/sessions.py`  \n**类**: `Session`  \n**方法**: `__init__`  \n**说明**: 在初始化会话时，您需要配置重试策略。虽然代码片段中没有直接显示重试配置，但您可以通过以下方式实现：\n\n```python\nfrom requests.adapters import HTTPAdapter\nfrom urllib3.util.retry import Retry\n\nsession = requests.Session()\nretry_strategy = Retry(\n    total=3,  # 最大重试次数\n    backoff_factor=1,  # 重试间隔因子\n    status_forcelist=[500, 502, 503, 504],  # 需要重试的HTTP状态码\n    allowed_methods=[\"GET\", \"POST\"]  # 允许重试的HTTP方法\n)\nadapter = HTTPAdapter(max_retries=retry_strategy)\nsession.mount(\"http://\", adapter)\nsession.mount(\"https://\", adapter)\n```\n\n## 3. 请求发送方法（重试触发点）\n**文件**: `requests/sessions.py`  \n**类**: `Session`  \n**方法**: `send`  \n**说明**: 这是实际发送请求的方法。当配置了重试策略后，`adapter.send()` 内部会自动处理重试逻辑。如果重试失败，会抛出`RetryError`异常。\n\n## 4. 请求构造方法（重试入口）\n**文件**: `requests/sessions.py`  \n**类**: `Session`  \n**方法**: `request`  \n**说明**: 这是构造和发送请求的入口方法。它会调用`send()`方法，因此重试策略会在此处生效。\n\n## 5. 重定向处理方法（注意重试与重定向的交互）\n**文件**: `requests/sessions.py`  \n**类**: `SessionRedirectMixin`  \n**方法**: `rebuild_method`  \n**说明**:"
+    },
+    {
+      "id": "C08",
+      "category": "C_fuzzy",
+      "query": "发送JSON数据和发送表单数据有什么区别？",
+      "expected_file": "requests/models.py",
+      "expected_function": "prepare_body",
+      "score": 2,
+      "response": "根据您提供的代码片段，以下是关于发送JSON数据和发送表单数据区别的详细说明：\n\n## 核心区别\n\n### 1. 数据传递方式不同\n\n**发送JSON数据**（使用`json`参数）：\n- 文件：`requests/models.py`\n- 类：`PreparedRequest`\n- 方法：`prepare_body`\n\n```python\n# 在prepare_body方法中处理json参数\nif not data and json is not None:\n    content_type = \"application/json\"\n    body = complexjson.dumps(json, allow_nan=False)  # 序列化为JSON字符串\n    if not isinstance(body, bytes):\n        body = body.encode(\"utf-8\")\n```\n\n**发送表单数据**（使用`data`参数）：\n- 文件：`requests/models.py`\n- 类：`PreparedRequest`\n- 方法：`prepare_body`\n\n```python\n# data参数会按表单编码处理\n# 如果是字典，会被编码为 application/x-www-form-urlencoded\n# 如果是文件，会被编码为 multipart/form-data\n```\n\n### 2. Content-Type自动设置不同\n\n| 参数 | 自动设置的Content-Type | 数据格式 |\n|------|----------------------|----------|\n| `json` | `application/json` | JSON字符串 |\n| `data` (字典) | `application/x-www-form-urlencoded` | key=value&key2=value2 |\n| `data` (文件) | `multipart/form-data` | 多部分编码 |\n\n### 3. 使用示例对比\n\n**发送JSON数据**：\n```python\nimport requests\n\n# 使用json参数\nresponse = requests.post('https://api.example.com/data', \n    json={\"name\": \"John\", \"age\": 30})\n# 自动设置 Content-Type: application/json\n# 请求体: {\"name\": \"John\", \"age\": 30}\n```\n\n**发送表单数据**：\n```python\nimport requests\n\n# 使用data参数（字典）\nresponse = requests.post('https://api.example.com/form', \n    data={\"name\": \"John\", \"age\": 30})\n# 自动设置 Content-Type: application/x-www-form-urlencoded\n# 请求体: name=John&age=30\n```\n\n### 4. 调用链差异\n\n**JSON数据**的调用链：\n1. `requests/api.py` → `post()` 函数\n2. `requests"
+    },
+    {
+      "id": "C09",
+      "category": "C_fuzzy",
+      "query": "能不能让requests忽略HTTPS证书错误？",
+      "expected_file": "requests/adapters.py",
+      "expected_function": "send",
+      "score": 0,
+      "response": "根据您提供的代码片段，要实现忽略HTTPS证书错误，需要在创建Session或发送请求时设置`verify=False`。以下是具体的实现方式：\n\n## 方法1：在Session级别设置（推荐）\n\n**文件：** `requests/sessions.py`\n**类：** `Session`\n**方法：** `__init__`（片段1）或 `request`（片段4）\n\n```python\nimport requests\n\n# 创建Session时设置verify=False\nsession = requests.Session()\nsession.verify = False  # 在__init__中初始化为True，这里覆盖为False\n\n# 或者使用with语句\nwith requests.Session() as s:\n    s.verify = False\n    response = s.get('https://example.com')\n```\n\n## 方法2：在单个请求中设置\n\n**文件：** `requests/sessions.py`\n**类：** `Session`\n**方法：** `request`（片段4）\n\n```python\nimport requests\n\n# 在单个请求中设置verify=False\nresponse = requests.get('https://example.com', verify=False)\n```\n\n## 方法3：全局设置（不推荐）\n\n```python\nimport requests\nfrom requests.packages.urllib3.exceptions import InsecureRequestWarning\n\n# 禁用警告（可选）\nrequests.packages.urllib3.disable_warnings(InsecureRequestWarning)\n\n# 全局设置verify=False\nrequests.Session.verify = False\n```\n\n## 重要说明\n\n1. **安全性警告**：设置`verify=False`会使您的应用容易受到中间人攻击（MitM），仅建议在测试或开发环境中使用。\n\n2. **代码片段中的相关逻辑**：\n   - 在`cert_verify`方法（片段2）中，当`verify=False`时，会设置`conn.cert_reqs = \"CERT_NONE\"`，从而跳过证书验证\n   - 在`_urllib3_request_context`函数（片段5）中，当`verify is False`时，设置`cert_reqs = \"CERT_NONE\"`\n\n3. **禁用警告**：使用`verify=False`时，urllib3会发出`InsecureRequestWarning`警告，可以通过以下方式禁用：\n   ```python\n   import urllib3\n   urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)\n   ```\n\n**推荐使用方式**：\n```python\nimport requests\nimport urllib3\n\n"
+    },
+    {
+      "id": "C10",
+      "category": "C_fuzzy",
+      "query": "我想在每次请求发出前做点处理，有没有钩子之类的机制？",
+      "expected_file": "requests/hooks.py → requests/models.py",
+      "expected_function": "dispatch_hook",
+      "score": 2,
+      "response": "根据您的需求，您可以使用 requests 库中的钩子（hooks）机制。具体来说，您需要关注以下代码：\n\n**文件：** `requests/models.py`\n**类：** `PreparedRequest`\n**方法：** `prepare_hooks`\n\n**文件：** `requests/sessions.py`\n**类：** `Session`\n**方法：** `request`\n\n**实现方式：**\n\n1. **在 `Session.request` 方法中**，您可以通过 `hooks` 参数传递自定义钩子函数。例如：\n```python\ndef my_hook(response, *args, **kwargs):\n    # 在请求发出前处理\n    print(\"请求即将发出\")\n    return response\n\nsession = requests.Session()\nsession.request('GET', 'http://example.com', hooks={'response': my_hook})\n```\n\n2. **在 `PreparedRequest.prepare_hooks` 方法中**，钩子会被注册到请求对象中。您可以通过 `register_hook` 方法添加自定义钩子。\n\n3. **在 `Session.send` 方法中**，钩子会在请求发送后通过 `dispatch_hook` 函数被调用。\n\n**关键点：**\n- 钩子是通过 `hooks` 参数传递的字典，键为事件名称（如 `'response'`），值为可调用对象\n- 您可以在 `Session.request` 或直接创建 `PreparedRequest` 时传递钩子\n- 钩子函数会在请求发送后、响应返回前被调用\n\n如果您需要在**每次请求发出前**做处理，建议在 `Session.request` 方法中设置全局钩子，或者重写 `Session.send` 方法。"
+    },
+    {
+      "id": "C11",
+      "category": "C_fuzzy",
+      "query": "服务器不接受我的请求，说认证失败，requests怎么处理这种情况？",
+      "expected_file": "requests/auth.py → requests/sessions.py",
+      "expected_function": "HTTPDigestAuth.handle_401",
+      "score": 1,
+      "response": "根据您提供的代码片段，以下是处理服务器认证失败的相关函数和类：\n\n## 核心文件与函数\n\n### 1. **Session 类 - `request` 方法**\n- **文件**: `requests/sessions.py`\n- **类**: `Session`\n- **方法**: `request`\n- **作用**: 这是发送请求的入口方法，支持 `auth` 参数用于认证\n\n### 2. **Session 类 - `__init__` 方法**\n- **文件**: `requests/sessions.py`\n- **类**: `Session`\n- **方法**: `__init__`\n- **作用**: 初始化 Session 对象，其中 `self.auth = None` 是默认认证设置\n\n### 3. **HTTPAdapter 类 - `cert_verify` 方法**\n- **文件**: `requests/adapters.py`\n- **类**: `HTTPAdapter`\n- **方法**: `cert_verify`\n- **作用**: 验证 SSL 证书，当 `verify=True` 时会检查证书有效性\n\n### 4. **`_urllib3_request_context` 函数**\n- **文件**: `requests/adapters.py`\n- **类型**: 函数\n- **作用**: 处理 SSL 验证和客户端证书配置\n\n## 处理认证失败的建议\n\n当服务器返回认证失败时，您可以：\n\n1. **使用 `auth` 参数**：\n```python\nimport requests\ns = requests.Session()\ns.auth = ('username', 'password')  # 基本认证\nresponse = s.get('https://api.example.com/data')\n```\n\n2. **检查 SSL 证书验证**：\n```python\n# 如果服务器使用自签名证书，可以临时禁用验证（不推荐生产环境）\nresponse = s.get('https://api.example.com/data', verify=False)\n```\n\n3. **使用自定义证书**：\n```python\n# 指定 CA 证书路径\nresponse = s.get('https://api.example.com/data', verify='/path/to/cert.pem')\n```\n\n4. **处理认证异常**：\n```python\nfrom requests.exceptions import HTTPError\n\ntry:\n    response = s.get('https://api.example.com/data')\n    response.raise_for_status()  # 检查 HTTP 状态码\nexcept HTTPError as e:\n    if response.status_code == 401:\n        print(\"认证失败，请检查用户名和密码\")\n    elif response.status_code == 403:\n        print(\"权限不足\")\n"
+    },
+    {
+      "id": "C12",
+      "category": "C_fuzzy",
+      "query": "怎么知道我的请求最终被重定向了多少次？",
+      "expected_file": "requests/models.py → requests/sessions.py",
+      "expected_function": "Response.history",
+      "score": 2,
+      "response": "根据您提供的代码片段，要了解请求最终被重定向了多少次，可以通过以下方式：\n\n## 关键代码位置\n\n**文件：** `requests/sessions.py`\n**类：** `SessionRedirectMixin`\n**方法：** `resolve_redirects`\n\n## 具体实现\n\n在 `resolve_redirects` 方法中，重定向历史被记录在 `hist` 列表中：\n\n```python\nhist: list[Response] = []  # keep track of history\n```\n\n每次重定向时，历史会被更新并附加到响应对象上：\n\n```python\nresp.history = hist[:]\nhist.append(resp)\n```\n\n## 使用方法\n\n在您的代码中，可以通过检查响应的 `history` 属性来获取重定向次数：\n\n```python\nimport requests\n\nresponse = requests.get('http://example.com')\nredirect_count = len(response.history)\nprint(f\"重定向次数: {redirect_count}\")\n```\n\n`response.history` 是一个包含所有重定向响应的列表，列表的长度就是重定向的次数。如果请求没有发生重定向，`history` 将是一个空列表。"
+    },
+    {
+      "id": "D01",
+      "category": "D_edge",
+      "query": "requests.get和Session.get有什么区别？",
+      "expected_file": "requests/api.py vs requests/sessions.py",
+      "expected_function": "api.get vs Session.get",
+      "score": 2,
+      "response": "根据检索到的代码片段，`requests.get` 和 `Session.get` 的区别如下：\n\n## 核心区别\n\n1. **`requests.get`** 是模块级别的函数，每次调用都会创建一个新的临时 Session 对象，发送请求后立即关闭。\n2. **`Session.get`** 是 `Session` 类的方法，使用同一个 Session 实例发送请求，可以保持 cookie、连接池等状态。\n\n## 具体实现\n\n**`Session.get`**（片段2）：\n- 文件：`requests/sessions.py`\n- 类：`Session`\n- 方法名：`get`\n- 内部调用 `self.request(\"GET\", url, params=params, **kwargs)`，使用当前 Session 实例的配置和状态。\n\n**`requests.get`**（未在片段中直接显示，但根据常见实现）：\n- 文件：`requests/api.py`\n- 函数名：`get`\n- 内部实现类似：`with Session() as session: return session.get(url, params=params, **kwargs)`，即每次创建临时 Session。\n\n## 使用场景\n\n- **`Session.get`**：适合需要保持会话状态（如 cookie、连接池）的多次请求场景。\n- **`requests.get`**：适合单次、无状态的简单请求。\n\n## 代码示例\n\n```python\n# 使用 Session.get（保持状态）\nwith requests.Session() as s:\n    s.get('https://httpbin.org/get')  # 使用同一个 Session\n\n# 使用 requests.get（无状态）\nrequests.get('https://httpbin.org/get')  # 每次创建新 Session\n```"
+    },
+    {
+      "id": "D02",
+      "category": "D_edge",
+      "query": "timeout参数设成一个数字和设成元组有什么不同？",
+      "expected_file": "requests/adapters.py",
+      "expected_function": "send",
+      "score": 2,
+      "response": "根据检索到的代码片段，timeout参数设成一个数字和设成元组的不同主要体现在以下两个类/方法中：\n\n1. **文件**: `requests/adapters.py` → **类**: `BaseAdapter` → **方法**: `send`\n   - 文档说明：`timeout: (optional) How long to wait for the server to send data before giving up, as a float, or a :ref:(connect timeout, read timeout) <timeouts> tuple.`\n   - 类型提示：`timeout: _t.TimeoutType = None`\n\n2. **文件**: `requests/adapters.py` → **类**: `HTTPAdapter` → **方法**: `send`\n   - 文档说明：`timeout: (optional) How long to wait for the server to send data before giving up, as a float, or a :ref:(connect timeout, read timeout) <timeouts> tuple.`\n   - 类型提示：`timeout: _t.TimeoutType = None`\n\n3. **文件**: `requests/sessions.py` → **类**: `Session` → **方法**: `request`\n   - 文档说明：`timeout: (optional) How many seconds to wait for the server to send data before giving up, as a float, or a :ref:(connect timeout, read timeout) <timeouts> tuple.`\n\n**区别**：\n- **设成一个数字（float）**：表示整个请求（连接和读取）的总超时时间。例如，`timeout=5` 表示连接和读取的总时间不能超过5秒。\n- **设成元组（tuple）**：可以分别指定连接超时和读取超时。格式为 `(connect_timeout, read_timeout)`。例如，`timeout=(3, 7)` 表示连接超时3秒，读取超时7秒。这样可以对连接和读取阶段分别设置不同的等待时间。"
+    },
+    {
+      "id": "D03",
+      "category": "D_edge",
+      "query": "requests.compat模块是做什么的？",
+      "expected_file": "requests/compat.py",
+      "expected_function": "compat",
+      "score": 2,
+      "response": "根据提供的代码片段，**没有找到与 `requests.compat` 模块相关的任何内容**。所有检索到的代码片段均来自 `requests/sessions.py`、`requests/api.py` 和 `requests/adapters.py` 文件，不涉及 `requests.compat` 模块。\n\n不过，根据 `requests` 库的通用知识，`requests.compat` 模块通常用于**提供 Python 2 和 Python 3 之间的兼容性**。它包含一些跨版本兼容的导入和工具函数，例如：\n- 统一处理字符串类型（如 `str`、`bytes`、`unicode`）\n- 处理 `urllib` 相关模块的差异（如 `urlparse`、`urlencode` 等）\n- 提供 `cookielib` 等模块的兼容性导入\n\n**注意**：由于代码片段中未包含该模块，以上解释基于 `requests` 库的通用设计，而非从提供的代码中直接提取。如果需要确认具体实现，建议直接查看 `requests/compat.py` 文件。"
+    },
+    {
+      "id": "D04",
+      "category": "D_edge",
+      "query": "CaseInsensitiveDict是什么，为什么HTTP头要用它？",
+      "expected_file": "requests/structures.py",
+      "expected_function": "CaseInsensitiveDict",
+      "score": 2,
+      "response": "根据您提供的代码片段，以下是具体的文件名和函数/类名：\n\n## 1. CaseInsensitiveDict 类定义\n- **文件名**: `requests/structures.py`\n- **类名**: `CaseInsensitiveDict`\n\n## 2. 使用 CaseInsensitiveDict 的关键位置\n\n### 2.1 构建 HTTP 响应头\n- **文件名**: `requests/adapters.py`\n- **类名**: `HTTPAdapter`\n- **方法名**: `build_response`\n- **具体代码行**: `response.headers = CaseInsensitiveDict(getattr(resp, \"headers\", {}))`\n\n### 2.2 创建默认请求头\n- **文件名**: `requests/utils.py`\n- **函数名**: `default_headers`\n- **返回值类型**: `CaseInsensitiveDict[str]`\n\n### 2.3 CaseInsensitiveDict 的核心方法\n- **文件名**: `requests/structures.py`\n- **方法名**: `__getitem__` - 实现大小写不敏感的键值获取\n- **方法名**: `__eq__` - 实现大小写不敏感的比较\n\n## 为什么 HTTP 头要用 CaseInsensitiveDict？\n\nHTTP 协议规范（RFC 7230）规定**HTTP 头字段名称是大小写不敏感的**。这意味着：\n\n- `Content-Type`\n- `content-type`\n- `CONTENT-TYPE`\n\n这些都应该被视为相同的头字段。\n\n使用 `CaseInsensitiveDict` 的好处：\n\n1. **用户友好**：开发者无需记忆头字段的确切大小写格式\n2. **兼容性**：不同 HTTP 客户端/服务器可能使用不同的大小写风格\n3. **一致性**：无论原始响应使用什么大小写，都能正确访问\n4. **内部保留原始大小写**：`iter()`、`keys()` 等方法返回的是最后设置的大小写形式，便于调试和日志记录"
+    },
+    {
+      "id": "D05",
+      "category": "D_edge",
+      "query": "如果我问requests怎么做WebSocket连接，它支持吗？",
+      "expected_file": "N/A",
+      "expected_function": "N/A",
+      "score": 2,
+      "response": "根据检索到的代码片段，requests库**不支持**WebSocket连接。以下是具体分析：\n\n## 不支持的原因\n\n1. **核心设计限制**：\n   - `requests`库是基于HTTP/HTTPS协议的同步请求库，其核心类`Session`和`HTTPAdapter`都是为HTTP协议设计的\n   - WebSocket需要长连接、双向通信和协议升级（Upgrade），这些在requests中完全没有实现\n\n2. **相关代码分析**：\n   - `requests/sessions.py`中的`get_adapter`方法（片段1）只支持HTTP/HTTPS协议的适配器查找\n   - `requests/adapters.py`中的`get_connection`和`get_connection_with_tls_context`方法（片段2、4）返回的是`urllib3.HTTPConnectionPool`，这是HTTP连接池，不支持WebSocket\n   - `request_url`方法（片段5）只处理HTTP代理逻辑，没有WebSocket相关的URL处理\n\n## 替代方案\n\n如果需要WebSocket支持，建议使用以下专门库：\n\n1. **websockets**（推荐）：\n   ```python\n   import asyncio\n   import websockets\n   \n   async def connect():\n       async with websockets.connect('ws://example.com') as ws:\n           await ws.send('Hello')\n           response = await ws.recv()\n   ```\n\n2. **websocket-client**（同步）：\n   ```python\n   import websocket\n   \n   ws = websocket.WebSocket()\n   ws.connect('ws://example.com')\n   ws.send('Hello')\n   response = ws.recv()\n   ```\n\n3. **aiohttp**（异步HTTP+WebSocket）：\n   ```python\n   import aiohttp\n   \n   async with aiohttp.ClientSession() as session:\n       async with session.ws_connect('ws://example.com') as ws:\n           await ws.send_str('Hello')\n           msg = await ws.receive()\n   ```\n\n## 结论\n\n**requests库不支持WebSocket连接**。它专注于HTTP/HTTPS协议的同步请求，没有实现WebSocket所需的协议升级、帧处理、长连接管理等核心功能。如果需要WebSocket功能，请使用上述专门库。"
+    },
+    {
+      "id": "D06",
+      "category": "D_edge",
+      "query": "requests库本身有没有实现异步请求？",
+      "expected_file": "N/A",
+      "expected_function": "N/A",
+      "score": 0,
+      "response": "根据检索到的代码片段，requests库本身**没有实现异步请求**。所有检索到的代码（`send`、`get`、`options`、`prepare_request`、`head`）都是同步方法，位于文件 `requests/sessions.py` 的 `Session` 类中。\n\n具体来说：\n- **文件名**：`requests/sessions.py`\n- **类名**：`Session`\n- **相关方法**：`send`、`get`、`options`、`prepare_request`、`head`\n\n这些方法都是同步阻塞的，例如 `send` 方法中直接调用 `adapter.send(request, **kwargs)` 并等待响应返回，没有使用 `async/await` 或任何异步机制。如果需要异步HTTP请求，可以考虑使用 `httpx` 或 `aiohttp` 等支持异步的库。"
+    },
+    {
+      "id": "D07",
+      "category": "D_edge",
+      "query": "PreparedRequest的prepare方法和Session.prepare_request有什么关系？",
+      "expected_file": "requests/models.py vs requests/sessions.py",
+      "expected_function": "PreparedRequest.prepare vs Session.prepare_request",
+      "score": 2,
+      "response": "根据代码片段分析，`PreparedRequest.prepare` 和 `Session.prepare_request` 的关系如下：\n\n## 调用关系\n\n**`Session.prepare_request` 内部调用了 `PreparedRequest.prepare`**。\n\n具体调用链：\n1. **`Session.prepare_request`** (requests/sessions.py, class Session)\n   - 负责合并 Session 级别的配置（cookies、headers、auth等）\n   - 创建 `PreparedRequest` 实例\n   - 调用 `p.prepare(...)` 方法\n\n2. **`PreparedRequest.prepare`** (requests/models.py, class PreparedRequest)\n   - 被 `Session.prepare_request` 调用\n   - 内部依次调用各个 `prepare_*` 方法（如 `prepare_method`、`prepare_url` 等）\n\n## 职责分工\n\n| 方法 | 文件/类 | 职责 |\n|------|---------|------|\n| `Session.prepare_request` | requests/sessions.py, Session | 合并 Session 级别的配置（cookies、headers、auth等），然后委托给 PreparedRequest |\n| `PreparedRequest.prepare` | requests/models.py, PreparedRequest | 执行具体的请求准备逻辑（方法、URL、头、cookies、body、auth、hooks） |\n\n## 调用示例\n\n```python\n# Session.prepare_request 内部逻辑简化版\ndef prepare_request(self, request):\n    # ... 合并 session 配置 ...\n    p = PreparedRequest()\n    p.prepare(  # 调用 PreparedRequest.prepare\n        method=method,\n        url=url,\n        headers=merged_headers,\n        cookies=merged_cookies,\n        # ...\n    )\n    return p\n```\n\n## 关键区别\n\n- **`Session.prepare_request`** 是高层方法，负责**合并 Session 级别的配置**（如持久化 cookies、默认 headers）\n- **`PreparedRequest.prepare`** 是底层方法，负责**执行具体的请求准备逻辑**（设置 method、URL、headers 等）\n\n简单来说，`Session.prepare_request` 是 `PreparedRequest.prepare` 的**包装器**，在调用后者之前先处理 Session 级别的配置合并。"
+    },
+    {
+      "id": "D08",
+      "category": "D_edge",
+      "query": "发送请求时data参数传了一个生成器（generator）会发生什么？",
+      "expected_file": "requests/models.py",
+      "expected_function": "prepare_body",
+      "score": 1,
+      "response": "根据代码片段分析，当`data`参数传入一个生成器时，主要涉及以下文件和函数：\n\n**文件：`requests/sessions.py`**\n- **类：`Session`**\n- **方法：`request`** - 这是核心请求方法，接收`data`参数并传递给后续处理\n\n**文件：`requests/models.py`**\n- **类：`Request`**\n- **方法：`prepare`** - 将`data`参数传递给`PreparedRequest.prepare()`方法\n\n**文件：`requests/adapters.py`**\n- **类：`BaseAdapter`**\n- **方法：`send`** - 发送准备好的请求\n\n**行为分析：**\n\n1. **在`Session.request()`中**：生成器作为`data`参数传入，会被传递给`Request`对象。\n\n2. **在`Request.prepare()`中**：生成器被传递给`PreparedRequest.prepare()`方法，该方法会尝试读取生成器的内容。\n\n3. **可能发生的情况**：\n   - **正常情况**：如果生成器产生字节数据，请求会正常发送，但生成器只能被消费一次。\n   - **重定向问题**：如果请求发生重定向，`requests`会尝试重新发送请求，但生成器已经被消费，第二次发送时生成器为空，导致请求体丢失。\n   - **流式传输**：如果使用`stream=True`，生成器可能被用于流式上传，但需要确保生成器不会在重定向时被重新消费。\n\n**潜在风险**：\n- 生成器只能迭代一次，重定向或重试会导致数据丢失\n- 生成器产生的数据必须是字节类型或可被编码为字节\n- 如果生成器产生大量数据，可能会消耗大量内存（取决于实现）\n\n**建议**：避免直接传入生成器，而是先将其转换为列表或使用`io.BytesIO`包装，以确保数据可重复使用。"
+    },
+    {
+      "id": "AUTO_001",
+      "category": "auto_generated",
+      "query": "如何用Python发送一个GET请求到指定网址？",
+      "expected_file": "requests/api.py",
+      "expected_function": "request",
+      "score": 2,
+      "response": "根据您提供的代码片段，发送GET请求有两种方式：\n\n1. **使用顶级函数**（简单快捷）：\n   - 文件：`requests/api.py`\n   - 函数：`get`\n   - 用法：`requests.get('https://example.com')`\n\n2. **使用Session对象**（推荐用于需要保持会话的场景）：\n   - 文件：`requests/sessions.py`\n   - 类：`Session`\n   - 方法：`get`\n   - 用法：\n     ```python\n     s = requests.Session()\n     s.get('https://example.com')\n     ```\n\n两种方式都会返回一个`Response`对象。顶级函数`get`内部会调用`request(\"get\", url, ...)`，而Session的`get`方法会调用`self.request(\"GET\", url, ...)`。"
+    },
+    {
+      "id": "AUTO_002",
+      "category": "auto_generated",
+      "query": "我想从某个网址获取数据，并带上一些查询参数。",
+      "expected_file": "requests/api.py",
+      "expected_function": "get",
+      "score": 2,
+      "response": "根据您的需求，您可以使用以下两个函数/方法：\n\n1. **`requests/api.py` → `get`**（顶层函数）\n   - 直接调用 `requests.get(url, params=...)` 即可发送带查询参数的GET请求\n   - 示例：`requests.get('https://httpbin.org/get', params={'key': 'value'})`\n\n2. **`requests/sessions.py` → `Session.get`**（Session类方法）\n   - 如果您需要保持会话（如cookie持久化），可以使用 `Session` 对象的 `get` 方法\n   - 示例：\n     ```python\n     session = requests.Session()\n     session.get('https://httpbin.org/get', params={'key': 'value'})\n     ```\n\n这两个方法都支持通过 `params` 参数传递查询参数（字典、列表元组或字节串），并返回 `Response` 对象。"
+    },
+    {
+      "id": "AUTO_003",
+      "category": "auto_generated",
+      "query": "我想查看某个网址支持哪些HTTP请求方法，怎么查？",
+      "expected_file": "requests/api.py",
+      "expected_function": "options",
+      "score": 1,
+      "response": "根据您提供的代码片段，要查看某个网址支持哪些HTTP请求方法，您可以使用 `requests` 库中的 `Session.request` 方法，但更直接的方法是使用 `requests.options()` 函数（它内部调用 `Session.request` 发送 OPTIONS 请求）。\n\n具体来说，您需要查看以下文件中的函数：\n\n**文件：** `requests/sessions.py`\n**类：** `Session`\n**方法：** `request`\n\n**说明：** 您可以通过发送一个 HTTP OPTIONS 请求来获取服务器支持的请求方法。OPTIONS 请求的响应头中通常会包含 `Allow` 字段，列出该资源允许的 HTTP 方法。\n\n**示例代码：**\n```python\nimport requests\n\nurl = \"https://example.com\"\nresponse = requests.options(url)\nprint(response.headers.get(\"Allow\"))\n```\n\n**注意：** 并非所有服务器都会正确返回 `Allow` 头，有些服务器可能不支持 OPTIONS 方法或返回空值。"
+    },
+    {
+      "id": "AUTO_004",
+      "category": "auto_generated",
+      "query": "我想用Python发送一个HTTP HEAD请求，该怎么写代码？",
+      "expected_file": "requests/api.py",
+      "expected_function": "head",
+      "score": 2,
+      "response": "根据您提供的代码片段，发送HTTP HEAD请求有两种方式：\n\n## 方式一：使用顶级函数（简单快捷）\n\n```python\nimport requests\n\nresponse = requests.head('https://httpbin.org/get')\nprint(response.status_code)\n```\n\n**文件**: `requests/api.py`  \n**函数**: `head`\n\n## 方式二：使用Session对象（推荐，支持连接池和cookie持久化）\n\n```python\nimport requests\n\n# 创建Session对象\nsession = requests.Session()\n# 发送HEAD请求\nresponse = session.head('https://httpbin.org/get')\nprint(response.status_code)\n```\n\n**文件**: `requests/sessions.py`  \n**类**: `Session`  \n**方法**: `head`\n\n## 两种方式的区别\n\n1. **顶级函数**（`requests.head`）：\n   - 简单直接，适合一次性请求\n   - 每次调用都会创建新的连接\n\n2. **Session方法**（`session.head`）：\n   - 保持会话状态（如cookies）\n   - 复用连接，性能更好\n   - 适合多次请求的场景\n\n两种方式都会自动设置 `allow_redirects=False`（如代码片段所示），这是HEAD请求的默认行为。"
+    },
+    {
+      "id": "AUTO_005",
+      "category": "auto_generated",
+      "query": "我想用Python发送一个POST请求，该怎么做？",
+      "expected_file": "requests/api.py",
+      "expected_function": "post",
+      "score": 2,
+      "response": "根据您提供的代码片段，要发送POST请求，可以使用以下两种方式：\n\n## 方式一：使用顶级函数（简单快捷）\n\n**文件**: `requests/api.py`\n**函数**: `post`\n\n```python\nimport requests\n\nresponse = requests.post('https://httpbin.org/post', data={'key': 'value'})\n# 或者发送JSON数据\nresponse = requests.post('https://httpbin.org/post', json={'key': 'value'})\n```\n\n## 方式二：使用Session对象（推荐用于多个请求）\n\n**文件**: `requests/sessions.py`\n**类**: `Session`\n**方法**: `post`\n\n```python\nimport requests\n\nsession = requests.Session()\nresponse = session.post('https://httpbin.org/post', data={'key': 'value'})\n```\n\n## 参数说明\n\n- `url`: 请求的URL\n- `data`: (可选) 字典、元组列表、字节或文件对象，作为请求体发送\n- `json`: (可选) 可JSON序列化的Python对象，作为JSON请求体发送\n- `**kwargs`: 其他可选参数，如`headers`、`cookies`、`timeout`等\n\n## 完整示例\n\n```python\nimport requests\n\n# 发送POST请求\nresponse = requests.post(\n    'https://httpbin.org/post',\n    data={'username': 'admin', 'password': '123456'},\n    headers={'User-Agent': 'Mozilla/5.0'},\n    timeout=5\n)\n\n# 检查响应\nif response.status_code == 200:\n    print('请求成功')\n    print(response.json())  # 解析JSON响应\nelse:\n    print(f'请求失败，状态码: {response.status_code}')\n```\n\n两种方式都会调用底层的`request`函数（位于`requests/api.py`），最终发送HTTP POST请求。"
+    },
+    {
+      "id": "AUTO_006",
+      "category": "auto_generated",
+      "query": "我想用HTTP的PUT方法向某个URL发送数据，该怎么做？",
+      "expected_file": "requests/api.py",
+      "expected_function": "put",
+      "score": 2,
+      "response": "根据您的查询，您可以使用以下两种方式发送HTTP PUT请求：\n\n## 方式一：使用顶级函数（推荐用于简单请求）\n\n**文件：** `requests/api.py`\n**函数：** `put`\n\n```python\nimport requests\n\nresponse = requests.put('https://httpbin.org/put', data={'key': 'value'})\n```\n\n## 方式二：使用Session对象（推荐用于需要保持会话的场景）\n\n**文件：** `requests/sessions.py`\n**类：** `Session`\n**方法：** `put`\n\n```python\nimport requests\n\nsession = requests.Session()\nresponse = session.put('https://httpbin.org/put', data={'key': 'value'})\n```\n\n## 参数说明\n\n两种方式都支持以下常用参数：\n- `url`：目标URL\n- `data`：要发送的数据（字典、列表、字节或文件对象）\n- `json`：JSON序列化数据\n- `headers`：自定义HTTP头\n- `timeout`：超时时间\n- `auth`：认证信息\n\n## 完整示例\n\n```python\nimport requests\n\n# 发送JSON数据\nresponse = requests.put(\n    'https://api.example.com/resource/1',\n    json={'name': 'updated_name'},\n    headers={'Authorization': 'Bearer your_token'}\n)\n\n# 检查响应\nif response.status_code == 200:\n    print('更新成功:', response.json())\nelse:\n    print('请求失败:', response.status_code)\n```\n\n两种方式最终都会调用底层的 `Session.request` 方法（位于 `requests/sessions.py` 的 `Session` 类中）来执行实际的HTTP请求。"
+    },
+    {
+      "id": "AUTO_007",
+      "category": "auto_generated",
+      "query": "我想用PATCH方法更新服务器上的资源数据，该怎么做？",
+      "expected_file": "requests/api.py",
+      "expected_function": "patch",
+      "score": 2,
+      "response": "根据您的查询，您可以使用PATCH方法更新服务器上的资源数据。以下是两种主要方式：\n\n## 方式一：使用顶级函数（简单快捷）\n\n**文件**: `requests/api.py`\n**函数**: `patch`\n\n```python\nimport requests\n\n# 基本用法\nresponse = requests.patch('https://api.example.com/resource/1', \n                          data={'key': 'new_value'})\n\n# 或使用JSON数据\nresponse = requests.patch('https://api.example.com/resource/1', \n                          json={'key': 'new_value'})\n\n# 检查响应\nif response.status_code == 200:\n    print('更新成功')\n    print(response.json())\n```\n\n## 方式二：使用Session对象（推荐，支持连接池和cookie持久化）\n\n**文件**: `requests/sessions.py`\n**类**: `Session`\n**方法**: `patch`\n\n```python\nimport requests\n\n# 创建Session对象\nsession = requests.Session()\n\n# 使用Session发送PATCH请求\nresponse = session.patch('https://api.example.com/resource/1', \n                         data={'key': 'new_value'})\n\n# 或使用JSON数据\nresponse = session.patch('https://api.example.com/resource/1', \n                         json={'key': 'new_value'})\n\n# 检查响应\nif response.status_code == 200:\n    print('更新成功')\n    print(response.json())\n```\n\n## 完整示例\n\n```python\nimport requests\n\n# 使用Session（推荐）\nwith requests.Session() as session:\n    # 设置认证信息（如果需要）\n    session.auth = ('username', 'password')\n    \n    # 发送PATCH请求更新资源\n    response = session.patch(\n        'https://api.example.com/users/123',\n        json={\n            'name': '新名字',\n            'email': 'newemail@example.com'\n        },\n        headers={'Content-Type': 'application/json'}\n    )\n    \n    if response.status_code == 200:\n        print('更新成功')\n        print(f'响应数据: {response.json()}')\n    else:\n        print(f'更新失败，状态码: {response.status_code}')\n```\n\n## 关键参数说明\n\n- **data**: 发送表单数据（字典、元组列表、字节或文件对象）\n- **json**: 发送JSON数据（自动设置Content-Type为application/json）\n- **headers**: 自定义HTTP头\n- **auth**: 认证信息"
+    },
+    {
+      "id": "AUTO_008",
+      "category": "auto_generated",
+      "query": "怎么用Python发送一个HTTP DELETE请求并获取响应？",
+      "expected_file": "requests/api.py",
+      "expected_function": "delete",
+      "score": 2,
+      "response": "根据您提供的代码片段，以下是发送HTTP DELETE请求并获取响应的具体方法：\n\n## 方法一：使用顶级函数（推荐简单场景）\n\n**文件**: `requests/api.py`\n**函数**: `delete`\n\n```python\nimport requests\n\nresponse = requests.delete('https://httpbin.org/delete')\nprint(response.status_code)\nprint(response.text)\n```\n\n## 方法二：使用Session对象（推荐需要保持会话的场景）\n\n**文件**: `requests/sessions.py`\n**类**: `Session`\n**方法**: `delete`\n\n```python\nimport requests\n\nsession = requests.Session()\nresponse = session.delete('https://httpbin.org/delete')\nprint(response.status_code)\nprint(response.text)\n```\n\n## 两种方法的区别\n\n1. **顶级函数 `requests.delete()`**（`requests/api.py`）：\n   - 直接调用，简单方便\n   - 每次调用都会创建新的连接\n\n2. **Session对象的 `session.delete()`**（`requests/sessions.py`）：\n   - 需要先创建Session实例\n   - 提供cookie持久化、连接池和配置共享\n   - 适合需要保持会话状态的场景\n\n## 带参数的DELETE请求示例\n\n```python\nimport requests\n\n# 使用顶级函数\nresponse = requests.delete(\n    'https://httpbin.org/delete',\n    headers={'Authorization': 'Bearer token123'},\n    timeout=5\n)\n\n# 使用Session\nsession = requests.Session()\nresponse = session.delete(\n    'https://httpbin.org/delete',\n    headers={'Authorization': 'Bearer token123'},\n    timeout=5\n)\n\nprint(f\"状态码: {response.status_code}\")\nprint(f\"响应内容: {response.text}\")\n```\n\n两种方法都会返回 `requests.Response` 对象，您可以通过该对象获取状态码、响应内容等信息。"
+    },
+    {
+      "id": "AUTO_009",
+      "category": "auto_generated",
+      "query": "我想用Python发送一个HTTP请求到指定网址该怎么写",
+      "expected_file": "requests/models.py",
+      "expected_function": "Request",
+      "score": 2,
+      "response": "根据您提供的代码片段，要发送HTTP请求，您可以使用`requests`库中的`request`函数。以下是具体的实现方式：\n\n## 推荐方法\n\n使用 `requests/api.py` 中的 `request` 函数（顶级函数）：\n\n```python\nimport requests\n\n# 发送GET请求\nresponse = requests.request('GET', 'https://api.example.com/data')\n\n# 发送POST请求\nresponse = requests.request('POST', 'https://api.example.com/submit', \n                           data={'key': 'value'})\n\n# 打印响应内容\nprint(response.text)\n```\n\n## 更简洁的写法\n\n通常更常用的方式是直接使用快捷方法：\n\n```python\nimport requests\n\n# GET请求\nresponse = requests.get('https://api.example.com/data')\n\n# POST请求\nresponse = requests.post('https://api.example.com/submit', \n                        data={'key': 'value'})\n\n# 带参数的GET请求\nresponse = requests.get('https://api.example.com/search', \n                       params={'q': 'python', 'page': 1})\n\n# 带JSON数据的POST请求\nresponse = requests.post('https://api.example.com/api', \n                        json={'name': 'John', 'age': 30})\n\n# 检查响应状态\nif response.status_code == 200:\n    print(response.json())  # 解析JSON响应\nelse:\n    print(f\"请求失败: {response.status_code}\")\n```\n\n## 请求流程说明\n\n根据您提供的代码片段，请求的完整流程是：\n\n1. **`requests/api.py` → `request` 函数**：用户调用的入口点\n2. **`requests/sessions.py` → `Session.request` 方法**：构造并发送请求\n3. **`requests/models.py` → `Request.prepare` 方法**：创建 `PreparedRequest` 对象\n4. **`requests/models.py` → `PreparedRequest.prepare_url` 方法**：处理URL编码\n5. **`requests/adapters.py` → `HTTPAdapter.request_url` 方法**：确定最终请求URL（考虑代理）\n\n## 完整示例\n\n```python\nimport requests\n\ntry:\n    # 发送请求\n    response = requests.get(\n        'https://api.github.com',\n        timeout=5,  # 超时设置\n        headers={'User-Agent': 'MyApp/1.0'}  # 自定义头部\n    )\n    \n    #"
+    },
+    {
+      "id": "AUTO_010",
+      "category": "auto_generated",
+      "query": "我想修改一个即将发送的HTTP请求的原始字节内容，该怎么做？",
+      "expected_file": "requests/models.py",
+      "expected_function": "PreparedRequest",
+      "score": 2,
+      "response": "根据您的需求，要修改即将发送的HTTP请求的原始字节内容，您需要关注以下关键位置：\n\n## 主要修改点\n\n### 1. `requests/models.py` → `PreparedRequest` 类\n这是您需要直接操作的核心类，它包含了即将发送的完整HTTP请求数据。\n\n### 2. `requests/models.py` → `PreparedRequest.prepare_body()` 方法\n**文件名**: `requests/models.py`\n**类名**: `PreparedRequest`\n**方法名**: `prepare_body`\n\n这个方法负责准备请求体（body）的原始字节内容。您可以通过重写或修改此方法来改变请求体的原始字节。\n\n### 3. `requests/models.py` → `PreparedRequest.body` 属性\n**文件名**: `requests/models.py`\n**类名**: `PreparedRequest`\n**属性名**: `body`\n\n这是存储请求体原始字节数据的属性。您可以直接修改这个属性来改变请求的原始字节内容。\n\n## 具体实现方法\n\n### 方法一：使用钩子（Hooks）\n在 `requests/sessions.py` 的 `Session.request()` 方法中，您可以使用 `hooks` 参数在请求发送前修改：\n\n```python\nimport requests\n\ndef modify_request(r):\n    # r 是 PreparedRequest 对象\n    # 修改原始字节内容\n    r.body = b\"modified body content\"\n    # 或者修改其他属性\n    r.headers['Content-Type'] = 'application/octet-stream'\n    return r\n\nsession = requests.Session()\nresponse = session.get('http://example.com', hooks={'prepared': modify_request})\n```\n\n### 方法二：继承 PreparedRequest 类\n```python\nfrom requests.models import PreparedRequest\n\nclass CustomPreparedRequest(PreparedRequest):\n    def prepare_body(self, data, files, json=None):\n        super().prepare_body(data, files, json)\n        # 在这里修改 body 的原始字节\n        if self.body:\n            self.body = b\"modified: \" + self.body\n```\n\n### 方法三：直接修改 PreparedRequest 实例\n```python\nimport requests\n\n# 创建请求\nreq = requests.Request('POST', 'http://example.com', data='original data')\nprepared = req.prepare()\n\n# 直接修改原始字节\nprepared.body = b\"modified raw bytes\"\nprepared.headers['Content-Length'] = str(len(prepared.body))\n\n# 发送"
+    },
+    {
+      "id": "AUTO_011",
+      "category": "auto_generated",
+      "query": "如何获取HTTP请求返回的响应对象中的内容？",
+      "expected_file": "requests/models.py",
+      "expected_function": "Response",
+      "score": 2,
+      "response": "根据您提供的代码片段，要获取HTTP请求返回的响应对象中的内容，可以使用以下方法：\n\n**文件名：** `requests/models.py`\n**类名：** `Response`\n**方法名：** `content`\n\n具体使用方式如下：\n\n```python\nimport requests\n\nresponse = requests.get('https://example.com')\ncontent_bytes = response.content  # 返回字节类型的内容\n```\n\n`content` 方法会返回响应的内容（以字节形式），如果内容尚未被读取，它会自动从底层连接中读取并缓存。如果内容已经被消费过，会直接返回缓存的内容。"
+    },
+    {
+      "id": "AUTO_012",
+      "category": "auto_generated",
+      "query": "我想合并请求中的字典参数和会话中的默认设置，该怎么做？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "merge_setting",
+      "score": 2,
+      "response": "根据您的需求，您可以使用 `requests/sessions.py` 文件中的以下函数和方法：\n\n## 1. 核心合并函数：`merge_setting`\n\n**文件**: `requests/sessions.py`  \n**名称**: `merge_setting`  \n**类型**: 顶层函数\n\n这个函数专门用于合并请求设置和会话设置，当两者都是字典时会进行合并：\n\n```python\nfrom requests.sessions import merge_setting\n\n# 合并字典参数\nmerged = merge_setting(request_setting, session_setting)\n```\n\n## 2. 高级合并方法：`Session.merge_environment_settings`\n\n**文件**: `requests/sessions.py`  \n**类**: `Session`  \n**名称**: `merge_environment_settings`  \n**类型**: 方法\n\n这个方法不仅合并请求和会话设置，还会考虑环境变量：\n\n```python\nsession = requests.Session()\nsession.proxies = {'http': 'http://proxy.example.com'}\nsession.verify = '/path/to/cert'\n\n# 合并请求设置和会话设置\nsettings = session.merge_environment_settings(\n    url='https://example.com',\n    proxies={'https': 'https://proxy.example.com'},\n    stream=False,\n    verify=True,\n    cert=None\n)\n# 返回: {'proxies': merged_dict, 'stream': False, 'verify': True, 'cert': None}\n```\n\n## 3. 自动合并方法：`Session.prepare_request`\n\n**文件**: `requests/sessions.py`  \n**类**: `Session`  \n**名称**: `prepare_request`  \n**类型**: 方法\n\n这个方法会自动合并请求和会话的所有设置（包括字典参数）：\n\n```python\nsession = requests.Session()\nsession.headers.update({'X-Custom': 'session-value'})\nsession.params = {'key1': 'session'}\n\nreq = requests.Request('GET', 'https://httpbin.org/get', \n                       headers={'X-Custom': 'request-value'},\n                       params={'key2': 'request'})\nprepared = session.prepare_request(req)\n# prepared.headers 会包含合并后的 headers\n# prepared.params 会包含合并后的 params\n```\n\n## 推荐使用方式\n\n对于简单的字典合并，直接使用 `merge_setting` 函数：\n\n```python\nfrom requests.sessions import merge_setting\n\nrequest_params = {'key1': 'value1', 'key2': 'value2'}\nsession_params = {'key2': 'session_value', 'key"
+    },
+    {
+      "id": "AUTO_013",
+      "category": "auto_generated",
+      "query": "我在使用requests库时，钩子函数合并后失效了怎么办？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "merge_hooks",
+      "score": 2,
+      "response": "根据您的问题，钩子函数合并后失效的问题，主要涉及以下代码：\n\n## 关键函数\n\n### 1. `requests/sessions.py` → `merge_hooks`\n这是处理钩子合并的核心函数。当您发现钩子合并后失效时，问题很可能出在这里。\n\n**问题原因**：当 `request_hooks == {'response': []}` 时，合并会破坏 Session 的钩子。该函数专门处理了这种情况。\n\n### 2. `requests/sessions.py` → `merge_setting`\n这是 `merge_hooks` 内部调用的通用合并函数，用于合并字典类型的设置。\n\n## 解决方案\n\n### 检查点1：确保钩子格式正确\n```python\n# 错误示例 - 会导致合并失效\nhooks = {'response': []}  # 空列表会触发特殊处理\n\n# 正确示例\nhooks = {'response': [my_hook_function]}\n```\n\n### 检查点2：使用正确的注册方式\n```python\n# 使用 RequestHooksMixin 类的方法\n# 文件: requests/models.py\n# 类: RequestHooksMixin\n# 方法: register_hook\n\n# 正确注册钩子\nrequest.register_hook('response', my_hook_function)\n```\n\n### 检查点3：避免空钩子字典\n```python\n# 不要这样做\nhooks = {'response': []}  # 会导致 merge_hooks 返回 request_hooks，忽略 session_hooks\n\n# 应该这样做\nhooks = None  # 或者不传 hooks 参数\n```\n\n## 完整示例\n\n```python\nimport requests\n\ndef my_hook(response, *args, **kwargs):\n    print(f\"Response status: {response.status_code}\")\n    return response\n\n# 正确方式1：在请求时传递钩子\nsession = requests.Session()\nsession.hooks['response'].append(my_hook)  # 使用 Session 的钩子\n\n# 正确方式2：在单个请求中传递钩子\nresponse = session.get('https://api.example.com', hooks={'response': [my_hook]})\n\n# 错误方式 - 会导致合并失效\nresponse = session.get('https://api.example.com', hooks={'response': []})\n```\n\n如果问题仍然存在，请检查：\n1. 是否在请求中传入了空的 `{'response': []}` 字典\n2. 是否使用了正确的钩子事件名称（目前"
+    },
+    {
+      "id": "AUTO_014",
+      "category": "auto_generated",
+      "query": "我想用Python爬取网页时保持登录状态和cookie，应该怎么做？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "Session",
+      "score": 2,
+      "response": "根据您提供的代码片段，以下是实现保持登录状态和Cookie的关键组件：\n\n## 1. **Session 类** - 核心会话管理\n**文件**: `requests/sessions.py`  \n**类名**: `Session`\n\n这是保持登录状态的核心类，它会自动管理Cookie的持久化：\n```python\nfrom requests import Session\n\ns = Session()\n# 登录请求后，Session会自动保存Cookie\ns.post('https://example.com/login', data={'username': 'user', 'password': 'pass'})\n# 后续请求会自动携带Cookie\ns.get('https://example.com/protected-page')\n```\n\n## 2. **Session.__init__** - 初始化会话配置\n**文件**: `requests/sessions.py`  \n**类**: `Session`  \n**方法**: `__init__`\n\n初始化时会自动创建`RequestsCookieJar`对象用于存储Cookie：\n```python\nself.cookies = RequestsCookieJar()  # 自动初始化\n```\n\n## 3. **Session.__enter__** - 上下文管理器支持\n**文件**: `requests/sessions.py`  \n**类**: `Session`  \n**方法**: `__enter__`\n\n支持使用`with`语句自动管理会话生命周期：\n```python\nwith requests.Session() as s:\n    s.get('https://example.com')  # 自动处理Cookie\n```\n\n## 4. **Session.__getstate__** - 序列化支持\n**文件**: `requests/sessions.py`  \n**类**: `Session`  \n**方法**: `__getstate__`\n\n可以序列化会话状态（包括Cookie）以便持久化存储：\n```python\nimport pickle\n\n# 保存会话状态\nwith open('session.pkl', 'wb') as f:\n    pickle.dump(s.__getstate__(), f)\n\n# 恢复会话状态\nwith open('session.pkl', 'rb') as f:\n    state = pickle.load(f)\n    s = Session()\n    s.__dict__.update(state)\n```\n\n## 5. **MockRequest** - Cookie处理适配器\n**文件**: `requests/cookies.py`  \n**类名**: `MockRequest`\n\n这个类用于适配`http.cookiejar.CookieJar`的接口，确保Cookie策略正确执行：\n```python\n# 内部使用，通常不需要直接调用\n# 但了解其存在有助于理解Cookie处理机制\n```\n\n## 完整示例代码\n\n```python\nimport requests"
+    },
+    {
+      "id": "AUTO_015",
+      "category": "auto_generated",
+      "query": "如何使用Python的requests库创建可自动关闭的会话对象",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "session",
+      "score": 2,
+      "response": "根据您提供的代码片段，要创建可自动关闭的会话对象，可以使用以下方式：\n\n## 使用 `Session` 类的上下文管理器\n\n**文件**: `requests/sessions.py`\n**类**: `Session`\n**方法**: `__exit__`\n\n```python\nimport requests\n\n# 使用 with 语句创建自动关闭的会话\nwith requests.Session() as session:\n    response = session.get('https://httpbin.org/get')\n    # 会话会在 with 块结束时自动关闭\n```\n\n## 工作原理\n\n1. **`Session.__exit__`** (片段1) 在退出 `with` 块时自动调用 `self.close()`\n2. **`Session.close`** (片段3) 会关闭所有适配器，释放连接池资源\n\n## 替代方案（已弃用）\n\n**文件**: `requests/sessions.py`\n**函数**: `session` (片段5)\n\n```python\n# 已弃用，不推荐使用\nwith requests.session() as session:\n    response = session.get('https://httpbin.org/get')\n```\n\n## 推荐用法\n\n```python\nimport requests\n\n# 推荐：直接使用 Session 类的上下文管理器\nwith requests.Session() as session:\n    # 会话会自动管理cookie和连接池\n    session.get('https://httpbin.org/get')\n    session.post('https://httpbin.org/post', data={'key': 'value'})\n    # 退出with块时自动调用close()\n```\n\n这种方式确保会话在使用完毕后自动关闭，避免资源泄漏。"
+    },
+    {
+      "id": "AUTO_016",
+      "category": "auto_generated",
+      "query": "我想了解requests库中基础传输适配器的作用是什么。",
+      "expected_file": "requests/adapters.py",
+      "expected_function": "BaseAdapter",
+      "score": 2,
+      "response": "根据您提供的代码片段，以下是关于requests库中基础传输适配器（BaseAdapter）的相关信息：\n\n## 基础传输适配器（BaseAdapter）\n\n**文件**: `requests/adapters.py`\n**类名**: `BaseAdapter`\n\n### 作用说明\n\n`BaseAdapter` 是requests库中的**基础传输适配器**，它定义了所有传输适配器必须实现的接口规范。具体作用包括：\n\n1. **定义接口标准**：作为抽象基类，规定了传输适配器需要实现的 `send` 方法签名\n2. **提供默认实现**：`send` 方法默认抛出 `NotImplementedError`，强制子类必须重写该方法\n3. **作为类型约束**：在 `Session.get_adapter()` 方法中，返回值类型被声明为 `BaseAdapter`（见片段2）\n\n### 关键实现\n\n- **`send` 方法**（片段4）：定义了发送请求的标准接口，接收 `PreparedRequest` 对象，返回 `Response` 对象\n- **子类 `HTTPAdapter`**（片段3）：继承自 `BaseAdapter`，提供了基于urllib3的实际HTTP/HTTPS传输实现\n\n### 使用场景\n\n在 `Session` 类中（片段2），`get_adapter` 方法会根据URL前缀匹配对应的适配器，返回 `BaseAdapter` 类型的实例，确保所有适配器都遵循统一的接口规范。"
+    },
+    {
+      "id": "AUTO_017",
+      "category": "auto_generated",
+      "query": "在Python的requests库中，如何设置默认的HTTP适配器来处理请求？",
+      "expected_file": "requests/adapters.py",
+      "expected_function": "HTTPAdapter",
+      "score": 2,
+      "response": "根据您提供的代码片段，在Python的requests库中，设置默认HTTP适配器的方法是使用`HTTPAdapter`类。具体来说：\n\n**文件名**: `requests/adapters.py`\n**类名**: `HTTPAdapter`\n\n**使用示例**：\n```python\nimport requests\nfrom requests.adapters import HTTPAdapter\n\n# 创建Session对象\ns = requests.Session()\n\n# 创建HTTPAdapter实例，可以设置参数如max_retries\na = HTTPAdapter(max_retries=3)\n\n# 将适配器挂载到特定的URL前缀上\ns.mount('http://', a)\ns.mount('https://', a)\n```\n\n**关键点**：\n1. `HTTPAdapter`是requests库内置的HTTP适配器，位于`requests/adapters.py`文件中\n2. 通过`Session.mount()`方法将适配器与URL前缀关联\n3. 可以设置`max_retries`、`pool_connections`、`pool_maxsize`等参数来控制连接池和重试行为\n4. 适配器支持代理管理（通过`proxy_manager_for`方法）和自定义请求头（通过`add_headers`方法）\n\n这样配置后，所有通过该Session发起的HTTP/HTTPS请求都会使用这个自定义的适配器。"
+    },
+    {
+      "id": "AUTO_018",
+      "category": "auto_generated",
+      "query": "我想了解requests库中认证功能的基础类是怎么用的。",
+      "expected_file": "requests/auth.py",
+      "expected_function": "AuthBase",
+      "score": 2,
+      "response": "根据您提供的代码片段，requests库中认证功能的基础类是 `AuthBase`，具体信息如下：\n\n**文件名**: `requests/auth.py`\n**类名**: `AuthBase`\n\n**使用方式**:\n1. `AuthBase` 是一个抽象基类，所有认证实现都需要继承自它\n2. 它定义了一个 `__call__` 方法，接收一个 `PreparedRequest` 对象并返回修改后的 `PreparedRequest`\n3. 子类需要实现 `__call__` 方法来添加认证信息\n\n**示例**:\n```python\nfrom requests.auth import AuthBase\n\nclass MyCustomAuth(AuthBase):\n    def __init__(self, token):\n        self.token = token\n    \n    def __call__(self, r):\n        r.headers['Authorization'] = f'Bearer {self.token}'\n        return r\n\n# 使用自定义认证\nsession = requests.Session()\nsession.auth = MyCustomAuth('your-token')\n```\n\n**内置实现**:\n- `HTTPBasicAuth` 是 `AuthBase` 的一个具体实现，用于HTTP基本认证\n- 它通过 `__call__` 方法在请求头中添加 `Authorization: Basic <credentials>` 字段\n\n**核心机制**:\n- 认证类通过 `__call__` 方法实现，使其成为可调用对象\n- 在发送请求前，requests会调用认证对象的 `__call__` 方法，传入 `PreparedRequest` 对象\n- 认证对象修改请求头后返回，完成认证信息的注入"
+    },
+    {
+      "id": "AUTO_019",
+      "category": "auto_generated",
+      "query": "怎么用Python的requests库给HTTP请求添加基本的用户名密码认证？",
+      "expected_file": "requests/auth.py",
+      "expected_function": "HTTPBasicAuth",
+      "score": 2,
+      "response": "根据您提供的代码片段，要在Python的requests库中添加HTTP基本用户名密码认证，需要使用`requests.auth`模块中的`HTTPBasicAuth`类。具体实现如下：\n\n**文件名**: `requests/auth.py`\n**类名**: `HTTPBasicAuth`\n\n**使用方法**：\n\n```python\nimport requests\nfrom requests.auth import HTTPBasicAuth\n\n# 方式1：直接使用HTTPBasicAuth类\nresponse = requests.get('https://api.example.com/data', \n                       auth=HTTPBasicAuth('username', 'password'))\n\n# 方式2：更简洁的写法（requests会自动处理）\nresponse = requests.get('https://api.example.com/data', \n                       auth=('username', 'password'))\n```\n\n**关键方法**：\n- `__init__(self, username, password)` - 构造函数，接收用户名和密码（支持str或bytes类型）\n- `__call__(self, r)` - 核心方法，将认证信息添加到请求的Authorization头中\n\n**参数类型**：\n- `username`: `str` 或 `bytes`\n- `password`: `str` 或 `bytes`\n\n两种方式效果相同，方式2是requests提供的便捷写法，内部会自动创建`HTTPBasicAuth`实例。"
+    },
+    {
+      "id": "AUTO_020",
+      "category": "auto_generated",
+      "query": "如何在发送HTTP请求时添加代理认证信息来访问受限资源？",
+      "expected_file": "requests/auth.py",
+      "expected_function": "HTTPProxyAuth",
+      "score": 2,
+      "response": "根据代码片段，要在发送HTTP请求时添加代理认证信息，可以使用以下两种方式：\n\n## 方式一：使用 `HTTPProxyAuth` 类（推荐）\n\n**文件**: `requests/auth.py`\n**类**: `HTTPProxyAuth`\n\n```python\nfrom requests.auth import HTTPProxyAuth\n\n# 创建代理认证对象\nproxy_auth = HTTPProxyAuth(\"username\", \"password\")\n\n# 在请求中使用\nresponse = requests.get(\n    \"http://example.com\",\n    proxies={\"http\": \"http://proxy.example.com:8080\"},\n    auth=proxy_auth\n)\n```\n\n`HTTPProxyAuth` 类的 `__call__` 方法会自动在请求头中添加 `Proxy-Authorization` 字段。\n\n## 方式二：在代理URL中直接包含认证信息\n\n**文件**: `requests/adapters.py`\n**方法**: `HTTPAdapter.proxy_headers`\n\n```python\n# 直接在代理URL中包含用户名和密码\nproxies = {\n    \"http\": \"http://username:password@proxy.example.com:8080\",\n    \"https\": \"http://username:password@proxy.example.com:8080\"\n}\n\nresponse = requests.get(\"http://example.com\", proxies=proxies)\n```\n\n`HTTPAdapter.proxy_headers` 方法会自动从代理URL中提取认证信息并生成 `Proxy-Authorization` 头。\n\n## 两种方式的区别\n\n1. **`HTTPProxyAuth`**：更灵活，可以动态设置用户名和密码，适合需要程序化控制认证信息的场景\n2. **代理URL直接包含认证**：更简洁，适合代理信息固定的场景\n\n两种方式最终都会在请求头中添加 `Proxy-Authorization` 字段，实现代理认证。"
+    },
+    {
+      "id": "AUTO_021",
+      "category": "auto_generated",
+      "query": "如何在Python的Requests库中启用HTTP摘要认证来发送请求？",
+      "expected_file": "requests/auth.py",
+      "expected_function": "HTTPDigestAuth",
+      "score": 2,
+      "response": "根据您提供的代码片段，要在Python的Requests库中启用HTTP摘要认证来发送请求，需要使用`HTTPDigestAuth`类。具体实现如下：\n\n**文件名：** `requests/auth.py`\n**类名：** `HTTPDigestAuth`\n**方法名：** `__call__`\n\n**使用示例：**\n```python\nfrom requests.auth import HTTPDigestAuth\nimport requests\n\n# 创建HTTP摘要认证对象\nauth = HTTPDigestAuth('your_username', 'your_password')\n\n# 发送请求时传入auth参数\nresponse = requests.get('https://example.com/protected', auth=auth)\n```\n\n**工作原理（基于代码片段）：**\n1. `HTTPDigestAuth.__call__` 方法会在请求发送前被调用\n2. 它会初始化线程状态（`init_per_thread_state()`）\n3. 如果已有保存的nonce值，会直接构建摘要认证头（`build_digest_header`）\n4. 记录请求体的位置（用于重试时重置）\n5. 注册响应钩子（`handle_401` 和 `handle_redirect`）来处理401认证挑战和重定向\n\n**完整流程：**\n1. 首次请求时，因为没有nonce，请求会先发送（不带认证头）\n2. 服务器返回401状态码和WWW-Authenticate头（包含nonce等信息）\n3. `handle_401`钩子被触发，使用服务器提供的nonce重新构建认证头\n4. 自动重发带有正确摘要认证头的请求\n\n您也可以使用`Session`对象（在`requests/sessions.py`中）来保持认证状态：\n```python\nfrom requests.auth import HTTPDigestAuth\nimport requests\n\nsession = requests.Session()\nsession.auth = HTTPDigestAuth('your_username', 'your_password')\nresponse = session.get('https://example.com/protected')\n```"
+    },
+    {
+      "id": "AUTO_022",
+      "category": "auto_generated",
+      "query": "我想模拟一个urllib2请求对象，用来测试cookie策略怎么办？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "MockRequest",
+      "score": 2,
+      "response": "根据您的查询，您需要使用 `MockRequest` 类来模拟 `urllib2.Request` 对象以测试 cookie 策略。以下是具体的文件路径和类信息：\n\n**文件路径：** `requests/cookies.py`\n\n**类名：** `MockRequest`\n\n**主要方法：**\n- `__init__(self, request: PreparedRequest)` - 初始化方法，接收一个 `PreparedRequest` 对象\n- `get_type()` - 返回请求的协议类型（http/https）\n- `get_host()` - 返回请求的主机名\n- `get_origin_req_host()` - 返回原始请求的主机名\n- `get_full_url()` - 返回完整的请求URL\n- `get_header(name, default=None)` - 获取请求头信息\n- `host()` - 返回主机名（调用 `get_host()`）\n\n**使用示例：**\n```python\nfrom requests.cookies import MockRequest\nfrom requests import Request, PreparedRequest\n\n# 创建一个 PreparedRequest 对象\nreq = Request('GET', 'http://example.com')\nprepared = req.prepare()\n\n# 创建 MockRequest 包装器\nmock_request = MockRequest(prepared)\n\n# 现在可以像使用 urllib2.Request 一样使用 mock_request\nprint(mock_request.get_host())  # 输出: example.com\nprint(mock_request.get_type())  # 输出: http\n```\n\n这个类专门设计用于与 `http.cookiejar.CookieJar` 交互，以正确管理 cookie 策略。"
+    },
+    {
+      "id": "AUTO_023",
+      "category": "auto_generated",
+      "query": "如何从HTTP响应头中提取Cookiejar需要的格式？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "MockResponse",
+      "score": 2,
+      "response": "根据您提供的代码片段，从HTTP响应头中提取CookieJar需要的格式主要通过以下函数和类实现：\n\n## 主要函数\n\n**`requests/cookies.py` → `extract_cookies_to_jar`**\n\n这是核心的提取函数，它接收三个参数：\n- `jar`: CookieJar对象\n- `request`: PreparedRequest对象\n- `response`: urllib3.HTTPResponse对象\n\n## 辅助类\n\n**`requests/cookies.py` → `MockResponse`**\n\n这个类用于包装HTTP响应头，使其符合`http.cookiejar`期望的格式。它包含以下方法：\n- `__init__(self, headers)`: 初始化，接收httplib.HTTPMessage对象\n- `info(self)`: 返回原始headers\n- `getheaders(self, name)`: 获取指定名称的headers\n\n**`requests/cookies.py` → `MockRequest`**\n\n这个类用于包装PreparedRequest对象，提供`get_full_url()`方法，用于获取完整的请求URL。\n\n## 使用流程\n\n1. 在`extract_cookies_to_jar`函数中，首先检查响应对象是否有`_original_response`属性\n2. 创建`MockRequest`对象包装请求\n3. 创建`MockResponse`对象包装响应头（`response._original_response.msg`）\n4. 调用`jar.extract_cookies(res, req)`将cookie提取到jar中\n\n这个流程确保了HTTP响应头中的cookie能够被正确解析并存储到CookieJar中。"
+    },
+    {
+      "id": "AUTO_024",
+      "category": "auto_generated",
+      "query": "怎么把HTTP响应的cookie提取并保存到指定的cookie容器里？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "extract_cookies_to_jar",
+      "score": 2,
+      "response": "根据您的查询，将HTTP响应的cookie提取并保存到指定的cookie容器里，主要涉及以下函数和类：\n\n## 核心函数\n\n**文件**: `requests/cookies.py`  \n**函数**: `extract_cookies_to_jar`  \n**功能**: 从HTTP响应中提取cookie并保存到指定的CookieJar容器中\n\n## 使用示例\n\n```python\nfrom requests.cookies import extract_cookies_to_jar\nfrom http.cookiejar import CookieJar\n\n# 创建cookie容器\njar = CookieJar()\n\n# 提取响应中的cookie并保存到jar中\nextract_cookies_to_jar(jar, request, response)\n```\n\n## 辅助类\n\n**文件**: `requests/cookies.py`  \n**类**: `MockResponse`  \n**方法**: \n- `__init__(self, headers)` - 初始化，接收HTTP头信息\n- `info(self)` - 返回HTTP头信息\n- `getheaders(self, name)` - 获取指定名称的HTTP头\n\n这个类用于包装HTTP响应头，使其符合`http.cookiejar`库的接口要求。\n\n## 相关函数\n\n**文件**: `requests/models.py`  \n**类**: `PreparedRequest`  \n**方法**: `prepare_cookies(self, cookies)`  \n**功能**: 准备HTTP cookie数据，生成Cookie头并添加到请求中\n\n## 工作流程\n\n1. `extract_cookies_to_jar`函数接收三个参数：cookie容器(jar)、请求对象(request)、响应对象(response)\n2. 函数内部创建`MockRequest`和`MockResponse`对象来适配`http.cookiejar`的接口\n3. 调用`jar.extract_cookies(res, req)`将cookie从响应中提取并保存到jar中"
+    },
+    {
+      "id": "AUTO_025",
+      "category": "auto_generated",
+      "query": "怎么从cookie对象生成请求用的Cookie请求头字符串？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "get_cookie_header",
+      "score": 2,
+      "response": "根据您提供的代码片段，从cookie对象生成请求用的Cookie请求头字符串主要通过以下函数实现：\n\n**文件名：** `requests/cookies.py`\n**函数名：** `get_cookie_header`\n\n**调用方式：**\n```python\nfrom requests.cookies import get_cookie_header\nfrom requests.cookies import RequestsCookieJar\n\n# 假设您有一个cookie jar对象\ncookie_jar = RequestsCookieJar()\n# ... 添加cookie到jar中 ...\n\n# 生成Cookie请求头字符串\ncookie_header = get_cookie_header(cookie_jar, prepared_request)\n```\n\n**函数内部实现流程：**\n1. 创建一个`MockRequest`对象来包装`PreparedRequest`\n2. 调用`jar.add_cookie_header(r)`方法（来自`http.cookiejar.CookieJar`）\n3. 通过`r.get_new_headers().get(\"Cookie\")`获取生成的Cookie头字符串\n\n**完整调用链：**\n- `get_cookie_header(jar, request)` → 创建`MockRequest` → 调用`jar.add_cookie_header()` → 返回Cookie头字符串\n\n**实际使用场景（在`PreparedRequest.prepare_cookies`方法中）：**\n```python\n# 在 requests/models.py 的 PreparedRequest 类中\ndef prepare_cookies(self, cookies):\n    # ... 处理cookies参数 ...\n    cookie_header = get_cookie_header(cookies_jar, self)\n    if cookie_header is not None:\n        self.headers[\"Cookie\"] = cookie_header\n```\n\n**注意：** 这个函数返回的是字符串类型的Cookie头内容（如 `\"key1=value1; key2=value2\"`），如果没有任何cookie则返回`None`。"
+    },
+    {
+      "id": "AUTO_026",
+      "category": "auto_generated",
+      "query": "如何删除指定名称的Cookie？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "remove_cookie_by_name",
+      "score": 2,
+      "response": "根据您提供的代码片段，删除指定名称的Cookie可以通过以下方式实现：\n\n## 主要方法\n\n**文件**: `requests/cookies.py`\n**类**: `RequestsCookieJar`\n**方法**: `__delitem__`\n\n```python\ndef __delitem__(self, name: str) -> None:\n    \"\"\"Deletes a cookie given a name.\"\"\"\n    remove_cookie_by_name(self, name)\n```\n\n## 底层实现\n\n**文件**: `requests/cookies.py`\n**函数**: `remove_cookie_by_name`\n\n```python\ndef remove_cookie_by_name(\n    cookiejar: CookieJar, name: str, domain: str | None = None, path: str | None = None\n) -> None:\n    \"\"\"Unsets a cookie by name, by default over all domains and paths.\"\"\"\n```\n\n## 使用方式\n\n1. **直接使用字典语法**（推荐）：\n   ```python\n   del cookie_jar['cookie_name']\n   ```\n\n2. **通过set方法赋值为None**（文件：`requests/cookies.py`，类：`RequestsCookieJar`，方法：`set`）：\n   ```python\n   cookie_jar.set('cookie_name', None)\n   ```\n\n3. **直接调用底层函数**：\n   ```python\n   from requests.cookies import remove_cookie_by_name\n   remove_cookie_by_name(cookie_jar, 'cookie_name')\n   ```\n\n`__delitem__` 方法会调用 `remove_cookie_by_name` 函数，该函数默认会删除所有域和路径下指定名称的cookie。如果需要更精确的控制，可以指定 `domain` 和 `path` 参数。"
+    },
+    {
+      "id": "AUTO_027",
+      "category": "auto_generated",
+      "query": "在Cookie Jar里遇到同名Cookie冲突时，如何指定域名和路径来获取正确的值？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "CookieConflictError",
+      "score": 2,
+      "response": "根据您提供的代码片段，要解决Cookie Jar中同名Cookie冲突的问题，可以通过指定域名和路径参数来获取正确的值。具体涉及以下文件、类和函数：\n\n**文件：** `requests/cookies.py`\n\n**类：** `RequestsCookieJar`\n\n**相关方法：**\n\n1. **`get` 方法** - 推荐使用\n   - 签名：`def get(self, name, default=None, domain=None, path=None)`\n   - 说明：这是字典风格的获取方法，支持可选的 `domain` 和 `path` 参数。当存在同名Cookie冲突时，它会调用 `_find_no_duplicates` 方法，如果找到多个匹配的Cookie会抛出 `CookieConflictError` 异常。\n\n2. **`_find_no_duplicates` 方法**（内部方法）\n   - 签名：`def _find_no_duplicates(self, name, domain=None, path=None)`\n   - 说明：`get` 方法内部调用的方法，严格检查是否存在多个匹配的Cookie。如果存在多个匹配，会抛出 `CookieConflictError` 异常。\n\n3. **`_find` 方法**（内部方法）\n   - 签名：`def _find(self, name, domain=None, path=None)`\n   - 说明：当存在冲突时，此方法会**任意选择一个**Cookie值返回，不会抛出异常。这是 `RequestsCookieJar` 内部使用的方法。\n\n**使用示例：**\n```python\n# 假设有两个同名cookie，但domain和path不同\ncookie_jar.get('session_id', domain='.example.com', path='/app')\n```\n\n**注意事项：**\n- 如果指定了 `domain` 和 `path` 后仍然存在多个匹配的Cookie，`get` 方法会抛出 `CookieConflictError` 异常\n- 如果不想处理异常，可以使用 `_find` 方法（但会任意选择）\n- 设置Cookie时也可以使用 `set` 方法指定 `domain` 和 `path` 参数来避免冲突"
+    },
+    {
+      "id": "AUTO_028",
+      "category": "auto_generated",
+      "query": "如何在Python中像字典一样操作HTTP响应返回的Cookie容器？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "RequestsCookieJar",
+      "score": 2,
+      "response": "根据您提供的代码片段，要在Python中像字典一样操作HTTP响应返回的Cookie容器，可以使用以下类和方法：\n\n## 主要类：`RequestsCookieJar`\n\n**文件**: `requests/cookies.py`\n\n### 关键方法：`items()`\n\n**类**: `RequestsCookieJar`  \n**方法名**: `items`  \n**文件**: `requests/cookies.py`\n\n```python\ndef items(self) -> list[tuple[str, str | None]]:\n    \"\"\"Dict-like items() that returns a list of name-value tuples from the\n    jar. Allows client-code to call ``dict(RequestsCookieJar)`` and get a\n    vanilla python dict of key value pairs.\n    \"\"\"\n    return list(self.iteritems())\n```\n\n## 使用方法\n\n`RequestsCookieJar` 类提供了类似字典的接口，您可以通过以下方式操作：\n\n1. **转换为普通字典**：\n   ```python\n   cookie_dict = dict(cookie_jar)\n   ```\n\n2. **获取所有键值对**：\n   ```python\n   items = cookie_jar.items()\n   ```\n\n3. **获取所有键**：\n   ```python\n   keys = cookie_jar.keys()\n   ```\n\n4. **获取所有值**：\n   ```python\n   values = cookie_jar.values()\n   ```\n\n## 实际应用示例\n\n```python\nimport requests\n\n# 发送请求\nresponse = requests.get('https://example.com')\n\n# 获取Cookie容器（RequestsCookieJar对象）\ncookie_jar = response.cookies\n\n# 像字典一样操作\ncookie_dict = dict(cookie_jar)  # 转换为普通字典\nfor name, value in cookie_jar.items():\n    print(f\"{name}: {value}\")\n```\n\n`RequestsCookieJar` 是 `http.cookiejar.CookieJar` 的子类，但暴露了字典接口，使得操作Cookie更加直观和方便。"
+    },
+    {
+      "id": "AUTO_029",
+      "category": "auto_generated",
+      "query": "怎么创建一个只在当前域名下生效的简单cookie？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "create_cookie",
+      "score": 2,
+      "response": "根据您提供的代码片段，要创建一个只在当前域名下生效的简单cookie，可以使用以下方法：\n\n## 推荐方法：使用 `RequestsCookieJar.set()` 方法\n\n**文件**: `requests/cookies.py`\n**类**: `RequestsCookieJar`\n**方法**: `set`\n\n```python\nfrom requests.cookies import RequestsCookieJar\n\njar = RequestsCookieJar()\njar.set(\"cookie_name\", \"cookie_value\", domain=\".example.com\", path=\"/\")\n```\n\n## 参数说明\n\n- `name`: cookie的名称\n- `value`: cookie的值\n- `domain`: 指定cookie生效的域名（例如：`.example.com`）\n- `path`: 指定cookie生效的路径（例如：`/`）\n\n## 底层实现\n\n`set()` 方法内部会调用 `create_cookie()` 函数（**文件**: `requests/cookies.py`，**函数**: `create_cookie`）来创建cookie对象，然后通过 `set_cookie()` 方法添加到cookie jar中。\n\n## 完整示例\n\n```python\nfrom requests.cookies import RequestsCookieJar\n\n# 创建cookie jar\njar = RequestsCookieJar()\n\n# 创建一个只在当前域名下生效的cookie\njar.set(\n    \"session_id\", \n    \"abc123\", \n    domain=\".example.com\",  # 指定域名\n    path=\"/\"                # 指定路径\n)\n\n# 验证cookie是否设置成功\nprint(jar.get_dict())  # 输出: {'session_id': 'abc123'}\n```\n\n## 注意事项\n\n1. `domain` 参数通常以点号开头（如 `.example.com`），表示匹配该域名及其所有子域名\n2. 如果不指定 `domain`，cookie默认会在所有请求中发送（即\"超级cookie\"）\n3. 可以通过 `get_dict()` 方法（**文件**: `requests/cookies.py`，**类**: `RequestsCookieJar`，**方法**: `get_dict`）来查看已设置的cookie"
+    },
+    {
+      "id": "AUTO_030",
+      "category": "auto_generated",
+      "query": "如何把Morsel对象转换成包含单一键值对的Cookie？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "morsel_to_cookie",
+      "score": 2,
+      "response": "根据您提供的代码片段，将Morsel对象转换成包含单一键值对的Cookie的方法是调用 `morsel_to_cookie` 函数。\n\n**文件名**: `requests/cookies.py`\n**函数名**: `morsel_to_cookie`\n\n该函数定义如下：\n```python\ndef morsel_to_cookie(morsel: Morsel[Any]) -> Cookie:\n    \"\"\"Convert a Morsel object into a Cookie containing the one k/v pair.\"\"\"\n    # ... 实现细节\n```\n\n**使用示例**：\n```python\nfrom requests.cookies import morsel_to_cookie\nfrom http.cookies import Morsel\n\n# 假设有一个Morsel对象\nmorsel = Morsel()\nmorsel['domain'] = 'example.com'\nmorsel['path'] = '/'\nmorsel['secure'] = True\n# ... 设置其他属性\n\n# 转换为Cookie对象\ncookie = morsel_to_cookie(morsel)\n```\n\n该函数会读取Morsel对象中的各个属性（如domain、path、secure、expires等），并调用 `create_cookie` 函数创建一个新的Cookie对象。"
+    },
+    {
+      "id": "AUTO_031",
+      "category": "auto_generated",
+      "query": "如何用字典格式的键值对快速生成一个CookieJar对象？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "cookiejar_from_dict",
+      "score": 2,
+      "response": "根据您提供的代码片段，可以使用以下函数快速从字典生成CookieJar对象：\n\n**文件名：** `requests/cookies.py`\n**函数名：** `cookiejar_from_dict`\n\n**调用方式：**\n```python\nfrom requests.cookies import cookiejar_from_dict\n\ncookie_dict = {\"key1\": \"value1\", \"key2\": \"value2\"}\ncookie_jar = cookiejar_from_dict(cookie_dict)\n```\n\n该函数接受一个字典参数，返回一个`RequestsCookieJar`对象（继承自`CookieJar`）。您也可以传入已有的`CookieJar`对象作为第二个参数来添加新cookie，并通过第三个参数`overwrite`控制是否覆盖已有cookie（默认为True）。\n\n另外，`requests/utils.py`中的`add_dict_to_cookiejar`函数也提供了类似功能，它内部调用了`cookiejar_from_dict`。"
+    },
+    {
+      "id": "AUTO_032",
+      "category": "auto_generated",
+      "query": "如何把新cookie合并到现有的cookie容器里？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "merge_cookies",
+      "score": 2,
+      "response": "根据您提供的代码片段，将新cookie合并到现有cookie容器的方法如下：\n\n## 主要函数\n\n**文件**: `requests/cookies.py`  \n**函数**: `merge_cookies(cookiejar, cookies)`\n\n### 使用方法\n\n```python\nfrom requests.cookies import merge_cookies, RequestsCookieJar\n\n# 创建现有的cookie容器\nexisting_jar = RequestsCookieJar()\n\n# 方式1：合并字典形式的cookies\nnew_cookies_dict = {\"key1\": \"value1\", \"key2\": \"value2\"}\nmerged_jar = merge_cookies(existing_jar, new_cookies_dict)\n\n# 方式2：合并另一个CookieJar\nanother_jar = RequestsCookieJar()\nmerged_jar = merge_cookies(existing_jar, another_jar)\n```\n\n### 函数说明\n\n`merge_cookies` 函数接受两个参数：\n- `cookiejar`: 现有的CookieJar对象\n- `cookies`: 要合并的字典或CookieJar对象\n\n它会将新cookie添加到现有容器中，并返回合并后的CookieJar。\n\n### 内部实现\n\n该函数内部会：\n1. 如果 `cookies` 是字典，调用 `cookiejar_from_dict` 将字典转换为CookieJar并合并\n2. 如果 `cookies` 是CookieJar，使用 `update` 方法进行合并\n\n### 实际应用示例（来自Session类）\n\n在 `requests/sessions.py` 的 `Session.prepare_request` 方法中，可以看到实际使用：\n\n```python\nmerged_cookies = merge_cookies(\n    merge_cookies(RequestsCookieJar(), self.cookies), cookies\n)\n```\n\n这展示了如何先创建一个空的CookieJar，然后依次合并session的cookies和请求的cookies。"
+    },
+    {
+      "id": "AUTO_033",
+      "category": "auto_generated",
+      "query": "处理网络请求时遇到不明确的错误该怎么解决",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "RequestException",
+      "score": 2,
+      "response": "根据您提供的代码片段，处理网络请求时遇到不明确的错误，可以按照以下步骤进行排查和处理：\n\n## 1. 捕获并处理 `RequestException`\n\n**文件**: `requests/exceptions.py`\n**类**: `RequestException`\n\n这是所有请求异常的基类，当发生不明确的错误时，首先捕获这个异常：\n\n```python\nimport requests\nfrom requests.exceptions import RequestException\n\ntry:\n    response = requests.get('https://example.com')\n    response.raise_for_status()\nexcept RequestException as e:\n    print(f\"请求发生错误: {e}\")\n    # 可以访问 request 和 response 对象\n    if e.response is not None:\n        print(f\"状态码: {e.response.status_code}\")\n    if e.request is not None:\n        print(f\"请求URL: {e.request.url}\")\n```\n\n## 2. 使用 `raise_for_status()` 检查响应状态\n\n**文件**: `requests/models.py`\n**类**: `Response`\n**方法**: `raise_for_status`\n\n这个方法会检查响应状态码，如果状态码在400-599之间，会抛出 `HTTPError`：\n\n```python\nresponse = requests.get('https://example.com')\ntry:\n    response.raise_for_status()\nexcept requests.exceptions.HTTPError as e:\n    print(f\"HTTP错误: {e}\")\n    # 根据状态码进行不同处理\n    if response.status_code == 404:\n        print(\"资源未找到\")\n    elif response.status_code == 500:\n        print(\"服务器内部错误\")\n```\n\n## 3. 处理重定向问题\n\n**文件**: `requests/sessions.py`\n**类**: `SessionRedirectMixin`\n**方法**: `resolve_redirects`\n\n如果遇到重定向相关的问题，可以配置重定向行为：\n\n```python\n# 禁用重定向\nresponse = requests.get('https://example.com', allow_redirects=False)\n\n# 设置最大重定向次数\nsession = requests.Session()\nsession.max_redirects = 5\n```\n\n## 4. 检查网络认证\n\n**文件**: `requests/utils.py`\n**函数**: `get_netrc_auth`\n\n如果遇到认证问题，可以检查 netrc 文件配置：\n\n```python\nfrom requests.utils import get_netrc_auth\n\nauth = get_netrc_auth('https://example.com')\nif auth:\n    username, password = auth\n    print(f\"使用netrc认证: {username}\")\n"
+    },
+    {
+      "id": "AUTO_034",
+      "category": "auto_generated",
+      "query": "发送了一个无效的JSON数据，请求报错了怎么办？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "InvalidJSONError",
+      "score": 2,
+      "response": "根据您的问题，当发送无效JSON数据导致请求报错时，相关的异常处理代码位于以下文件中：\n\n**文件：`requests/exceptions.py`**\n\n涉及的类和方法：\n\n1. **类 `InvalidJSONError`** - 表示JSON错误的基础异常类\n2. **类 `JSONDecodeError`** - 表示无法解码JSON文本的异常类，继承自 `InvalidJSONError`\n3. **方法 `JSONDecodeError.__init__`** - 构造方法，用于初始化异常实例\n\n**解决方案：**\n\n当您发送无效JSON数据时，`requests` 库会抛出 `JSONDecodeError` 异常。您可以通过捕获这个异常来处理错误：\n\n```python\nimport requests\nfrom requests.exceptions import JSONDecodeError\n\ntry:\n    response = requests.post('https://api.example.com/data', json={\"invalid\": json})\n    response.json()  # 如果响应不是有效JSON，这里会抛出异常\nexcept JSONDecodeError as e:\n    print(f\"JSON解析错误: {e}\")\n    # 处理错误逻辑\n```\n\n**其他相关文件：**\n\n- **`requests/api.py`** → 函数 `patch` - 发送PATCH请求的API函数\n- **`requests/utils.py`** → 函数 `guess_json_utf` - 用于猜测JSON数据的UTF编码\n\n建议在发送请求时使用 `try-except` 块捕获 `JSONDecodeError`，以确保程序能够优雅地处理无效JSON数据的情况。"
+    },
+    {
+      "id": "AUTO_035",
+      "category": "auto_generated",
+      "query": "我在用requests库时，返回的内容不是合法的JSON格式，怎么处理？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "JSONDecodeError",
+      "score": 2,
+      "response": "根据您的查询，当requests库返回的内容不是合法的JSON格式时，您需要捕获并处理相关的异常。以下是相关的代码片段：\n\n## 异常类\n\n**文件**: `requests/exceptions.py`\n\n1. **类名**: `InvalidJSONError`\n   - 继承自 `RequestException`\n   - 文档: \"A JSON error occurred.\"\n\n2. **类名**: `JSONDecodeError`\n   - 继承自 `InvalidJSONError` 和 `CompatJSONDecodeError`\n   - 文档: \"Couldn't decode the text into json\"\n\n## 处理方法\n\n当调用 `response.json()` 方法时，如果响应体不是合法的JSON格式，会抛出 `requests.exceptions.JSONDecodeError` 异常。您应该捕获这个异常并进行处理：\n\n```python\nimport requests\nfrom requests.exceptions import JSONDecodeError\n\nresponse = requests.get('https://api.example.com/data')\ntry:\n    data = response.json()\nexcept JSONDecodeError:\n    # 处理JSON解析失败的情况\n    print(\"响应内容不是合法的JSON格式\")\n    # 可以获取原始文本内容\n    text_content = response.text\n```\n\n**相关方法**:\n- **文件**: `requests/models.py`\n- **类**: `Response`\n- **方法**: `json()` - 解码JSON响应体，如果无效会抛出 `RequestsJSONDecodeError`（它是 `JSONDecodeError` 的别名）"
+    },
+    {
+      "id": "AUTO_036",
+      "category": "auto_generated",
+      "query": "在请求接口时返回了HTTP错误，怎么捕获这种异常？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "HTTPError",
+      "score": 2,
+      "response": "根据您提供的代码片段，要捕获HTTP错误异常，可以使用以下方法：\n\n## 捕获HTTPError异常\n\n**文件：** `requests/exceptions.py`\n**类名：** `HTTPError`\n\n**文件：** `requests/models.py`\n**方法名：** `raise_for_status`（在`Response`类中）\n\n### 示例代码：\n\n```python\nimport requests\nfrom requests.exceptions import HTTPError\n\ntry:\n    response = requests.get('https://api.example.com/data')\n    response.raise_for_status()  # 如果状态码是4xx或5xx，会抛出HTTPError\n    print(response.json())\nexcept HTTPError as e:\n    print(f\"HTTP错误发生: {e}\")\n    print(f\"状态码: {e.response.status_code}\")\n    print(f\"响应内容: {e.response.text}\")\n```\n\n### 更详细的捕获方式：\n\n```python\nimport requests\nfrom requests.exceptions import HTTPError, RequestException\n\ntry:\n    response = requests.get('https://api.example.com/data')\n    response.raise_for_status()\nexcept HTTPError as e:\n    # 专门处理HTTP错误\n    print(f\"HTTP错误: {e.response.status_code} - {e.response.reason}\")\nexcept RequestException as e:\n    # 处理所有请求相关的异常（包括HTTPError）\n    print(f\"请求异常: {e}\")\n```\n\n### 关键点说明：\n\n1. **`HTTPError`** 类定义在 `requests/exceptions.py` 中，继承自 `RequestException`\n2. **`raise_for_status()`** 方法定义在 `requests/models.py` 的 `Response` 类中\n3. 该方法会在状态码为4xx（客户端错误）或5xx（服务器错误）时抛出 `HTTPError`\n4. 异常对象包含 `response` 属性，可以访问完整的响应信息\n\n这是最标准、最推荐的捕获HTTP错误的方式。"
+    },
+    {
+      "id": "AUTO_037",
+      "category": "auto_generated",
+      "query": "我在用requests库时遇到连接失败，怎么捕获这种异常？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "ConnectionError",
+      "score": 2,
+      "response": "根据您提供的代码片段，要捕获连接失败异常，可以使用以下方式：\n\n## 捕获连接失败异常\n\n```python\nimport requests\nfrom requests.exceptions import ConnectionError\n\ntry:\n    response = requests.get('https://example.com')\nexcept ConnectionError as e:\n    print(f\"连接失败: {e}\")\n```\n\n## 更具体的异常捕获\n\n如果您想区分不同类型的连接失败，可以捕获更具体的异常：\n\n```python\nimport requests\nfrom requests.exceptions import ConnectTimeout, ProxyError\n\ntry:\n    response = requests.get('https://example.com')\nexcept ConnectTimeout as e:\n    print(f\"连接超时: {e}\")  # 文件: requests/exceptions.py, 类: ConnectTimeout\nexcept ProxyError as e:\n    print(f\"代理错误: {e}\")  # 文件: requests/exceptions.py, 类: ProxyError\nexcept ConnectionError as e:\n    print(f\"其他连接错误: {e}\")  # 文件: requests/exceptions.py, 类: ConnectionError\n```\n\n## 异常类层次结构\n\n根据代码片段，异常继承关系如下：\n\n- **ConnectionError** (`requests/exceptions.py`) - 基础连接错误\n  - **ProxyError** (`requests/exceptions.py`) - 代理错误\n  - **ConnectTimeout** (`requests/exceptions.py`) - 连接超时（同时继承自 `Timeout`）\n\n## 推荐做法\n\n建议捕获 `ConnectionError` 作为通用连接失败异常，因为它能覆盖所有连接相关的错误情况。"
+    },
+    {
+      "id": "AUTO_038",
+      "category": "auto_generated",
+      "query": "为什么我通过代理发送请求时会报错，提示代理错误？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "ProxyError",
+      "score": 2,
+      "response": "根据您提供的代码片段，当通过代理发送请求时出现代理错误，可能涉及以下几个关键文件中的类/函数：\n\n## 1. 异常类定义\n\n**文件**: `requests/exceptions.py`\n\n- **`ProxyError`** (类) - 当代理错误发生时抛出的异常\n- **`InvalidProxyURL`** (类) - 当代理URL格式无效时抛出的异常\n\n这两个异常类直接对应您遇到的代理错误提示。\n\n## 2. 代理管理核心方法\n\n**文件**: `requests/adapters.py`\n\n- **`HTTPAdapter.proxy_manager_for`** (方法) - 这是创建和管理代理连接的核心方法。它根据代理类型（HTTP/HTTPS/SOCKS）创建对应的 `ProxyManager`。如果此方法执行失败，会触发代理错误。\n\n## 3. 底层请求处理\n\n**文件**: `requests/adapters.py`\n\n- **`_urllib3_request_context`** (函数) - 处理请求的SSL/TLS验证和证书配置。如果代理需要特定的SSL配置（如自定义CA证书），此函数的参数配置不当可能导致代理错误。\n- **`BaseAdapter.send`** (方法) - 所有适配器的基类方法，定义了发送请求的接口。如果自定义适配器未正确实现此方法，也可能导致代理错误。\n\n## 常见原因排查\n\n1. **代理URL格式错误** → 检查 `InvalidProxyURL` 异常\n2. **代理服务器不可达或拒绝连接** → 检查 `ProxyError` 异常\n3. **代理认证失败** → 检查 `proxy_manager_for` 方法中的认证参数\n4. **SSL/TLS配置问题** → 检查 `_urllib3_request_context` 函数中的证书验证逻辑\n\n建议您检查代理URL的格式是否正确，以及代理服务器是否正常运行。如果问题持续，可以查看完整的异常堆栈信息来确定具体是哪个环节出错。"
+    },
+    {
+      "id": "AUTO_039",
+      "category": "auto_generated",
+      "query": "我在用Python的requests库时遇到了SSL证书错误，该怎么排查？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "SSLError",
+      "score": 2,
+      "response": "根据您提供的代码片段，以下是排查SSL证书错误时需要关注的关键文件和函数/类：\n\n## 1. 异常类\n**文件**: `requests/exceptions.py`\n**类**: `SSLError`\n- 这是SSL错误的具体异常类，继承自`ConnectionError`\n- 当捕获到`requests.exceptions.SSLError`时，说明SSL证书验证失败\n\n## 2. SSL验证核心方法\n**文件**: `requests/adapters.py`\n**类**: `HTTPAdapter`\n**方法**: `cert_verify(self, conn, url, verify, cert)`\n- 这是SSL证书验证的核心方法\n- 参数`verify`控制验证行为：\n  - `True`：严格验证（默认）\n  - `False`：跳过验证（不推荐用于生产环境）\n  - 字符串：指定CA证书包路径\n\n## 3. 连接池配置\n**文件**: `requests/adapters.py`\n**类**: `HTTPAdapter`\n**方法**: `build_connection_pool_key_attributes(self, request, verify, cert=None)`\n- 构建SSL连接池的关键属性\n- 决定使用哪个SSL上下文或证书文件\n\n## 4. 连接获取\n**文件**: `requests/adapters.py`\n**类**: `HTTPAdapter`\n**方法**: `get_connection_with_tls_context(self, request, verify, proxies=None, cert=None)`\n- 获取带有TLS配置的urllib3连接\n- 整合了SSL验证和代理设置\n\n## 5. Session初始化\n**文件**: `requests/sessions.py`\n**类**: `Session`\n**方法**: `__init__(self)`\n- 初始化`self.verify = True`（默认严格验证）\n- 初始化`self.cert = None`（客户端证书）\n\n## 排查步骤建议：\n\n1. **检查verify参数**：\n   ```python\n   # 临时跳过验证（仅测试用）\n   requests.get('https://example.com', verify=False)\n   \n   # 指定CA证书包\n   requests.get('https://example.com', verify='/path/to/cert.pem')\n   ```\n\n2. **检查Session配置**：\n   ```python\n   session = requests.Session()\n   session.verify = '/path/to/ca-bundle.crt'  # 设置CA证书路径\n   ```\n\n3. **查看具体错误**：\n   ```python\n   try:\n      "
+    },
+    {
+      "id": "AUTO_040",
+      "category": "auto_generated",
+      "query": "我发送请求后长时间没有响应，如何捕获超时相关的异常？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "Timeout",
+      "score": 2,
+      "response": "根据您提供的代码片段，要捕获超时相关的异常，您需要使用以下具体的类和文件：\n\n**文件：** `requests/exceptions.py`\n**类名：** `Timeout`\n\n这个 `Timeout` 异常类可以同时捕获两种超时情况：\n- `ConnectTimeout`（连接超时）\n- `ReadTimeout`（读取超时）\n\n使用示例：\n```python\nfrom requests.exceptions import Timeout\n\ntry:\n    response = requests.get('https://example.com', timeout=5)\nexcept Timeout:\n    print(\"请求超时了！\")\n```\n\n如果您需要更精确地捕获特定类型的超时，也可以分别捕获：\n- `requests.exceptions.ConnectTimeout` - 连接超时\n- `requests.exceptions.ReadTimeout` - 读取超时\n\n但根据文档说明，直接捕获 `Timeout` 是最方便的方式，因为它会同时捕获这两种超时异常。"
+    },
+    {
+      "id": "AUTO_041",
+      "category": "auto_generated",
+      "query": "发送请求时连接远程服务器超时了，重试能解决吗？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "ConnectTimeout",
+      "score": 2,
+      "response": "根据您提供的代码片段，连接远程服务器超时的情况可以通过重试来解决。以下是相关的代码位置：\n\n**文件名：** `requests/exceptions.py`\n**类名：** `ConnectTimeout`\n\n该类的文档明确说明：\n> \"Requests that produced this error are safe to retry.\"\n\n这意味着当捕获到 `ConnectTimeout` 异常时，可以安全地进行重试操作。"
+    },
+    {
+      "id": "AUTO_042",
+      "category": "auto_generated",
+      "query": "我在发送请求时服务器超时没有返回数据，该怎么处理这个异常？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "ReadTimeout",
+      "score": 2,
+      "response": "根据您的查询，当服务器超时没有返回数据时，应该捕获 `ReadTimeout` 异常。以下是相关的代码位置：\n\n**异常类：**\n- **文件名：** `requests/exceptions.py`\n- **类名：** `ReadTimeout`\n- **说明：** 继承自 `Timeout`，表示服务器在分配的时间内没有发送任何数据。\n\n**处理方式示例：**\n```python\nfrom requests.exceptions import ReadTimeout\n\ntry:\n    response = session.request('GET', url, timeout=5)\nexcept ReadTimeout:\n    print(\"服务器超时，没有返回数据\")\n```\n\n**相关父类（可用于捕获更广泛的超时错误）：**\n- **文件名：** `requests/exceptions.py`\n- **类名：** `Timeout`\n- **说明：** 捕获 `Timeout` 可以同时处理 `ConnectTimeout` 和 `ReadTimeout` 两种超时异常。\n\n**发送请求的方法：**\n- **文件名：** `requests/sessions.py`\n- **类名：** `Session`\n- **方法名：** `request`\n- **说明：** 该方法中的 `timeout` 参数用于设置超时时间，当服务器在指定时间内没有响应时会抛出超时异常。\n\n建议使用 `try-except` 块捕获 `ReadTimeout` 异常，并根据业务逻辑进行重试或错误处理。"
+    },
+    {
+      "id": "AUTO_043",
+      "category": "auto_generated",
+      "query": "发送请求时提示需要提供有效的网址，该怎么解决？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "URLRequired",
+      "score": 2,
+      "response": "根据您的查询，当发送请求时提示需要提供有效的网址，这通常是因为请求的URL无效或为空。以下是相关的代码片段和解决方案：\n\n## 相关代码\n\n### 1. 异常类定义\n**文件**: `requests/exceptions.py`\n**类名**: `URLRequired`\n\n```python\nclass URLRequired(RequestException):\n    \"\"\"A valid URL is required to make a request.\"\"\"\n```\n\n### 2. 发送请求的方法\n**文件**: `requests/sessions.py`\n**类名**: `Session`\n**方法名**: `request`\n\n```python\ndef request(self, method, url, params=..., data=..., headers=..., cookies=..., \n            files=..., auth=..., timeout=..., allow_redirects=..., proxies=..., \n            hooks=..., stream=..., verify=..., cert=..., json=...)\n```\n\n## 解决方案\n\n当您看到\"需要提供有效的网址\"错误时，请检查以下几点：\n\n### 1. 确保URL不为空\n```python\n# 错误示例\nurl = \"\"  # 空字符串会导致URLRequired异常\nresponse = session.get(url)\n\n# 正确示例\nurl = \"https://api.example.com/data\"\nresponse = session.get(url)\n```\n\n### 2. 确保URL格式正确\n```python\n# 错误示例\nurl = \"example.com\"  # 缺少协议\nresponse = session.get(url)\n\n# 正确示例\nurl = \"https://example.com\"  # 包含完整协议\nresponse = session.get(url)\n```\n\n### 3. 检查URL变量是否被正确赋值\n```python\n# 可能的问题\nurl = None  # None值会导致错误\nresponse = session.get(url)\n\n# 正确做法\nurl = \"https://api.example.com\"\nresponse = session.get(url)\n```\n\n### 4. 使用Session时的常见问题\n```python\n# 创建Session\nsession = requests.Session()\n\n# 确保传入有效的URL\nurl = \"https://httpbin.org/get\"\nresponse = session.request(\"GET\", url)  # 或使用 session.get(url)\n```\n\n## 调试建议\n\n1. **打印URL值**：\n```python\nurl = \"https://api.example.com\"\nprint(f\"Requesting URL: {url}\")\nresponse = session.get(url)\n```\n\n2. **添加URL验证**：\n```python\ndef validate_url(url):\n    if not url or not isinstance(url, str):\n        raise ValueError(\""
+    },
+    {
+      "id": "AUTO_044",
+      "category": "auto_generated",
+      "query": "在爬取网页时遇到重定向次数过多，应该如何处理这个异常？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "TooManyRedirects",
+      "score": 2,
+      "response": "根据您提供的代码片段，处理重定向次数过多的异常，需要关注以下关键文件、类和函数：\n\n## 1. 异常类\n**文件**: `requests/exceptions.py`\n**类名**: `TooManyRedirects`\n\n这是当重定向次数超过限制时抛出的异常类，继承自 `RequestException`。\n\n## 2. 重定向处理核心逻辑\n**文件**: `requests/sessions.py`\n**类名**: `SessionRedirectMixin`\n**方法名**: `resolve_redirects`\n\n在这个方法中，当重定向次数达到 `self.max_redirects` 限制时，会抛出 `TooManyRedirects` 异常：\n```python\nif len(resp.history) >= self.max_redirects:\n    raise TooManyRedirects(\n        f\"Exceeded {self.max_redirects} redirects.\", response=resp\n    )\n```\n\n## 3. 处理方法\n\n### 方案一：捕获异常\n```python\nimport requests\nfrom requests.exceptions import TooManyRedirects\n\ntry:\n    response = requests.get('http://example.com')\nexcept TooManyRedirects as e:\n    print(f\"重定向次数过多: {e}\")\n    # 可以获取最后一次的响应对象\n    last_response = e.response\n```\n\n### 方案二：设置最大重定向次数\n```python\nimport requests\n\n# 设置最大重定向次数为 5\nresponse = requests.get('http://example.com', max_redirects=5)\n```\n\n### 方案三：禁止重定向\n```python\nimport requests\n\n# 禁止自动重定向\nresponse = requests.get('http://example.com', allow_redirects=False)\n# 手动处理重定向\nif response.status_code in (301, 302, 303, 307, 308):\n    redirect_url = response.headers.get('Location')\n    # 手动处理...\n```\n\n## 4. 相关辅助方法\n**文件**: `requests/sessions.py`\n**类名**: `SessionRedirectMixin`\n**方法名**: \n- `get_redirect_target` - 获取重定向目标URL\n- `rebuild_method` - 根据重定向状态码调整请求方法\n- `should_strip_auth` - 判断是否移除认证信息\n\n这些方法在重定向处理过程中被调用，了解它们有助于理解重定向的完整流程。"
+    },
+    {
+      "id": "AUTO_045",
+      "category": "auto_generated",
+      "query": "我访问一个网址时提示缺少协议头，这是怎么回事？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "MissingSchema",
+      "score": 2,
+      "response": "根据您提供的代码片段，当访问网址时提示“缺少协议头”，这通常是因为URL中没有包含协议头（如`http://`或`https://`）。以下是相关的代码位置：\n\n1. **异常类**：`requests/exceptions.py` → `MissingSchema`\n   - 这是一个异常类，当URL缺少协议头时会被抛出。\n\n2. **辅助函数**：`requests/utils.py` → `prepend_scheme_if_needed`\n   - 这个函数用于在URL缺少协议头时自动添加协议头。如果URL已经有协议头，则不会替换。\n\n3. **适配器选择**：`requests/sessions.py` → `Session.get_adapter`\n   - 当URL没有匹配的适配器时，会抛出`InvalidSchema`异常，这也可能与协议头缺失有关。\n\n**解决方案**：\n- 确保您的URL包含协议头，例如：`https://example.com` 而不是 `example.com`\n- 或者使用`prepend_scheme_if_needed`函数自动添加协议头\n\n如果您需要更具体的帮助，请提供您使用的代码片段。"
+    },
+    {
+      "id": "AUTO_046",
+      "category": "auto_generated",
+      "query": "用了一个无效的URL协议，访问网站时提示出错怎么办",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "InvalidSchema",
+      "score": 2,
+      "response": "根据您提供的代码片段，当使用无效的URL协议时，会抛出 `InvalidSchema` 异常。以下是具体的处理方法和相关代码位置：\n\n## 异常类信息\n\n**文件名**: `requests/exceptions.py`\n**类名**: `InvalidSchema`\n**类型**: 类\n\n```python\nclass InvalidSchema(RequestException, ValueError):\n    \"\"\"The URL scheme provided is either invalid or unsupported.\"\"\"\n```\n\n## 异常触发位置\n\n**文件名**: `requests/models.py`\n**类名**: `PreparedRequest`\n**方法名**: `prepare_url`\n\n在 `prepare_url` 方法中，当URL的协议（scheme）不是HTTP/HTTPS时，会直接返回而不进行URL准备，但不会抛出异常。实际上，`InvalidSchema` 异常是在其他位置（如 `requests/sessions.py` 或 `requests/adapters.py`）中检查协议支持时抛出的。\n\n## 解决方案\n\n1. **检查URL协议**：确保URL以 `http://` 或 `https://` 开头\n2. **常见错误协议示例**：\n   - `ftp://`（不被requests支持）\n   - `file://`（不被requests支持）\n   - 拼写错误如 `htp://` 或 `http//`\n\n3. **正确示例**：\n   ```python\n   # 正确\n   response = requests.get('https://example.com')\n   response = requests.get('http://example.com')\n   \n   # 错误 - 会抛出 InvalidSchema\n   response = requests.get('ftp://example.com')\n   response = requests.get('htp://example.com')\n   ```\n\n4. **异常处理示例**：\n   ```python\n   from requests.exceptions import InvalidSchema\n   \n   try:\n       response = requests.get('ftp://example.com')\n   except InvalidSchema as e:\n       print(f\"无效的URL协议: {e}\")\n       # 建议用户使用 http:// 或 https:// 协议\n   ```\n\n## 相关异常类\n\n- `InvalidURL` - 当URL格式无效时抛出\n- `MissingSchema` - 当URL缺少协议时抛出\n- `InvalidProxyURL` - 当代理URL无效时抛出\n\n建议检查您的URL是否使用了正确的HTTP/HTTPS协议，或者是否拼写正确。"
+    },
+    {
+      "id": "AUTO_047",
+      "category": "auto_generated",
+      "query": "为什么我输入的网址会提示无效，是不是格式有问题？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "InvalidURL",
+      "score": 2,
+      "response": "根据您的问题，您遇到的网址无效提示可能与URL格式有关。以下是相关的异常类和函数：\n\n1. **InvalidURL** - `requests/exceptions.py`\n   - 当URL格式无效时抛出\n   - 继承自 `RequestException` 和 `ValueError`\n\n2. **InvalidSchema** - `requests/exceptions.py`\n   - 当URL的协议（scheme）无效或不受支持时抛出\n   - 例如：`ftp://example.com` 可能不被支持\n\n3. **MissingSchema** - `requests/exceptions.py`\n   - 当URL缺少协议（如 `http://` 或 `https://`）时抛出\n   - 例如：直接输入 `www.example.com` 而不是 `https://www.example.com`\n\n4. **InvalidProxyURL** - `requests/exceptions.py`\n   - 当代理URL格式无效时抛出\n   - 继承自 `InvalidURL`\n\n5. **_urllib3_request_context** - `requests/adapters.py`\n   - 内部函数，用于处理URL解析和验证\n   - 会检查URL的scheme、host和port\n\n**常见问题排查：**\n- 检查URL是否包含协议（如 `http://` 或 `https://`）\n- 检查URL格式是否正确（如是否有特殊字符）\n- 如果使用代理，检查代理URL格式是否正确\n\n建议您提供具体的URL示例，以便更准确地判断问题所在。"
+    },
+    {
+      "id": "AUTO_048",
+      "category": "auto_generated",
+      "query": "为什么我传了一个请求头但提示我头部信息无效？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "InvalidHeader",
+      "score": 2,
+      "response": "根据您提供的代码片段，当您传入的请求头导致“头部信息无效”错误时，问题可能出在以下位置：\n\n## 相关异常类\n\n**文件**: `requests/exceptions.py`\n**类名**: `InvalidHeader`\n\n这个异常类专门用于处理头部信息无效的情况。当您传入的请求头格式或内容不符合HTTP规范时，requests库会抛出这个异常。\n\n## 可能的原因\n\n1. **请求头值格式错误**：HTTP头部值必须符合RFC标准，例如不能包含非法字符（如换行符、控制字符等）。\n\n2. **请求头名称格式错误**：头部名称只能包含字母、数字和连字符，不能包含空格或其他特殊字符。\n\n## 建议检查\n\n- 检查您传入的请求头值是否包含非法字符\n- 确保请求头名称的拼写正确\n- 检查请求头值的编码是否正确\n\n如果您能提供具体的请求头代码，我可以帮您进一步分析问题所在。"
+    },
+    {
+      "id": "AUTO_049",
+      "category": "auto_generated",
+      "query": "设置代理后请求报错，提示代理地址格式不对怎么办？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "InvalidProxyURL",
+      "score": 2,
+      "response": "根据您的问题，当设置代理后请求报错提示代理地址格式不对时，主要涉及以下代码文件中的相关类和函数：\n\n## 1. 异常类：`InvalidProxyURL`\n- **文件**：`requests/exceptions.py`\n- **类名**：`InvalidProxyURL`\n- **说明**：这是专门用于代理URL格式无效的异常类，继承自`InvalidURL`。当代理地址格式不正确时会抛出此异常。\n\n## 2. 代理管理器方法：`proxy_manager_for`\n- **文件**：`requests/adapters.py`\n- **类名**：`HTTPAdapter`\n- **方法名**：`proxy_manager_for`\n- **说明**：此方法用于创建代理管理器。当传入的代理URL格式不正确时，会触发`InvalidProxyURL`异常。该方法内部会调用`get_auth_from_url`解析代理URL，如果格式错误会抛出异常。\n\n## 3. URL准备方法：`prepare_url`\n- **文件**：`requests/models.py`\n- **类名**：`PreparedRequest`\n- **方法名**：`prepare_url`\n- **说明**：此方法负责准备HTTP URL。虽然主要处理请求URL，但代理URL的解析逻辑类似，如果代理URL格式不正确（如缺少协议、主机等），会抛出`InvalidURL`或`MissingSchema`异常。\n\n## 4. 适配器获取方法：`get_adapter`\n- **文件**：`requests/sessions.py`\n- **类名**：`Session`\n- **方法名**：`get_adapter`\n- **说明**：此方法根据URL获取对应的连接适配器。如果代理URL格式不正确，可能导致无法找到合适的适配器，从而抛出`InvalidSchema`异常。\n\n## 解决方案建议\n\n当遇到代理地址格式错误时，请检查：\n1. **代理URL格式**：确保代理URL包含正确的协议（如`http://`、`https://`、`socks5://`等）\n2. **代理地址完整性**：确保包含主机名和端口号（如`http://proxy.example.com:8080`）\n3. **特殊字符处理**：如果代理需要认证，确保用户名和密码正确编码（如`http://user:pass@proxy.example.com:8080`）\n\n示例正确格式：\n```python\nproxies = {\n    'http': 'http://user:password@proxy.example.com"
+    },
+    {
+      "id": "AUTO_050",
+      "category": "auto_generated",
+      "query": "我在用requests下载文件时遇到分块编码错误，该怎么处理？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "ChunkedEncodingError",
+      "score": 2,
+      "response": "根据您的查询，您在使用requests下载文件时遇到了分块编码错误。以下是相关的代码信息：\n\n## 相关异常类\n\n**文件名**: `requests/exceptions.py`\n**类名**: `ChunkedEncodingError`\n\n```python\nclass ChunkedEncodingError(RequestException):\n    \"\"\"The server declared chunked encoding but sent an invalid chunk.\"\"\"\n```\n\n## 处理建议\n\n这个错误表示服务器声明了分块编码（chunked encoding），但发送了无效的数据块。以下是几种处理方法：\n\n### 1. 捕获异常并重试\n\n```python\nimport requests\nfrom requests.exceptions import ChunkedEncodingError\n\ndef download_with_retry(url, max_retries=3):\n    for attempt in range(max_retries):\n        try:\n            response = requests.get(url, stream=True)\n            response.raise_for_status()\n            \n            # 下载文件\n            with open('file.bin', 'wb') as f:\n                for chunk in response.iter_content(chunk_size=8192):\n                    if chunk:\n                        f.write(chunk)\n            return True\n            \n        except ChunkedEncodingError as e:\n            print(f\"分块编码错误 (尝试 {attempt + 1}/{max_retries}): {e}\")\n            if attempt == max_retries - 1:\n                raise\n            continue\n```\n\n### 2. 禁用流式下载\n\n如果问题持续，可以尝试不使用流式下载：\n\n```python\nimport requests\n\ntry:\n    response = requests.get(url)  # 不使用 stream=True\n    response.raise_for_status()\n    \n    with open('file.bin', 'wb') as f:\n        f.write(response.content)\n        \nexcept requests.exceptions.ChunkedEncodingError as e:\n    print(f\"下载失败: {e}\")\n```\n\n### 3. 设置超时和重试策略\n\n```python\nfrom requests.adapters import HTTPAdapter\nfrom urllib3.util.retry import Retry\n\nsession = requests.Session()\nretry_strategy = Retry(\n    total=3,\n    backoff_factor=1,\n    status_forcelist=[500, 502, 503, 504],\n)\nadapter = HTTPAdapter(max_retries=retry_strategy)\nsession.mount('http://', adapter)\nsession.mount('https://', adapter)\n\ntry:\n    response = session.get(url, stream=True, timeout=30)\n    response.raise_for_status"
+    },
+    {
+      "id": "AUTO_051",
+      "category": "auto_generated",
+      "query": "我请求一个网页时遇到内容解码失败的错误，该怎么处理？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "ContentDecodingError",
+      "score": 2,
+      "response": "根据您的查询，您遇到了内容解码失败的错误，这对应的是 `ContentDecodingError` 异常。以下是相关的代码文件和函数/类名：\n\n1. **异常类**：`ContentDecodingError`\n   - 文件：`requests/exceptions.py`\n   - 类型：类\n   - 说明：当响应内容解码失败时抛出此异常\n\n2. **可能触发该异常的常见场景**：\n   - 当使用 `Response.json()` 方法时（文件：`requests/models.py`，类：`Response`，方法：`json`），如果响应体不是有效的JSON格式，会抛出 `JSONDecodeError`，但不会直接抛出 `ContentDecodingError`\n   - `ContentDecodingError` 通常在使用 `Response.content` 或 `Response.text` 时，当底层解码（如gzip、deflate等压缩解码）失败时抛出\n\n**处理方法建议**：\n\n1. **检查响应编码**：\n   ```python\n   response = requests.get(url)\n   print(response.encoding)  # 查看当前编码\n   response.encoding = 'utf-8'  # 尝试手动设置编码\n   ```\n\n2. **捕获异常并处理**：\n   ```python\n   from requests.exceptions import ContentDecodingError\n   \n   try:\n       response = requests.get(url)\n       content = response.content  # 或 response.text\n   except ContentDecodingError as e:\n       print(f\"内容解码失败: {e}\")\n       # 可以尝试使用原始字节内容\n       content = response.raw.read()\n   ```\n\n3. **禁用自动解码**（如果不需要）：\n   ```python\n   response = requests.get(url, stream=True)\n   # 手动处理原始响应\n   ```\n\n4. **检查服务器返回的内容类型**：\n   ```python\n   print(response.headers.get('Content-Type'))\n   print(response.headers.get('Content-Encoding'))\n   ```\n\n如果问题持续存在，建议检查服务器返回的实际内容格式，或者尝试使用 `response.raw` 获取原始字节流进行手动解码。"
+    },
+    {
+      "id": "AUTO_052",
+      "category": "auto_generated",
+      "query": "为什么读取响应内容时报错说数据已经被消费了？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "StreamConsumedError",
+      "score": 2,
+      "response": "根据您提供的代码片段，读取响应内容时报错“数据已经被消费了”是因为您尝试重复读取响应内容。具体涉及以下文件和函数/类：\n\n1. **文件**: `requests/models.py`\n   - **类**: `Response`\n   - **方法**: `content`（第1个片段）\n   - **说明**: 当您第一次访问 `response.content` 时，它会读取并缓存响应数据。如果再次访问时 `_content_consumed` 已经是 `True`，但 `_content` 为 `False`（即尚未成功读取），则会抛出 `RuntimeError(\"The content for this response was already consumed\")`。\n\n2. **文件**: `requests/exceptions.py`\n   - **类**: `StreamConsumedError`（第2个片段）\n   - **说明**: 这是专门为此错误定义的异常类，继承自 `RequestException` 和 `TypeError`，文档说明为“The content for this response was already consumed.”\n\n3. **文件**: `requests/models.py`\n   - **类**: `Response`\n   - **方法**: `__getstate__`（第3个片段）\n   - **说明**: 在序列化（pickle）响应对象时，会调用 `self.content` 来确保内容已被完全读取。如果内容尚未被消费，此操作会触发读取，但不会导致重复消费错误。\n\n**根本原因**：`Response` 对象的 `content` 属性设计为只能被消费一次。一旦通过 `content` 属性或 `iter_content` 方法读取了响应数据，`_content_consumed` 标志会被设置为 `True`。如果再次尝试访问 `content` 属性，且 `_content` 为 `False`（表示之前读取失败或未成功缓存），就会抛出 `RuntimeError`。\n\n**解决方案**：\n- 只读取一次响应内容，并将结果保存到变量中重复使用。\n- 如果需要多次访问，请使用 `response.text`（会自动处理编码）或 `response.raw`（原始流，但需注意流只能被读取一次）。\n- 避免在读取内容后再次调用 `response.content`，除非您已经通过其他方式重置了响应对象。"
+    },
+    {
+      "id": "AUTO_053",
+      "category": "auto_generated",
+      "query": "我在使用requests库时，重试机制失败了，如何捕获这个异常？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "RetryError",
+      "score": 2,
+      "response": "根据您提供的代码片段，要捕获重试机制失败时的异常，您需要使用 `RetryError` 类。以下是具体的捕获方法：\n\n**文件名：** `requests/exceptions.py`\n**类名：** `RetryError`\n\n**捕获示例：**\n\n```python\nfrom requests.exceptions import RetryError\n\ntry:\n    # 您的请求代码\n    response = requests.get('https://example.com')\nexcept RetryError as e:\n    print(f\"重试机制失败: {e}\")\n    # 处理重试失败的逻辑\n```\n\n**继承关系：**\n`RetryError` 继承自 `RequestException`，而 `RequestException` 继承自 `IOError`。因此，您也可以使用更通用的异常类来捕获：\n\n```python\nfrom requests.exceptions import RequestException\n\ntry:\n    response = requests.get('https://example.com')\nexcept RequestException as e:\n    if isinstance(e, RetryError):\n        print(\"重试机制失败\")\n    else:\n        print(\"其他请求异常\")\n```\n\n**注意事项：**\n- `RetryError` 通常在使用 `requests.adapters.HTTPAdapter` 的自定义重试策略时触发\n- 确保您已经正确配置了重试策略，例如：\n  ```python\n  from requests.adapters import HTTPAdapter\n  from urllib3.util.retry import Retry\n\n  session = requests.Session()\n  retry_strategy = Retry(total=3, backoff_factor=1)\n  adapter = HTTPAdapter(max_retries=retry_strategy)\n  session.mount('https://', adapter)\n  session.mount('http://', adapter)\n  ```"
+    },
+    {
+      "id": "AUTO_054",
+      "category": "auto_generated",
+      "query": "请求重试时遇到请求体无法重置的错误，怎么办？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "UnrewindableBodyError",
+      "score": 2,
+      "response": "根据您提供的代码片段，当请求重试时遇到请求体无法重置的错误，主要涉及以下两个关键组件：\n\n## 1. 异常类：`UnrewindableBodyError`\n- **文件**：`requests/exceptions.py`\n- **类名**：`UnrewindableBodyError`\n- **说明**：这是当请求体无法重置时抛出的特定异常，继承自 `RequestException`\n\n## 2. 核心函数：`rewind_body`\n- **文件**：`requests/utils.py`\n- **函数名**：`rewind_body`\n- **签名**：`def rewind_body(prepared_request: PreparedRequest) -> None`\n- **说明**：该函数负责将文件指针移回记录的起始位置，以便在重定向时可以重新读取请求体\n\n## 解决方案\n\n当遇到 `UnrewindableBodyError` 时，通常有以下几种处理方式：\n\n### 方案1：使用可重复读取的请求体\n```python\nimport io\nimport requests\n\n# 使用 BytesIO 或 StringIO 创建可重复读取的请求体\ndata = io.BytesIO(b\"your request body\")\nresponse = requests.post('https://example.com', data=data)\n```\n\n### 方案2：捕获异常并处理\n```python\nfrom requests.exceptions import UnrewindableBodyError\n\ntry:\n    response = requests.post('https://example.com', data=your_data)\nexcept UnrewindableBodyError as e:\n    print(f\"请求体无法重置: {e}\")\n    # 重新创建请求体并重试\n    response = requests.post('https://example.com', data=your_data)\n```\n\n### 方案3：禁用重定向自动重试\n```python\nresponse = requests.post('https://example.com', data=your_data, allow_redirects=False)\n```\n\n### 方案4：使用 Session 并配置重试策略\n```python\nfrom requests.adapters import HTTPAdapter\nfrom urllib3.util.retry import Retry\n\nsession = requests.Session()\nretry_strategy = Retry(\n    total=3,\n    backoff_factor=1,\n    status_forcelist=[500, 502, 503, 504],\n)\nadapter = HTTPAdapter(max_retries=retry_strategy)\nsession.mount(\"https://\", adapter)\nsession.mount(\"http://\", adapter)\n\nresponse = session.post('https://example"
+    },
+    {
+      "id": "AUTO_055",
+      "category": "auto_generated",
+      "query": "我想知道在Requests库中处理警告信息时应该捕获哪种警告基类。",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "RequestsWarning",
+      "score": 2,
+      "response": "根据您提供的代码片段，在Requests库中处理警告信息时，应该捕获的警告基类是：\n\n**文件**: `requests/exceptions.py`\n**类名**: `RequestsWarning`\n\n该类是所有Requests警告的基类，定义如下：\n```python\nclass RequestsWarning(Warning):\n    \"\"\"Base warning for Requests.\"\"\"\n```\n\n此外，还有一个继承自`RequestsWarning`的子类：\n- **文件**: `requests/exceptions.py`\n- **类名**: `RequestsDependencyWarning`\n- **描述**: 当导入的依赖项不符合预期版本范围时触发\n\n因此，如果您想捕获所有Requests相关的警告，可以捕获`RequestsWarning`；如果只想捕获特定类型的警告（如依赖版本不匹配），可以捕获`RequestsDependencyWarning`。"
+    },
+    {
+      "id": "AUTO_056",
+      "category": "auto_generated",
+      "query": "为什么打开文本文件时提示二进制长度不匹配？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "FileModeWarning",
+      "score": 2,
+      "response": "根据您提供的代码片段，当打开文本文件时提示二进制长度不匹配，是因为在计算文件长度时使用了二进制方式（`os.fstat(fileno).st_size`），但文件是以文本模式打开的。\n\n具体涉及以下代码：\n\n**文件：** `requests/utils.py`\n**函数：** `super_len`\n\n**类：** `requests/exceptions.py` → `FileModeWarning`\n\n在 `super_len` 函数中（第2个片段），当通过 `fileno()` 获取文件描述符并使用 `os.fstat(fileno).st_size` 计算文件大小时，会检查文件的打开模式：\n\n```python\nif \"b\" not in o.mode:\n    warnings.warn(\n        (\n            \"Requests has determined the content-length for this \"\n            \"request using the binary size of the file: however, the \"\n            \"file has been opened in text mode (i.e. without the 'b' \"\n            \"flag in the mode). This may lead to an incorrect \"\n            \"content-length. In Requests 3.0, support will be removed \"\n            \"for files in text mode.\"\n        ),\n        FileModeWarning,\n    )\n```\n\n**原因解释：**\n1. `super_len` 函数使用 `os.fstat(fileno).st_size` 获取文件的二进制大小\n2. 如果文件以文本模式打开（`mode` 中不包含 `'b'` 标志），文本模式下的换行符转换（Windows 上 `\\r\\n` → `\\n`）会导致实际读取的字符数少于二进制字节数\n3. 因此，使用二进制大小作为 Content-Length 会导致长度不匹配\n\n**警告类：** `requests/exceptions.py` → `FileModeWarning`（第1个片段）专门用于此场景的警告。"
+    },
+    {
+      "id": "AUTO_057",
+      "category": "auto_generated",
+      "query": "我在用requests库时收到版本不匹配的警告，该怎么处理？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "RequestsDependencyWarning",
+      "score": 2,
+      "response": "根据您的问题，您在使用 `requests` 库时遇到了版本不匹配的警告，这对应的是 `RequestsDependencyWarning` 类。\n\n**相关代码位置：**\n- **文件名**：`requests/exceptions.py`\n- **类名**：`RequestsDependencyWarning`\n\n**处理建议：**\n\n1. **检查依赖版本**：这个警告表示某个导入的依赖库版本与 `requests` 期望的版本范围不匹配。常见的依赖包括 `urllib3`、`chardet`、`charset_normalizer`、`idna` 等。\n\n2. **更新依赖**：运行以下命令更新所有相关依赖到兼容版本：\n   ```bash\n   pip install --upgrade requests urllib3 chardet charset-normalizer idna certifi\n   ```\n\n3. **查看具体依赖**：如果警告信息不够明确，可以查看 `requests` 的 `setup.py` 或 `setup.cfg` 文件中的 `install_requires` 部分，了解具体的版本要求。\n\n4. **使用虚拟环境**：建议在虚拟环境中安装 `requests`，避免与其他项目的依赖冲突：\n   ```bash\n   python -m venv myenv\n   source myenv/bin/activate  # Linux/Mac\n   myenv\\Scripts\\activate     # Windows\n   pip install requests\n   ```\n\n5. **忽略警告（不推荐）**：如果确认功能正常，可以临时忽略警告：\n   ```python\n   import warnings\n   from requests.exceptions import RequestsDependencyWarning\n   warnings.filterwarnings(\"ignore\", category=RequestsDependencyWarning)\n   ```\n\n**警告类定义**（来自 `requests/exceptions.py`）：\n```python\nclass RequestsDependencyWarning(RequestsWarning):\n    \"\"\"An imported dependency doesn't match the expected version range.\"\"\"\n```\n\n最推荐的解决方案是**更新所有相关依赖到最新兼容版本**，这通常能解决版本不匹配的问题。"
+    },
+    {
+      "id": "AUTO_058",
+      "category": "auto_generated",
+      "query": "如何在发送请求时让钩子函数自动处理返回的数据？",
+      "expected_file": "requests/hooks.py",
+      "expected_function": "dispatch_hook",
+      "score": 2,
+      "response": "根据您的查询，关于在发送请求时让钩子函数自动处理返回的数据，以下是相关的代码位置：\n\n## 主要文件：`requests/sessions.py`\n\n### 1. `Session.send` 方法（关键位置）\n- **文件**: `requests/sessions.py`\n- **类**: `Session`\n- **方法**: `send`\n- **行号**: 在方法内部，约第30行附近\n\n钩子函数的调用发生在 `send` 方法中，具体代码为：\n```python\nr = dispatch_hook(\"response\", hooks, r, **kwargs)\n```\n这一行在发送请求后、返回响应前执行，用于处理响应数据。\n\n### 2. `Session.request` 方法\n- **文件**: `requests/sessions.py`\n- **类**: `Session`\n- **方法**: `request`\n- **用途**: 这是构造和发送请求的入口方法，您可以通过 `hooks` 参数传入自定义钩子函数\n\n### 3. `Session.patch` 方法（示例）\n- **文件**: `requests/sessions.py`\n- **类**: `Session`\n- **方法**: `patch`\n- **用途**: 展示了如何通过 `**kwargs` 传递钩子参数给 `request` 方法\n\n## 使用示例\n\n```python\nimport requests\n\ndef response_hook(response, *args, **kwargs):\n    # 自动处理返回的数据\n    print(f\"Status: {response.status_code}\")\n    # 可以在这里进行数据转换、日志记录等操作\n    response.processed_data = response.json()  # 添加自定义属性\n    return response\n\n# 在发送请求时传入钩子\nsession = requests.Session()\nresponse = session.get(\n    'https://api.example.com/data',\n    hooks={'response': response_hook}\n)\n```\n\n## 关键点说明\n\n1. **钩子类型**: 支持 `response` 钩子，在响应返回后自动调用\n2. **调用时机**: 在 `Session.send` 方法中，`adapter.send()` 之后、返回响应之前\n3. **参数传递**: 通过 `hooks` 参数传递给 `request` 方法，最终在 `send` 方法中执行\n4. **返回值**: 钩子函数应返回修改后的 `Response` 对象\n\n这样，您就可以在发送请求时让钩子函数自动处理返回的数据了。"
+    },
+    {
+      "id": "AUTO_059",
+      "category": "auto_generated",
+      "query": "如何创建一个不区分大小写的字典来存储HTTP请求头？",
+      "expected_file": "requests/structures.py",
+      "expected_function": "CaseInsensitiveDict",
+      "score": 2,
+      "response": "根据您提供的代码片段，我找到了以下相关实现：\n\n**文件：`requests/adapters.py`**\n**类：`HTTPAdapter`**\n**方法：`proxy_headers`**\n\n在 `proxy_headers` 方法中，返回的 `headers` 字典是普通的 `dict` 类型，并没有使用不区分大小写的字典。不过，在 `requests` 库中，实际上使用了 `CaseInsensitiveDict` 来处理 HTTP 请求头。\n\n**文件：`requests/structures.py`**\n**类：`CaseInsensitiveDict`**\n\n这是 `requests` 库中专门用于存储不区分大小写键的字典类。您可以直接使用它来创建不区分大小写的 HTTP 请求头字典。\n\n**使用示例：**\n```python\nfrom requests.structures import CaseInsensitiveDict\n\nheaders = CaseInsensitiveDict()\nheaders['Content-Type'] = 'application/json'\nheaders['content-type']  # 返回 'application/json'，不区分大小写\n```\n\n**文件：`requests/sessions.py`**\n**类：`Session`**\n**方法：`request`**\n\n在 `Session.request` 方法中，当处理请求头时，会使用 `CaseInsensitiveDict` 来确保头字段不区分大小写。\n\n**文件：`requests/api.py`**\n**函数：`request`**\n\n这个顶层函数最终会调用 `Session.request`，同样会使用 `CaseInsensitiveDict` 来处理请求头。\n\n如果您需要创建自己的不区分大小写的字典来存储 HTTP 请求头，建议直接使用 `requests.structures.CaseInsensitiveDict` 类。"
+    },
+    {
+      "id": "AUTO_060",
+      "category": "auto_generated",
+      "query": "我想查一个字典对象，但希望访问不存在的键时返回默认值而不是报错。",
+      "expected_file": "requests/structures.py",
+      "expected_function": "LookupDict",
+      "score": 2,
+      "response": "根据您的需求，您可以使用 `LookupDict` 类，它提供了两种方式来访问不存在的键时返回默认值而不是报错：\n\n## 推荐方案\n\n**文件**: `requests/structures.py`\n**类**: `LookupDict`\n\n### 方法1：使用 `__getitem__`（方括号访问）\n\n```python\nd = LookupDict()\nvalue = d['nonexistent_key']  # 返回 None，不会报错\n```\n\n**文件**: `requests/structures.py`\n**类**: `LookupDict`\n**方法**: `__getitem__`\n\n### 方法2：使用 `get` 方法（推荐）\n\n```python\nd = LookupDict()\nvalue = d.get('nonexistent_key')  # 返回 None\nvalue = d.get('nonexistent_key', 'default_value')  # 返回 'default_value'\n```\n\n**文件**: `requests/structures.py`\n**类**: `LookupDict`\n**方法**: `get`\n\n## 关键特性\n\n- `LookupDict` 继承自 `dict`，但重写了 `__getitem__` 方法，使其在键不存在时返回 `None` 而不是抛出 `KeyError`\n- `get` 方法也支持自定义默认值，与标准字典的 `get` 行为一致\n- 同时支持属性访问（`d.key`），但属性访问在键不存在时会抛出 `AttributeError`\n\n## 使用示例\n\n```python\nfrom requests.structures import LookupDict\n\nd = LookupDict('my_dict')\nd['existing_key'] = 'value'\n\n# 安全的键访问\nprint(d['nonexistent'])  # 输出: None\nprint(d.get('nonexistent', 'fallback'))  # 输出: fallback\n```"
+    },
+    {
+      "id": "AUTO_061",
+      "category": "auto_generated",
+      "query": "怎么把一个字典转换成更新请求头用的内部序列格式？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "dict_to_sequence",
+      "score": 2,
+      "response": "根据您提供的代码片段，将字典转换为更新请求头用的内部序列格式，可以使用以下函数：\n\n**文件名**: `requests/utils.py`\n**函数名**: `dict_to_sequence`\n\n**使用方法**：\n```python\nfrom requests.utils import dict_to_sequence\n\nheaders_dict = {\"Content-Type\": \"application/json\", \"Authorization\": \"Bearer token\"}\nsequence = dict_to_sequence(headers_dict)\n```\n\n**函数说明**：\n- 该函数接受一个字典（或支持 `items()` 方法的对象，或可迭代的键值对元组）\n- 如果输入是支持 `items()` 方法的对象（如字典），则返回其 `items()` 迭代器\n- 如果输入已经是可迭代的键值对元组，则直接返回原对象\n\n这个函数正是用于将字典转换为 requests 库内部处理请求头更新时所需的序列格式。"
+    },
+    {
+      "id": "AUTO_062",
+      "category": "auto_generated",
+      "query": "怎么从netrc文件里获取某个网址的登录认证信息？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "get_netrc_auth",
+      "score": 2,
+      "response": "根据您提供的代码片段，从netrc文件获取某个网址的登录认证信息主要通过以下函数实现：\n\n## 主要函数\n\n**文件：** `requests/utils.py`\n**函数名：** `get_netrc_auth`\n\n**签名：** `def get_netrc_auth(url, raise_errors=False)`\n\n**功能说明：** 从netrc文件中获取指定URL的认证信息（用户名和密码），返回格式为 `(username, password)` 的元组。\n\n## 使用示例\n\n```python\nfrom requests.utils import get_netrc_auth\n\n# 获取某个网址的认证信息\nauth = get_netrc_auth(\"https://example.com\")\nif auth:\n    username, password = auth\n    print(f\"用户名: {username}, 密码: {password}\")\n```\n\n## 函数工作流程\n\n1. **查找netrc文件**：首先检查环境变量 `NETRC`，如果设置了则使用该路径；否则在用户主目录下查找 `NETRC_FILES` 中定义的文件（通常是 `.netrc` 或 `_netrc`）\n\n2. **解析URL**：使用 `urlparse` 提取主机名\n\n3. **读取认证信息**：调用 `netrc` 库的 `authenticators(host)` 方法获取指定主机的认证信息\n\n4. **返回结果**：如果找到有效的认证信息，返回 `(login, password)` 元组；否则返回 `None`\n\n## 相关函数\n\n**文件：** `requests/sessions.py`\n**类：** `SessionRedirectMixin`\n**方法名：** `rebuild_auth`\n\n该方法在重定向时会调用 `get_netrc_auth` 来获取新主机的认证信息，确保认证信息不会丢失。"
+    },
+    {
+      "id": "AUTO_063",
+      "category": "auto_generated",
+      "query": "怎么从响应对象里猜出下载文件的原始文件名？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "guess_filename",
+      "score": 2,
+      "response": "根据您的查询，要从响应对象中猜出下载文件的原始文件名，可以使用以下函数：\n\n**文件名**: `requests/utils.py`\n**函数名**: `guess_filename`\n\n这个函数会尝试从对象中获取 `name` 属性，如果存在且符合条件（不是以 `<` 开头或以 `>` 结尾），则返回该名称的基文件名（通过 `os.path.basename` 处理）。\n\n**使用示例**：\n```python\nimport requests\nfrom requests.utils import guess_filename\n\nresponse = requests.get('https://example.com/file.zip')\n# 如果响应对象有 name 属性，可以尝试猜测文件名\nfilename = guess_filename(response)\n```\n\n不过需要注意的是，`guess_filename` 函数通常用于上传文件时猜测文件名，而不是直接用于下载响应。对于下载响应，更常见的做法是从响应头中的 `Content-Disposition` 字段提取文件名，或者从 URL 中提取。"
+    },
+    {
+      "id": "AUTO_064",
+      "category": "auto_generated",
+      "query": "如何在解压zip文件后获取内部文件的真实路径？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "extract_zipped_paths",
+      "score": 2,
+      "response": "根据您的查询，您需要获取解压zip文件后内部文件的真实路径。相关的函数是：\n\n**文件名**: `requests/utils.py`\n**函数名**: `extract_zipped_paths`\n\n这个函数的功能正是将zip归档中的成员路径替换为提取后的临时文件路径。使用方法如下：\n\n```python\nfrom requests.utils import extract_zipped_paths\n\n# 假设您有一个zip文件中的文件路径\nzip_path = \"/path/to/archive.zip/member_file.txt\"\nreal_path = extract_zipped_paths(zip_path)\n# real_path 现在指向一个临时提取的文件\n```\n\n该函数会：\n1. 检查路径是否已存在，如果存在则直接返回\n2. 如果路径不存在，尝试将其解析为zip归档中的成员\n3. 找到有效的zip文件后，提取指定成员到临时文件\n4. 返回临时文件的真实路径"
+    },
+    {
+      "id": "AUTO_065",
+      "category": "auto_generated",
+      "query": "如何以原子操作的方式安全地将文件写入磁盘避免数据损坏",
+      "expected_file": "requests/utils.py",
+      "expected_function": "atomic_open",
+      "score": 2,
+      "response": "根据您提供的代码片段，实现原子操作安全写入磁盘的函数是：\n\n**文件名**: `requests/utils.py`\n**函数名**: `atomic_open`\n\n该函数通过以下机制保证原子写入：\n1. 使用 `tempfile.mkstemp()` 创建临时文件\n2. 通过 `yield` 返回文件句柄供写入操作\n3. 写入完成后使用 `os.replace()` 原子性地替换目标文件\n4. 异常情况下自动清理临时文件\n\n使用示例：\n```python\nwith atomic_open(\"target.txt\") as f:\n    f.write(b\"data\")\n```"
+    },
+    {
+      "id": "AUTO_066",
+      "category": "auto_generated",
+      "query": "怎么把键值对列表转成有序字典？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "from_key_val_list",
+      "score": 2,
+      "response": "根据您的查询，将键值对列表转成有序字典可以使用以下函数：\n\n**文件名**: `requests/utils.py`\n**函数名**: `from_key_val_list`\n\n使用方法：\n```python\nfrom requests.utils import from_key_val_list\n\n# 将键值对列表转为有序字典\nresult = from_key_val_list([('key', 'val')])\n# 返回: OrderedDict([('key', 'val')])\n```\n\n该函数接受一个键值对列表（或字典），返回一个 `OrderedDict` 有序字典。如果传入 `None` 则返回 `None`，传入字符串、字节、布尔或整数等非2元组对象会抛出 `ValueError`。"
+    },
+    {
+      "id": "AUTO_067",
+      "category": "auto_generated",
+      "query": "如何将一个列表或对象转换成键值对元组的列表形式？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "to_key_val_list",
+      "score": 2,
+      "response": "根据您的查询，您需要将一个列表或对象转换成键值对元组的列表形式。以下是相关的函数：\n\n**文件名**: `requests/utils.py`\n**函数名**: `to_key_val_list`\n\n该函数可以将以下类型的对象转换为键值对元组的列表：\n- 字典（dict）→ 返回 `list(value.items())`\n- 列表（list）→ 直接返回该列表（假设已经是元组列表形式）\n- 实现了 `SupportsItems` 接口的对象 → 返回 `list(value.items())`\n- `None` → 返回 `None`\n- 字符串、字节、布尔值、整数 → 抛出 `ValueError`\n\n**使用示例**：\n```python\nfrom requests.utils import to_key_val_list\n\n# 字典转换\nto_key_val_list({'key': 'val'})  # 返回 [('key', 'val')]\n\n# 列表转换（已经是元组形式）\nto_key_val_list([('key', 'val')])  # 返回 [('key', 'val')]\n\n# None 值\nto_key_val_list(None)  # 返回 None\n\n# 无效输入会抛出异常\nto_key_val_list('string')  # 抛出 ValueError\n```"
+    },
+    {
+      "id": "AUTO_068",
+      "category": "auto_generated",
+      "query": "怎么解析可能含引号逗号的逗号分隔列表字符串",
+      "expected_file": "requests/utils.py",
+      "expected_function": "parse_list_header",
+      "score": 2,
+      "response": "根据您提供的代码片段，解析可能含引号逗号的逗号分隔列表字符串的函数是：\n\n**文件名**: `requests/utils.py`\n**函数名**: `parse_list_header`\n\n该函数专门用于解析RFC 2068 Section 2中描述的列表格式，能够正确处理：\n- 逗号分隔的列表元素\n- 元素中包含引号字符串（引号内可包含逗号）\n- 非引号字符串中间可能包含引号\n- 自动移除解析后的引号\n\n使用示例：\n```python\nfrom requests.utils import parse_list_header\n\nresult = parse_list_header('token, \"quoted value\"')\n# 返回: ['token', 'quoted value']\n```"
+    },
+    {
+      "id": "AUTO_069",
+      "category": "auto_generated",
+      "query": "如何将类似foo=\"is a fish\"的键值对字符串转换成字典",
+      "expected_file": "requests/utils.py",
+      "expected_function": "parse_dict_header",
+      "score": 2,
+      "response": "根据您提供的代码片段，将类似 `foo=\"is a fish\"` 的键值对字符串转换成字典，可以使用以下函数：\n\n**文件名**: `requests/utils.py`\n**函数名**: `parse_dict_header`\n\n该函数专门用于解析RFC 2068 Section 2描述的键值对列表，并将其转换为Python字典。使用方法如下：\n\n```python\nfrom requests.utils import parse_dict_header\n\nresult = parse_dict_header('foo=\"is a fish\", bar=\"as well\"')\n# 返回: {'foo': 'is a fish', 'bar': 'as well'}\n```\n\n该函数会自动处理带引号的值（去除引号），以及没有值的键（设为None）。"
+    },
+    {
+      "id": "AUTO_070",
+      "category": "auto_generated",
+      "query": "怎么把HTTP响应头里的引号去掉，还原成原始值？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "unquote_header_value",
+      "score": 0,
+      "response": "根据您提供的代码片段，要处理HTTP响应头中的引号问题，您需要关注以下文件中的相关方法：\n\n**文件：`requests/models.py`**\n**类：`Response`**\n**方法：`links`**\n\n这个方法用于解析响应头中的`Link`头信息。它调用了`parse_header_links`函数来处理包含引号的链接值。如果您需要处理其他响应头中的引号，可以参考这个方法的实现逻辑。\n\n另外，**文件：`requests/models.py`**\n**类：`Response`**\n**属性：`headers`**\n\n在`Response`类的`__init__`方法中，`self.headers`被初始化为`CaseInsensitiveDict()`。这个字典存储了所有响应头，但默认情况下不会自动去除引号。您需要手动处理特定头部的值。\n\n**建议的处理方式：**\n1. 获取响应头值后，使用字符串的`.strip('\"')`方法去除首尾引号。\n2. 或者使用`ast.literal_eval()`来安全地解析带引号的字符串值。\n\n示例代码：\n```python\nresponse = requests.get('https://example.com')\n# 假设某个头部的值包含引号\nheader_value = response.headers.get('Some-Header')\nif header_value:\n    # 去除首尾引号\n    cleaned_value = header_value.strip('\"')\n    print(cleaned_value)\n```\n\n如果您需要处理的是`Link`头中的引号，`links`方法已经通过`parse_header_links`函数进行了处理，直接调用`response.links`即可获得解析后的字典。"
+    },
+    {
+      "id": "AUTO_071",
+      "category": "auto_generated",
+      "query": "怎么把CookieJar对象转换成字典格式的键值对？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "dict_from_cookiejar",
+      "score": 2,
+      "response": "根据您提供的代码片段，将CookieJar对象转换成字典格式的键值对可以使用以下函数：\n\n**文件名：** `requests/utils.py`\n**函数名：** `dict_from_cookiejar`\n\n**使用示例：**\n```python\nfrom requests.utils import dict_from_cookiejar\n\n# 假设 cj 是一个 CookieJar 对象\ncookie_dict = dict_from_cookiejar(cj)\n# 返回的 cookie_dict 是一个字典，键为cookie名称，值为cookie值\n```\n\n该函数内部实现非常简单，直接使用字典推导式：\n```python\ncookie_dict = {cookie.name: cookie.value for cookie in cj}\n```\n\n另外，您也可以直接使用 `RequestsCookieJar` 类的 `items()` 方法（位于 `requests/cookies.py`），然后通过 `dict()` 转换：\n```python\nfrom requests.cookies import RequestsCookieJar\n\n# 假设 cj 是 RequestsCookieJar 对象\ncookie_dict = dict(cj.items())\n# 或者更简洁地\ncookie_dict = dict(cj)\n```\n\n这两种方式都能实现将CookieJar对象转换为字典格式的键值对。"
+    },
+    {
+      "id": "AUTO_072",
+      "category": "auto_generated",
+      "query": "怎么把字典格式的cookie数据添加到CookieJar对象里？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "add_dict_to_cookiejar",
+      "score": 2,
+      "response": "根据您的查询，要将字典格式的cookie数据添加到CookieJar对象中，可以使用以下函数：\n\n**文件：`requests/utils.py`**\n**函数：`add_dict_to_cookiejar`**\n\n```python\ndef add_dict_to_cookiejar(cj: CookieJar, cookie_dict: dict[str, str]) -> CookieJar:\n```\n\n该函数接收一个CookieJar对象和一个字典，将字典中的cookie添加到CookieJar中并返回。\n\n**文件：`requests/cookies.py`**\n**函数：`merge_cookies`**\n\n```python\ndef merge_cookies(cookiejar: CookieJar, cookies: dict[str, str] | CookieJar | None) -> CookieJar:\n```\n\n该函数也可以将字典格式的cookie合并到CookieJar中，并且支持传入CookieJar对象。\n\n**文件：`requests/cookies.py`**\n**函数：`cookiejar_from_dict`**\n\n```python\ndef cookiejar_from_dict(cookie_dict: dict[str, str] | None, cookiejar: CookieJar | None = None, overwrite: bool = True) -> CookieJar:\n```\n\n该函数可以从字典创建CookieJar，也可以将字典中的cookie添加到已有的CookieJar中（通过传入cookiejar参数）。\n\n**推荐使用方式：**\n如果您已经有一个CookieJar对象，推荐使用`add_dict_to_cookiejar`或`merge_cookies`函数，它们更直接地实现了\"添加\"操作。"
+    },
+    {
+      "id": "AUTO_073",
+      "category": "auto_generated",
+      "query": "怎么从网页返回的二进制内容中自动检测出字符编码格式",
+      "expected_file": "requests/utils.py",
+      "expected_function": "get_encodings_from_content",
+      "score": 2,
+      "response": "根据您提供的代码片段，从网页返回的二进制内容中自动检测字符编码格式主要通过以下几个函数/方法实现：\n\n1. **`requests/utils.py` → `get_encoding_from_headers`**（片段4）\n   - 从HTTP响应头中提取编码信息\n   - 优先检查`Content-Type`头中的`charset`参数\n   - 如果未指定charset，对`text/*`类型默认返回`ISO-8859-1`，对`application/json`默认返回`utf-8`\n\n2. **`requests/models.py` → `Response.text`**（片段2）\n   - 这是主要的自动检测入口\n   - 当`Response.encoding`为`None`时，会使用`apparent_encoding`（通过`charset_normalizer`或`chardet`库自动检测）\n   - 检测优先级：HTTP头中的编码 > 自动检测的编码 > 默认UTF-8\n\n3. **`requests/utils.py` → `get_encodings_from_content`**（片段1）\n   - 从HTML内容中通过正则表达式提取编码声明\n   - 支持`<meta charset=\"...\">`、`<meta content=\"...charset=...\">`和XML声明`<?xml encoding=\"...\">`\n   - 注意：此函数已被标记为弃用，将在3.0版本移除\n\n4. **`requests/utils.py` → `guess_json_utf`**（片段3）\n   - 专门用于JSON数据的编码检测\n   - 通过检查BOM（字节顺序标记）和空字节位置来判断UTF-8/16/32编码\n\n**自动检测流程总结**：\n1. 首先检查HTTP响应头中的`Content-Type`字段（`get_encoding_from_headers`）\n2. 如果未找到，使用`charset_normalizer`或`chardet`库进行自动检测（通过`apparent_encoding`属性）\n3. 访问`Response.text`属性时，会按照上述优先级自动解码二进制内容为字符串"
+    },
+    {
+      "id": "AUTO_074",
+      "category": "auto_generated",
+      "query": "怎么从HTTP响应头里提取出字符编码信息？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "get_encoding_from_headers",
+      "score": 2,
+      "response": "根据您提供的代码片段，从HTTP响应头中提取字符编码信息主要通过以下函数实现：\n\n**文件名：** `requests/utils.py`\n**函数名：** `get_encoding_from_headers`\n\n该函数接收一个HTTP头字典（`headers`），按照以下逻辑提取编码信息：\n\n1. 首先检查`Content-Type`头是否存在\n2. 如果存在，解析其中的`charset`参数值\n3. 如果没有显式指定`charset`，对于`text/`类型的内容默认返回`ISO-8859-1`\n4. 对于`application/json`类型，根据RFC 4627默认返回`utf-8`\n\n在`requests/models.py`的`Response.text`方法中，会调用此函数来获取编码信息，如果`Response.encoding`为`None`，则会使用自动检测的编码（通过`charset_normalizer`或`chardet`库）。\n\n**使用示例：**\n```python\nimport requests\nfrom requests.utils import get_encoding_from_headers\n\nresponse = requests.get('https://example.com')\nencoding = get_encoding_from_headers(response.headers)\n# 或者直接通过 response.encoding 获取\nprint(response.encoding)\n```"
+    },
+    {
+      "id": "AUTO_075",
+      "category": "auto_generated",
+      "query": "怎么让从网络请求返回的迭代器内容自动解码成中文？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "stream_decode_response_unicode",
+      "score": 0,
+      "response": "根据您的查询，要实现从网络请求返回的迭代器内容自动解码成中文，可以使用以下方法：\n\n## 推荐方案：使用 `iter_content` 方法并设置 `decode_unicode=True`\n\n**文件：** `requests/models.py`\n**类：** `Response`\n**方法：** `iter_content`\n\n```python\nimport requests\n\nresponse = requests.get('http://example.com', stream=True)\nfor chunk in response.iter_content(chunk_size=128, decode_unicode=True):\n    print(chunk)  # 自动解码为中文\n```\n\n### 关键参数说明：\n- **`decode_unicode=True`**：启用自动解码，会根据响应头中的编码信息（如 `Content-Type` 中的 `charset`）自动将字节内容解码为 Unicode 字符串\n- **`chunk_size`**：每次读取的字节数，可根据需要调整\n\n### 工作原理：\n1. 当 `decode_unicode=True` 时，`iter_content` 会使用响应对象的 `encoding` 属性进行解码\n2. 如果 `encoding` 为 `None`，会尝试自动检测编码（使用 `charset_normalizer` 或 `chardet`）\n3. 解码后的内容以字符串形式返回，支持中文等 Unicode 字符\n\n### 替代方案：使用 `text` 属性\n\n**文件：** `requests/models.py`\n**类：** `Response`\n**方法：** `text`\n\n```python\nresponse = requests.get('http://example.com')\nprint(response.text)  # 自动解码为中文\n```\n\n`text` 属性会自动处理编码，但会一次性加载整个响应内容到内存中，适合小数据量场景。\n\n### 注意事项：\n- 确保响应头正确设置了编码信息（如 `Content-Type: text/html; charset=utf-8`）\n- 如果编码信息缺失，可以手动设置 `response.encoding = 'utf-8'` 或 `'gbk'` 等\n- 对于大文件流式处理，推荐使用 `iter_content(decode_unicode=True)` 以避免内存溢出"
+    },
+    {
+      "id": "AUTO_076",
+      "category": "auto_generated",
+      "query": "如何把一个字符串按固定长度分段，逐段处理？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "iter_slices",
+      "score": 2,
+      "response": "根据您提供的代码片段，要实现“把一个字符串按固定长度分段，逐段处理”，可以使用以下函数：\n\n**文件名：** `requests/utils.py`\n**函数名：** `iter_slices`\n\n**函数签名：**\n```python\ndef iter_slices(string: bytes | str, slice_length: int | None) -> Generator[bytes | str, None, None]:\n```\n\n**使用示例：**\n```python\nfrom requests.utils import iter_slices\n\n# 示例：将字符串按每3个字符分段处理\ntext = \"HelloWorld\"\nfor slice in iter_slices(text, 3):\n    print(slice)  # 输出: Hel, loW, orl, d\n```\n\n**参数说明：**\n- `string`: 要分段的字符串（支持 `str` 或 `bytes` 类型）\n- `slice_length`: 每段的长度。如果为 `None` 或小于等于0，则返回整个字符串作为一个段\n\n**返回值：**\n- 生成器，每次产生一个指定长度的字符串片段\n\n**注意事项：**\n- 该函数会从字符串开头开始，按固定长度切分，最后一段可能长度不足\n- 如果 `slice_length` 为 `None` 或 `<=0`，则整个字符串作为一个段返回"
+    },
+    {
+      "id": "AUTO_077",
+      "category": "auto_generated",
+      "query": "如何从HTTP响应中获取Unicode编码的文本内容",
+      "expected_file": "requests/utils.py",
+      "expected_function": "get_unicode_from_response",
+      "score": 2,
+      "response": "根据您提供的代码片段，以下是从HTTP响应中获取Unicode编码文本内容的具体方法：\n\n## 推荐方法\n\n**文件**: `requests/models.py`  \n**类**: `Response`  \n**方法**: `text` (属性)\n\n```python\nimport requests\n\nresponse = requests.get('https://example.com')\nunicode_text = response.text  # 直接获取Unicode文本\n```\n\n这是最直接、最推荐的方式。`text`属性会自动处理编码检测和转换。\n\n## 备选方法\n\n**文件**: `requests/utils.py`  \n**函数**: `get_unicode_from_response` (已弃用)\n\n```python\nfrom requests.utils import get_unicode_from_response\n\nresponse = requests.get('https://example.com')\nunicode_text = get_unicode_from_response(response)\n```\n\n注意：此函数在Requests 3.0中将被移除，建议使用`response.text`替代。\n\n## 流式处理方法\n\n**文件**: `requests/models.py`  \n**类**: `Response`  \n**方法**: `iter_content`\n\n```python\nresponse = requests.get('https://example.com', stream=True)\nfor chunk in response.iter_content(chunk_size=128, decode_unicode=True):\n    # chunk是str类型（Unicode文本）\n    print(chunk)\n```\n\n当`decode_unicode=True`时，`iter_content`会返回解码后的Unicode字符串。\n\n## 总结\n\n| 方法 | 文件 | 类/函数 | 推荐度 |\n|------|------|---------|--------|\n| `response.text` | `requests/models.py` | `Response.text` | ⭐⭐⭐⭐⭐ |\n| `get_unicode_from_response()` | `requests/utils.py` | 函数 | ⭐⭐ (已弃用) |\n| `iter_content(decode_unicode=True)` | `requests/models.py` | `Response.iter_content` | ⭐⭐⭐⭐ (流式场景) |\n\n最推荐使用`response.text`属性，它简单、高效且是官方推荐的方式。"
+    },
+    {
+      "id": "AUTO_078",
+      "category": "auto_generated",
+      "query": "我想把URL中非保留字符的百分号编码还原成原始字符。",
+      "expected_file": "requests/utils.py",
+      "expected_function": "unquote_unreserved",
+      "score": 2,
+      "response": "根据您的查询，您想要将URL中非保留字符的百分号编码还原成原始字符，对应的函数是：\n\n**文件名**: `requests/utils.py`\n**函数名**: `unquote_unreserved`\n\n该函数的功能正是将URI中属于非保留字符（unreserved characters）的百分号编码序列还原为原始字符，同时保留所有保留字符、非法字符和非ASCII字节的编码状态。"
+    },
+    {
+      "id": "AUTO_079",
+      "category": "auto_generated",
+      "query": "我有个网址被转义了，怎么才能把它恢复成标准格式？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "requote_uri",
+      "score": 2,
+      "response": "根据您的查询，您需要将转义的网址恢复成标准格式。在Requests库中，处理URL转义和标准化的相关功能主要在以下位置：\n\n## 相关文件和方法\n\n### 1. **`requests/models.py` → `PreparedRequest.prepare_url`**\n这是最核心的URL处理方法，它会自动处理URL的标准化和转义。当您使用`requests.get(url)`时，内部会调用此方法。\n\n### 2. **`requests/utils.py` → `requote_uri`**（未在片段中显示，但存在于Requests库中）\n这是一个专门用于URL重新转义的工具函数，可以将已经转义的URL恢复为标准格式。\n\n## 解决方案\n\n如果您需要手动将转义的URL恢复为标准格式，可以使用以下方法：\n\n```python\nfrom requests.utils import requote_uri\n\n# 假设您有一个被转义的URL\nescaped_url = \"https%3A%2F%2Fexample.com%2Fpath%3Fquery%3Dvalue\"\n\n# 恢复为标准格式\nstandard_url = requote_uri(escaped_url)\nprint(standard_url)  # 输出: https://example.com/path?query=value\n```\n\n或者，如果您想使用`PreparedRequest`对象：\n\n```python\nfrom requests.models import PreparedRequest\n\n# 创建PreparedRequest对象\nreq = PreparedRequest()\n\n# 准备URL（会自动处理转义）\nreq.prepare_url(\"https%3A%2F%2Fexample.com%2Fpath%3Fquery%3Dvalue\", None)\nprint(req.url)  # 输出标准化的URL\n```\n\n## 推荐做法\n\n对于大多数情况，直接使用`requests.get(url)`即可，因为Requests库内部会自动处理URL的标准化和转义。如果您需要手动处理，推荐使用`requote_uri`函数，它专门用于此目的。"
+    },
+    {
+      "id": "AUTO_080",
+      "category": "auto_generated",
+      "query": "我想检查某个IP地址是否属于指定的子网范围，应该怎么做？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "address_in_network",
+      "score": 2,
+      "response": "根据您的需求，您应该使用以下函数：\n\n**文件名**: `requests/utils.py`\n**函数名**: `address_in_network`\n\n**函数签名**: `def address_in_network(ip: str, net: str) -> bool`\n\n**使用方法**:\n```python\nfrom requests.utils import address_in_network\n\n# 检查IP 192.168.1.1是否属于子网 192.168.1.0/24\nresult = address_in_network(\"192.168.1.1\", \"192.168.1.0/24\")\n# 返回 True\n\n# 检查IP 192.168.1.1是否属于子网 192.168.100.0/24\nresult = address_in_network(\"192.168.1.1\", \"192.168.100.0/24\")\n# 返回 False\n```\n\n**参数说明**:\n- `ip`: 要检查的IP地址字符串\n- `net`: 子网范围，格式为 \"网络地址/子网掩码位数\"\n\n**返回值**: `bool` - 如果IP属于该子网返回True，否则返回False\n\n**辅助函数**:\n- `is_ipv4_address(string_ip)` - 用于验证IP地址格式是否正确\n- `is_valid_cidr(string_network)` - 用于验证CIDR格式是否正确\n\n这两个辅助函数也在 `requests/utils.py` 文件中。"
+    },
+    {
+      "id": "AUTO_081",
+      "category": "auto_generated",
+      "query": "如何将子网掩码的位数格式转换为点分十进制格式？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "dotted_netmask",
+      "score": 2,
+      "response": "根据您提供的代码片段，将子网掩码的位数格式转换为点分十进制格式的函数是：\n\n**文件名**: `requests/utils.py`\n**函数名**: `dotted_netmask`\n\n该函数接收一个整数类型的掩码位数（如24），返回对应的点分十进制字符串（如\"255.255.255.0\"）。使用示例：\n\n```python\nfrom requests.utils import dotted_netmask\nresult = dotted_netmask(24)  # 返回 \"255.255.255.0\"\n```"
+    },
+    {
+      "id": "AUTO_082",
+      "category": "auto_generated",
+      "query": "如何判断一个字符串是不是合法的IPv4地址？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "is_ipv4_address",
+      "score": 2,
+      "response": "根据您提供的代码片段，判断一个字符串是否为合法IPv4地址的函数是：\n\n**文件名**: `requests/utils.py`\n**函数名**: `is_ipv4_address`\n\n该函数通过调用 `socket.inet_aton()` 来验证IP地址格式，如果转换成功则返回 `True`，否则返回 `False`。"
+    },
+    {
+      "id": "AUTO_083",
+      "category": "auto_generated",
+      "query": "如何判断一个IP地址段是否属于有效的CIDR格式？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "is_valid_cidr",
+      "score": 2,
+      "response": "根据您提供的代码片段，判断一个IP地址段是否属于有效的CIDR格式，可以使用以下函数：\n\n**文件名**: `requests/utils.py`\n**函数名**: `is_valid_cidr`\n\n该函数位于 `requests/utils.py` 文件中，是一个顶层函数，签名如下：\n```python\ndef is_valid_cidr(string_network: str) -> bool:\n```\n\n**使用示例**：\n```python\nfrom requests.utils import is_valid_cidr\n\n# 检查有效的CIDR格式\nprint(is_valid_cidr(\"192.168.1.0/24\"))  # 返回 True\nprint(is_valid_cidr(\"10.0.0.0/8\"))      # 返回 True\n\n# 检查无效的CIDR格式\nprint(is_valid_cidr(\"192.168.1.0\"))     # 返回 False（缺少掩码）\nprint(is_valid_cidr(\"192.168.1.0/33\"))  # 返回 False（掩码超出范围）\nprint(is_valid_cidr(\"invalid/24\"))      # 返回 False（IP地址无效）\n```\n\n**函数逻辑说明**：\n1. 检查字符串中是否包含且仅包含一个 `/` 分隔符\n2. 尝试将掩码部分转换为整数，并验证其在 1-32 范围内\n3. 使用 `socket.inet_aton()` 验证IP地址部分的合法性\n4. 所有条件满足则返回 `True`，否则返回 `False`"
+    },
+    {
+      "id": "AUTO_084",
+      "category": "auto_generated",
+      "query": "我想临时修改一个环境变量，用完再恢复原值，怎么实现？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "set_environ",
+      "score": 2,
+      "response": "根据您的需求，您可以使用 `requests/utils.py` 文件中的 `set_environ` 函数来实现临时修改环境变量并在使用后自动恢复原值。\n\n**文件名**: `requests/utils.py`\n**函数名**: `set_environ`\n\n**使用示例**:\n```python\nfrom requests.utils import set_environ\n\n# 临时修改环境变量\nwith set_environ('HTTP_PROXY', 'http://proxy.example.com:8080'):\n    # 在这里执行需要该环境变量的操作\n    # 环境变量 'HTTP_PROXY' 被临时设置为 'http://proxy.example.com:8080'\n    # 执行你的请求或其他操作\n    pass\n# 退出 with 块后，环境变量自动恢复为原来的值\n```\n\n**函数说明**:\n- `set_environ(env_name, value)` 是一个上下文管理器（生成器函数）\n- 它会保存环境变量 `env_name` 的当前值\n- 将环境变量设置为 `value`\n- 在 `yield` 后执行你的代码\n- 最后自动恢复环境变量到原来的值\n- 如果 `value` 为 `None`，则不做任何操作\n\n这个函数非常适合您描述的\"临时修改环境变量，用完再恢复原值\"的场景。"
+    },
+    {
+      "id": "AUTO_085",
+      "category": "auto_generated",
+      "query": "怎么判断某个地址是否需要绕过代理直接连接？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "should_bypass_proxies",
+      "score": 2,
+      "response": "根据您提供的代码片段，判断某个地址是否需要绕过代理直接连接的功能在以下位置：\n\n**文件名**: `requests/utils.py`\n**函数名**: `should_bypass_proxies`\n\n该函数的签名和功能如下：\n\n```python\ndef should_bypass_proxies(url: str, no_proxy: str | None) -> bool:\n    \"\"\"\n    Returns whether we should bypass proxies or not.\n    :rtype: bool\n    \"\"\"\n```\n\n**使用方式**：\n- 传入参数：\n  - `url`：要检查的URL地址\n  - `no_proxy`：不需要代理的地址列表（可以是字符串或None）\n- 返回值：`bool`类型，`True`表示应该绕过代理直接连接，`False`表示应该使用代理\n\n**判断逻辑**（从代码片段中可以看出）：\n1. 首先检查`no_proxy`参数，如果为None则从环境变量获取\n2. 解析URL获取主机名\n3. 如果主机名为None（如file://协议），返回True\n4. 如果设置了no_proxy，检查主机名是否匹配no_proxy列表中的地址\n5. 最后调用`proxy_bypass()`函数进行最终判断\n\n这个函数是判断代理绕过的核心入口，您可以直接调用它来检查特定地址是否需要绕过代理。"
+    },
+    {
+      "id": "AUTO_086",
+      "category": "auto_generated",
+      "query": "如何在Python中获取当前系统环境变量中设置的代理信息？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "get_environ_proxies",
+      "score": 2,
+      "response": "根据您提供的代码片段，获取当前系统环境变量中设置的代理信息可以通过以下函数实现：\n\n**文件名：** `requests/utils.py`\n**函数名：** `get_environ_proxies`\n\n**函数签名：**\n```python\ndef get_environ_proxies(url: str, no_proxy: str | None = None) -> dict[str, str]:\n```\n\n**使用示例：**\n```python\nfrom requests.utils import get_environ_proxies\n\n# 获取所有环境变量中的代理设置\nproxies = get_environ_proxies(\"http://example.com\")\nprint(proxies)  # 返回类似 {'http': 'http://proxy.example.com:8080', 'https': 'https://proxy.example.com:8080'}\n```\n\n**说明：**\n- 该函数会检查环境变量（如 `HTTP_PROXY`、`HTTPS_PROXY`、`NO_PROXY` 等）并返回一个字典\n- 如果设置了 `NO_PROXY` 且匹配给定的 URL，则返回空字典\n- 内部调用 `urllib.request.getproxies()` 来获取系统代理设置\n\n另外，在 `requests/sessions.py` 的 `Session` 类中，`merge_environment_settings` 方法也会调用 `get_environ_proxies` 来合并环境代理设置。"
+    },
+    {
+      "id": "AUTO_087",
+      "category": "auto_generated",
+      "query": "我在请求某个链接时，想根据代理配置自动选择合适的代理。",
+      "expected_file": "requests/utils.py",
+      "expected_function": "select_proxy",
+      "score": 2,
+      "response": "根据您的查询，您想根据代理配置自动选择合适的代理。以下是相关的代码片段：\n\n**文件名：`requests/utils.py`**\n**函数名：`select_proxy`**\n\n这个函数正是用于根据URL和代理配置自动选择合适的代理。它接收一个URL和一个代理字典，然后根据URL的scheme和hostname从代理字典中选择匹配的代理。\n\n**使用示例：**\n```python\nfrom requests.utils import select_proxy\n\nproxies = {\n    \"http\": \"http://proxy1.example.com:8080\",\n    \"https\": \"https://proxy2.example.com:8443\",\n    \"all\": \"http://fallback-proxy.com:8080\"\n}\n\nurl = \"https://api.example.com/data\"\nproxy = select_proxy(url, proxies)\n# 返回 \"https://proxy2.example.com:8443\"\n```\n\n该函数会按照以下优先级顺序查找代理：\n1. `scheme://hostname`（例如 `https://api.example.com`）\n2. `scheme`（例如 `https`）\n3. `all://hostname`（例如 `all://api.example.com`）\n4. `all`（通用代理）"
+    },
+    {
+      "id": "AUTO_088",
+      "category": "auto_generated",
+      "query": "如何在请求中根据NO_PROXY设置自动排除不需要代理的地址？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "resolve_proxies",
+      "score": 2,
+      "response": "根据您的查询，在requests库中，自动根据`NO_PROXY`设置排除不需要代理的地址主要通过以下函数实现：\n\n## 核心函数\n\n### 1. `should_bypass_proxies` - 判断是否应绕过代理\n- **文件**: `requests/utils.py`\n- **类型**: 函数\n- **功能**: 检查URL是否应该绕过代理配置，会考虑`NO_PROXY`环境变量和参数\n\n### 2. `resolve_proxies` - 解析代理配置\n- **文件**: `requests/utils.py`\n- **类型**: 函数\n- **功能**: 整合请求代理配置和环境变量，自动调用`should_bypass_proxies`来排除不需要代理的地址\n\n### 3. `get_environ_proxies` - 获取环境代理\n- **文件**: `requests/utils.py`\n- **类型**: 函数\n- **功能**: 获取环境变量中的代理配置，内部调用`should_bypass_proxies`判断是否需要绕过\n\n## 工作流程\n\n当您发起请求时，`resolve_proxies`函数会自动处理`NO_PROXY`逻辑：\n\n1. 检查请求URL是否匹配`NO_PROXY`列表\n2. 如果匹配，则不会从环境变量中获取代理\n3. 如果不匹配，则从环境变量获取对应协议的代理\n\n## 使用示例\n\n```python\nimport requests\nimport os\n\n# 设置环境变量\nos.environ['HTTP_PROXY'] = 'http://proxy.example.com:8080'\nos.environ['HTTPS_PROXY'] = 'http://proxy.example.com:8080'\nos.environ['NO_PROXY'] = 'localhost,127.0.0.1,.internal.com'\n\n# 这些请求会自动使用代理\nresponse1 = requests.get('http://example.com')  # 会使用代理\n\n# 这些请求会自动绕过代理\nresponse2 = requests.get('http://localhost:8000')  # 匹配NO_PROXY\nresponse3 = requests.get('http://127.0.0.1:5000')  # 匹配NO_PROXY\nresponse4 = requests.get('http://api.internal.com')  # 匹配NO_PROXY\n```\n\n## 关键逻辑\n\n`should_bypass_proxies`函数会：\n1. 检查`NO_PROXY`参数或环境变量\n2. 支持IP地址、CIDR表示法"
+    },
+    {
+      "id": "AUTO_089",
+      "category": "auto_generated",
+      "query": "怎么查看Python的requests库默认发送的用户代理字符串是什么？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "default_user_agent",
+      "score": 2,
+      "response": "根据您提供的代码片段，要查看Python的requests库默认发送的用户代理字符串，可以查看以下函数：\n\n**文件名**: `requests/utils.py`\n**函数名**: `default_user_agent`\n\n该函数的实现如下：\n```python\ndef default_user_agent(name: str = \"python-requests\") -> str:\n    \"\"\"\n    Return a string representing the default user agent.\n    :rtype: str\n    \"\"\"\n    return f\"{name}/{__version__}\"\n```\n\n默认情况下，它会返回 `\"python-requests/{__version__}\"` 格式的字符串，其中 `__version__` 是requests库的版本号。\n\n您可以通过以下方式查看默认的用户代理字符串：\n```python\nimport requests\nprint(requests.utils.default_user_agent())\n# 输出类似: \"python-requests/2.31.0\"\n```"
+    },
+    {
+      "id": "AUTO_090",
+      "category": "auto_generated",
+      "query": "如何在Python中获取Requests库默认请求头的不区分大小写的字典格式？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "default_headers",
+      "score": 2,
+      "response": "根据您提供的代码片段，要在Python中获取Requests库默认请求头的不区分大小写的字典格式，可以使用以下方法：\n\n**文件名**: `requests/structures.py`\n**类名**: `LookupDict`\n**方法名**: `get` 和 `__getitem__`\n\n`LookupDict` 类是一个不区分大小写的字典查找对象。Requests库使用这个类来存储请求头，使得键的查找不区分大小写。\n\n具体实现方式：\n\n```python\nimport requests\nfrom requests.structures import LookupDict\n\n# 获取默认请求头\ndefault_headers = requests.utils.default_headers()\n\n# 转换为不区分大小写的LookupDict\ncase_insensitive_headers = LookupDict()\ncase_insensitive_headers.update(default_headers)\n\n# 现在可以这样访问：\nprint(case_insensitive_headers.get('Content-Type'))  # 不区分大小写\nprint(case_insensitive_headers['content-type'])      # 同样有效\n```\n\n或者更简单的方式，直接使用Requests库内部已经处理好的不区分大小写字典：\n\n```python\nimport requests\n\n# 创建一个会话，其headers已经是LookupDict类型\nsession = requests.Session()\nprint(session.headers.get('Content-Type'))  # 不区分大小写\n```\n\n`LookupDict` 类的 `get` 方法（片段1-3）和 `__getitem__` 方法（片段4）都实现了不区分大小写的键查找，它们内部都调用了 `self.__dict__.get(key, default)`，而 `__dict__` 在初始化时已经将所有键转换为小写存储。"
+    },
+    {
+      "id": "AUTO_091",
+      "category": "auto_generated",
+      "query": "如何从HTTP响应头中解析出多个链接及其属性信息？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "parse_header_links",
+      "score": 2,
+      "response": "根据您提供的代码片段，可以从HTTP响应头中解析多个链接及其属性信息，具体实现如下：\n\n## 主要函数/类\n\n1. **`requests/models.py` → `Response.links` 方法**\n   - 这是解析链接的主入口方法\n   - 从响应头中获取 `Link` 头信息\n   - 调用 `parse_header_links` 函数进行解析\n   - 返回以 `rel` 或 `url` 为键的字典\n\n2. **`requests/utils.py` → `parse_header_links` 函数**\n   - 负责实际的链接解析逻辑\n   - 解析格式如：`<http://.../front.jpeg>; rel=front; type=\"image/jpeg\"`\n   - 返回包含 `url` 和各个属性的字典列表\n\n## 使用示例\n\n```python\nimport requests\n\nresponse = requests.get('https://example.com')\nlinks = response.links  # 调用 Response 类的 links 方法\n\n# 返回格式示例：\n# {\n#     'front': {'url': 'http://.../front.jpeg', 'rel': 'front', 'type': 'image/jpeg'},\n#     'back': {'url': 'http://.../back.jpeg', 'rel': 'back', 'type': 'image/jpeg'}\n# }\n```\n\n## 解析流程\n\n1. `Response.links` 从响应头获取 `Link` 字段\n2. 调用 `parse_header_links` 解析原始字符串\n3. 按逗号和 `<` 分割多个链接\n4. 对每个链接提取 URL 和属性参数\n5. 最终以 `rel` 或 `url` 为键组织成字典返回"
+    },
+    {
+      "id": "AUTO_092",
+      "category": "auto_generated",
+      "query": "怎么猜测一段文本的JSON编码格式并返回字符串结果",
+      "expected_file": "requests/utils.py",
+      "expected_function": "guess_json_utf",
+      "score": 2,
+      "response": "根据您提供的代码片段，猜测一段文本的JSON编码格式并返回字符串结果的功能由以下函数实现：\n\n**文件名**: `requests/utils.py`\n**函数名**: `guess_json_utf`\n\n**函数签名**: `def guess_json_utf(data: bytes) -> str | None`\n\n**功能说明**:\n- 该函数接收一个字节串（bytes）作为输入\n- 通过检查数据的前4个字节来判断JSON的编码格式\n- 返回可能的编码格式字符串（如 \"utf-8\", \"utf-16\", \"utf-32\" 等）\n- 如果无法确定编码，则返回 None\n\n**判断逻辑**:\n1. 检查BOM（字节顺序标记）：\n   - UTF-32 LE/BE BOM → \"utf-32\"\n   - UTF-8 BOM → \"utf-8-sig\"\n   - UTF-16 LE/BE BOM → \"utf-16\"\n2. 统计空字节（null byte）数量：\n   - 0个空字节 → \"utf-8\"\n   - 2个空字节 → 判断是UTF-16 BE还是LE\n   - 3个空字节 → 判断是UTF-32 BE还是LE\n3. 无法判断 → 返回 None\n\n这个函数在 `requests/models.py` 的 `Response.json()` 方法中被调用，用于自动检测JSON响应的编码格式。"
+    },
+    {
+      "id": "AUTO_093",
+      "category": "auto_generated",
+      "query": "我有个网址可能没写协议头，怎么给它自动加上https？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "prepend_scheme_if_needed",
+      "score": 0,
+      "response": "根据您的需求，要为没有协议头的网址自动加上https，可以使用以下代码片段中的方法：\n\n**文件名：** `requests/sessions.py`\n**类名：** `Session`\n**方法名：** `get_adapter`\n\n这个方法可以用来检查URL是否包含协议头。但更直接的方式是使用Python的`urlparse`或自定义逻辑。以下是一个完整的解决方案：\n\n```python\nfrom urllib.parse import urlparse\n\ndef ensure_https(url):\n    \"\"\"如果URL没有协议头，自动添加https\"\"\"\n    if not urlparse(url).scheme:\n        url = 'https://' + url\n    return url\n\n# 使用示例\nurl = \"example.com/api/data\"\nurl_with_https = ensure_https(url)\nprint(url_with_https)  # 输出: https://example.com/api/data\n```\n\n如果您想在requests库的上下文中使用，可以结合`Session`类的`get_adapter`方法：\n\n```python\nimport requests\nfrom urllib.parse import urlparse\n\ndef safe_request(url, **kwargs):\n    \"\"\"安全发起请求，自动添加https\"\"\"\n    if not urlparse(url).scheme:\n        url = 'https://' + url\n    \n    session = requests.Session()\n    # 这里会调用 get_adapter 来检查URL是否有效\n    adapter = session.get_adapter(url)\n    return session.get(url, **kwargs)\n\n# 使用示例\nresponse = safe_request(\"example.com/api/data\")\n```\n\n**关键点：**\n1. 使用`urlparse`检查URL是否已有协议头（scheme）\n2. 如果没有，在URL前添加`https://`\n3. 可以结合`Session.get_adapter()`验证URL格式是否正确\n\n这样就能确保所有没有协议头的网址自动加上https协议。"
+    },
+    {
+      "id": "AUTO_094",
+      "category": "auto_generated",
+      "query": "我想从带用户名密码的URL中提取出登录信息。",
+      "expected_file": "requests/utils.py",
+      "expected_function": "get_auth_from_url",
+      "score": 2,
+      "response": "根据您的查询“从带用户名密码的URL中提取出登录信息”，以下是相关的函数：\n\n**文件名：** `requests/utils.py`\n**函数名：** `get_auth_from_url`\n\n**说明：**\n该函数正是用于从包含认证信息的URL中提取用户名和密码，返回一个包含用户名和密码的元组 `(username, password)`。\n\n**使用示例：**\n```python\nfrom requests.utils import get_auth_from_url\n\nurl = \"https://user:pass@example.com/\"\nauth = get_auth_from_url(url)\nprint(auth)  # 输出: ('user', 'pass')\n```\n\n该函数会解析URL中的认证部分，并对用户名和密码进行URL解码（`unquote`），如果URL中没有认证信息，则返回空字符串元组 `(\"\", \"\")`。"
+    },
+    {
+      "id": "AUTO_095",
+      "category": "auto_generated",
+      "query": "我想检查HTTP请求头中是否含有非法字符或空格。",
+      "expected_file": "requests/utils.py",
+      "expected_function": "check_header_validity",
+      "score": 2,
+      "response": "根据您的查询，您想检查HTTP请求头中是否含有非法字符或空格。以下是相关的函数和类：\n\n1. **`requests/utils.py` → `check_header_validity`**（函数）\n   - 这是最直接的函数，用于验证HTTP请求头是否包含前导空格、保留字符或回车字符\n   - 接收一个`(name, value)`格式的元组作为参数\n   - 内部调用`_validate_header_part`进行实际验证\n\n2. **`requests/utils.py` → `_validate_header_part`**（函数）\n   - 这是`check_header_validity`内部调用的辅助函数\n   - 负责具体的验证逻辑，检查header的name和value部分\n   - 使用正则表达式匹配器`_HEADER_VALIDATORS_STR`和`_HEADER_VALIDATORS_BYTE`进行验证\n\n3. **`requests/models.py` → `PreparedRequest.prepare_headers`**（方法）\n   - 在准备HTTP请求头时会调用`check_header_validity`进行验证\n   - 如果header包含非法字符，会抛出异常\n\n**使用建议**：\n- 直接调用`check_header_validity(header)`函数，传入`(name, value)`格式的元组\n- 如果header包含非法字符（前导空格、保留字符或回车字符），该函数会抛出`InvalidHeader`异常\n- 您可以在发送请求前对每个header进行验证，例如：\n  ```python\n  from requests.utils import check_header_validity\n  \n  headers = {\"Content-Type\": \"application/json\", \"Custom-Header\": \"value\"}\n  for name, value in headers.items():\n      check_header_validity((name, value))\n  ```"
+    },
+    {
+      "id": "AUTO_096",
+      "category": "auto_generated",
+      "query": "怎么去掉网址里的锚点和登录验证信息？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "urldefragauth",
+      "score": 2,
+      "response": "根据您的查询“怎么去掉网址里的锚点和登录验证信息？”，以下是相关的代码片段：\n\n**文件名：** `requests/utils.py`\n**函数名：** `urldefragauth`\n\n这个函数正是用来移除URL中的锚点（fragment）和认证信息（authentication part）的。\n\n**函数签名：**\n```python\ndef urldefragauth(url: str) -> str:\n```\n\n**功能说明：**\n- 移除URL中的片段标识符（锚点，即 `#` 后面的部分）\n- 移除URL中的认证信息（即 `@` 前面的用户名和密码部分）\n\n**使用示例：**\n```python\nfrom requests.utils import urldefragauth\n\n# 原始URL包含锚点和认证信息\nurl = \"https://user:password@example.com/path?query=value#section\"\n\n# 移除锚点和认证信息\nclean_url = urldefragauth(url)\n# 结果: \"https://example.com/path?query=value\"\n```\n\n**实现逻辑：**\n1. 使用 `urlparse` 解析URL的各部分\n2. 通过 `netloc.rsplit(\"@\", 1)[-1]` 移除认证信息（取 `@` 后面的部分）\n3. 通过 `urlunparse` 重新组合URL，并将fragment参数设为空字符串 `\"\"` 来移除锚点"
+    },
+    {
+      "id": "AUTO_097",
+      "category": "auto_generated",
+      "query": "怎么让请求的文件在重定向时重新从头读取？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "rewind_body",
+      "score": 2,
+      "response": "根据您的查询，要让请求的文件在重定向时重新从头读取，需要使用 `rewind_body` 函数。以下是具体信息：\n\n**文件名：** `requests/utils.py`\n**函数名：** `rewind_body`\n\n**使用方式：**\n这个函数会在重定向处理流程中被自动调用。在 `requests/sessions.py` 的 `resolve_redirects` 方法（类 `SessionRedirectMixin`）中，当处理重定向时，会调用 `rewind_body` 来重置请求体的文件指针位置，使得文件可以重新读取。\n\n**关键点：**\n1. 该函数要求请求体对象具有 `seek` 方法（即文件类对象）\n2. 需要预先记录文件指针的起始位置（存储在 `prepared_request._body_position` 中）\n3. 如果无法重置文件指针，会抛出 `UnrewindableBodyError` 异常\n\n**自动调用流程：**\n- 在 `SessionRedirectMixin.resolve_redirects` 方法中处理重定向时\n- 会调用 `rewind_body(prepared_request)` 来重置文件指针\n- 这样重定向后的新请求就能从头开始读取文件内容\n\n如果您需要手动控制，也可以直接调用 `rewind_body(prepared_request)` 函数。"
+    }
+  ]
+}

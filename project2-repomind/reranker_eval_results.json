@@ -1,0 +1,2803 @@
+{
+  "summary": {
+    "R@1": 70.7,
+    "R@3": 81.6,
+    "R@5": 83.7,
+    "MRR": 0.758
+  },
+  "details": [
+    {
+      "id": "A01",
+      "category": "A_simple",
+      "query": "requests库里发送GET请求的核心函数在哪里？",
+      "expected_file": "requests/api.py",
+      "expected_function": "get",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "get",
+        "request",
+        "get",
+        "head",
+        "head"
+      ]
+    },
+    {
+      "id": "A02",
+      "category": "A_simple",
+      "query": "如何在requests中设置请求超时时间？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "request",
+      "hit_rank": 3,
+      "r1": 0,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 0.3333333333333333,
+      "top5": [
+        "BaseAdapter",
+        "send",
+        "request",
+        "send",
+        "send"
+      ]
+    },
+    {
+      "id": "A03",
+      "category": "A_simple",
+      "query": "POST请求的实现函数是什么？",
+      "expected_file": "requests/api.py",
+      "expected_function": "post",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "post",
+        "request",
+        "post",
+        "put",
+        "get"
+      ]
+    },
+    {
+      "id": "A04",
+      "category": "A_simple",
+      "query": "请求响应的状态码在哪个类里存储？",
+      "expected_file": "requests/models.py",
+      "expected_function": "Response",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "__repr__",
+        "Response",
+        "ok",
+        "__nonzero__",
+        "__bool__"
+      ]
+    },
+    {
+      "id": "A05",
+      "category": "A_simple",
+      "query": "如何获取响应体的文本内容？",
+      "expected_file": "requests/models.py",
+      "expected_function": "text",
+      "hit_rank": 2,
+      "r1": 0,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 0.5,
+      "top5": [
+        "get_unicode_from_response",
+        "text",
+        "content",
+        "__getstate__",
+        "__init__"
+      ]
+    },
+    {
+      "id": "A06",
+      "category": "A_simple",
+      "query": "HTTP Basic Auth认证是怎么实现的？",
+      "expected_file": "requests/auth.py",
+      "expected_function": "HTTPBasicAuth",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "HTTPBasicAuth",
+        "HTTPProxyAuth",
+        "__init__",
+        "__init__",
+        "__eq__"
+      ]
+    },
+    {
+      "id": "A07",
+      "category": "A_simple",
+      "query": "请求头Headers是在哪里被设置的？",
+      "expected_file": "requests/models.py",
+      "expected_function": "prepare_headers",
+      "hit_rank": 3,
+      "r1": 0,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 0.3333333333333333,
+      "top5": [
+        "default_headers",
+        "add_headers",
+        "prepare_headers",
+        "proxy_headers",
+        "request"
+      ]
+    },
+    {
+      "id": "A08",
+      "category": "A_simple",
+      "query": "Cookie是如何被处理和存储的？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "RequestsCookieJar",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "create_cookie",
+        "prepare_cookies",
+        "merge_cookies",
+        "MockRequest",
+        "extract_cookies_to_jar"
+      ]
+    },
+    {
+      "id": "A09",
+      "category": "A_simple",
+      "query": "如何把响应内容解析成JSON格式？",
+      "expected_file": "requests/models.py",
+      "expected_function": "json",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "json",
+        "post",
+        "post",
+        "content",
+        "iter_content"
+      ]
+    },
+    {
+      "id": "A10",
+      "category": "A_simple",
+      "query": "Session对象是在哪里定义的？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "Session",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "Session",
+        "__init__",
+        "head",
+        "get",
+        "put"
+      ]
+    },
+    {
+      "id": "A11",
+      "category": "A_simple",
+      "query": "URL参数是如何编码和拼接到请求里的？",
+      "expected_file": "requests/models.py",
+      "expected_function": "prepare_url",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "RequestEncodingMixin",
+        "Request",
+        "patch",
+        "get",
+        "prepare_url"
+      ]
+    },
+    {
+      "id": "A12",
+      "category": "A_simple",
+      "query": "怎么上传文件（multipart/form-data）？",
+      "expected_file": "requests/models.py",
+      "expected_function": "prepare_body",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "_encode_files",
+        "Request",
+        "request",
+        "request",
+        "post"
+      ]
+    },
+    {
+      "id": "A13",
+      "category": "A_simple",
+      "query": "DELETE请求的函数实现在哪？",
+      "expected_file": "requests/api.py",
+      "expected_function": "delete",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "delete",
+        "delete",
+        "request",
+        "__exit__",
+        "__delitem__"
+      ]
+    },
+    {
+      "id": "A14",
+      "category": "A_simple",
+      "query": "如何检查HTTP响应是否成功（2xx状态码）？",
+      "expected_file": "requests/models.py",
+      "expected_function": "raise_for_status",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "__bool__",
+        "__nonzero__",
+        "ok",
+        "__init__",
+        "handle_401"
+      ]
+    },
+    {
+      "id": "A15",
+      "category": "A_simple",
+      "query": "代理设置是在哪里被应用到请求里的？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "rebuild_proxies",
+      "hit_rank": null,
+      "r1": 0,
+      "r3": 0,
+      "r5": 0,
+      "mrr": 0.0,
+      "top5": [
+        "proxy_headers",
+        "_urllib3_request_context",
+        "get_connection_with_tls_context",
+        "__setstate__",
+        "proxy_manager_for"
+      ]
+    },
+    {
+      "id": "B01",
+      "category": "B_cross_file",
+      "query": "当我调用requests.get()时，底层完整的调用链是什么？",
+      "expected_file": "requests/api.py → requests/sessions.py",
+      "expected_function": "get → request → send",
+      "hit_rank": null,
+      "r1": 0,
+      "r3": 0,
+      "r5": 0,
+      "mrr": 0.0,
+      "top5": [
+        "get_adapter",
+        "get",
+        "get",
+        "Session",
+        "get_connection"
+      ]
+    },
+    {
+      "id": "B02",
+      "category": "B_cross_file",
+      "query": "HTTP连接池是如何被Session管理的？",
+      "expected_file": "requests/sessions.py → requests/adapters.py",
+      "expected_function": "HTTPAdapter → get_connection",
+      "hit_rank": null,
+      "r1": 0,
+      "r3": 0,
+      "r5": 0,
+      "mrr": 0.0,
+      "top5": [
+        "HTTPAdapter",
+        "__init__",
+        "__setstate__",
+        "Session",
+        "close"
+      ]
+    },
+    {
+      "id": "B03",
+      "category": "B_cross_file",
+      "query": "SSL证书验证是在哪个环节、哪些文件里处理的？",
+      "expected_file": "requests/adapters.py → requests/utils.py",
+      "expected_function": "send → get_environ_proxies",
+      "hit_rank": null,
+      "r1": 0,
+      "r3": 0,
+      "r5": 0,
+      "mrr": 0.0,
+      "top5": [
+        "cert_verify",
+        "__init__",
+        "send",
+        "send",
+        "BaseAdapter"
+      ]
+    },
+    {
+      "id": "B04",
+      "category": "B_cross_file",
+      "query": "请求重定向是怎么被检测和处理的？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "resolve_redirects",
+      "hit_rank": 3,
+      "r1": 0,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 0.3333333333333333,
+      "top5": [
+        "rewind_body",
+        "is_redirect",
+        "SessionRedirectMixin",
+        "resolve_redirects",
+        "rebuild_method"
+      ]
+    },
+    {
+      "id": "B05",
+      "category": "B_cross_file",
+      "query": "PreparedRequest和Request这两个类有什么关系？",
+      "expected_file": "requests/models.py",
+      "expected_function": "Request.prepare → PreparedRequest",
+      "hit_rank": 2,
+      "r1": 0,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 0.5,
+      "top5": [
+        "prepare_request",
+        "prepare",
+        "PreparedRequest",
+        "Request",
+        "send"
+      ]
+    },
+    {
+      "id": "B06",
+      "category": "B_cross_file",
+      "query": "Session的Cookie是如何在多次请求之间自动保持的？",
+      "expected_file": "requests/sessions.py → requests/cookies.py",
+      "expected_function": "Session → merge_cookies",
+      "hit_rank": null,
+      "r1": 0,
+      "r3": 0,
+      "r5": 0,
+      "mrr": 0.0,
+      "top5": [
+        "__init__",
+        "prepare_request",
+        "send",
+        "head",
+        "Session"
+      ]
+    },
+    {
+      "id": "B07",
+      "category": "B_cross_file",
+      "query": "HTTPDigestAuth的工作原理是什么，涉及哪些文件？",
+      "expected_file": "requests/auth.py",
+      "expected_function": "HTTPDigestAuth",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "HTTPDigestAuth",
+        "build_digest_header",
+        "handle_401",
+        "__call__",
+        "init_per_thread_state"
+      ]
+    },
+    {
+      "id": "B08",
+      "category": "B_cross_file",
+      "query": "异常体系是怎么组织的，ConnectionError和Timeout是什么关系？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "ConnectionError, Timeout",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "ConnectTimeout",
+        "Timeout",
+        "BaseAdapter",
+        "request",
+        "send"
+      ]
+    },
+    {
+      "id": "B09",
+      "category": "B_cross_file",
+      "query": "请求体（body）从用户传入data参数到最终发出经过哪些处理步骤？",
+      "expected_file": "requests/models.py → requests/adapters.py",
+      "expected_function": "prepare_body → send",
+      "hit_rank": null,
+      "r1": 0,
+      "r3": 0,
+      "r5": 0,
+      "mrr": 0.0,
+      "top5": [
+        "prepare_body",
+        "__init__",
+        "prepare_content_length",
+        "request",
+        "Request"
+      ]
+    },
+    {
+      "id": "B10",
+      "category": "B_cross_file",
+      "query": "环境变量（如HTTP_PROXY）是如何被requests自动读取并应用的？",
+      "expected_file": "requests/utils.py → requests/sessions.py",
+      "expected_function": "get_environ_proxies → merge_environment_settings",
+      "hit_rank": null,
+      "r1": 0,
+      "r3": 0,
+      "r5": 0,
+      "mrr": 0.0,
+      "top5": [
+        "merge_environment_settings",
+        "resolve_proxies",
+        "__init__",
+        "request_url",
+        "get_environ_proxies"
+      ]
+    },
+    {
+      "id": "B11",
+      "category": "B_cross_file",
+      "query": "HTTPAdapter是如何与urllib3交互来实际发送HTTP请求的？",
+      "expected_file": "requests/adapters.py",
+      "expected_function": "HTTPAdapter.send",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "HTTPAdapter",
+        "__setstate__",
+        "__getstate__",
+        "get_connection",
+        "proxy_headers"
+      ]
+    },
+    {
+      "id": "B12",
+      "category": "B_cross_file",
+      "query": "响应内容的字符编码是如何自动检测的？",
+      "expected_file": "requests/models.py → requests/utils.py",
+      "expected_function": "Response.text → get_encoding_from_headers",
+      "hit_rank": null,
+      "r1": 0,
+      "r3": 0,
+      "r5": 0,
+      "mrr": 0.0,
+      "top5": [
+        "text",
+        "apparent_encoding",
+        "json",
+        "__init__",
+        "iter_content"
+      ]
+    },
+    {
+      "id": "B13",
+      "category": "B_cross_file",
+      "query": "Session的mount机制是如何决定用哪个adapter处理请求的？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "get_adapter",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "mount",
+        "HTTPAdapter",
+        "send",
+        "get_adapter",
+        "close"
+      ]
+    },
+    {
+      "id": "B14",
+      "category": "B_cross_file",
+      "query": "钩子（hooks）系统是如何实现的，response钩子在哪里被触发？",
+      "expected_file": "requests/models.py → requests/sessions.py → requests/hooks.py",
+      "expected_function": "dispatch_hook",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "dispatch_hook",
+        "request",
+        "merge_hooks",
+        "RequestHooksMixin",
+        "register_hook"
+      ]
+    },
+    {
+      "id": "B15",
+      "category": "B_cross_file",
+      "query": "流式响应（stream=True）和普通响应在处理上有什么区别？",
+      "expected_file": "requests/models.py → requests/adapters.py",
+      "expected_function": "iter_content, Response",
+      "hit_rank": null,
+      "r1": 0,
+      "r3": 0,
+      "r5": 0,
+      "mrr": 0.0,
+      "top5": [
+        "iter_lines",
+        "__init__",
+        "iter_content",
+        "send",
+        "resolve_redirects"
+      ]
+    },
+    {
+      "id": "C01",
+      "category": "C_fuzzy",
+      "query": "我想让requests记住我登录的状态，用哪个功能？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "Session",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "__getstate__",
+        "__setstate__",
+        "__init__",
+        "_urllib3_request_context",
+        "__enter__"
+      ]
+    },
+    {
+      "id": "C02",
+      "category": "C_fuzzy",
+      "query": "网络请求卡住了怎么让它自动停止？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "request",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "__exit__",
+        "close",
+        "send",
+        "send",
+        "request"
+      ]
+    },
+    {
+      "id": "C03",
+      "category": "C_fuzzy",
+      "query": "怎么让所有请求都走代理服务器？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "Session.request / proxies",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "__init__",
+        "proxy_headers",
+        "request_url",
+        "proxy_manager_for",
+        "select_proxy"
+      ]
+    },
+    {
+      "id": "C04",
+      "category": "C_fuzzy",
+      "query": "服务器返回的数据我想一边下载一边处理，不想等全部下完",
+      "expected_file": "requests/models.py",
+      "expected_function": "iter_content / iter_lines",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "iter_lines",
+        "request",
+        "iter_content",
+        "content",
+        "prepare_body"
+      ]
+    },
+    {
+      "id": "C05",
+      "category": "C_fuzzy",
+      "query": "我不想让requests自动跳转到新地址",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "request / resolve_redirects",
+      "hit_rank": 2,
+      "r1": 0,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 0.5,
+      "top5": [
+        "head",
+        "rebuild_auth",
+        "should_strip_auth",
+        "request_url",
+        "SessionRedirectMixin"
+      ]
+    },
+    {
+      "id": "C06",
+      "category": "C_fuzzy",
+      "query": "怎么给每个请求都加上同样的请求头，比如API key？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "Session",
+      "hit_rank": 3,
+      "r1": 0,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 0.3333333333333333,
+      "top5": [
+        "add_headers",
+        "head",
+        "__init__",
+        "request",
+        "proxy_headers"
+      ]
+    },
+    {
+      "id": "C07",
+      "category": "C_fuzzy",
+      "query": "请求失败的时候能不能自动重试？",
+      "expected_file": "requests/adapters.py",
+      "expected_function": "HTTPAdapter",
+      "hit_rank": null,
+      "r1": 0,
+      "r3": 0,
+      "r5": 0,
+      "mrr": 0.0,
+      "top5": [
+        "send",
+        "__init__",
+        "RetryError",
+        "request",
+        "rebuild_method"
+      ]
+    },
+    {
+      "id": "C08",
+      "category": "C_fuzzy",
+      "query": "发送JSON数据和发送表单数据有什么区别？",
+      "expected_file": "requests/models.py",
+      "expected_function": "prepare_body",
+      "hit_rank": 5,
+      "r1": 0,
+      "r3": 0,
+      "r5": 1,
+      "mrr": 0.2,
+      "top5": [
+        "post",
+        "post",
+        "request",
+        "request",
+        "prepare_body"
+      ]
+    },
+    {
+      "id": "C09",
+      "category": "C_fuzzy",
+      "query": "能不能让requests忽略HTTPS证书错误？",
+      "expected_file": "requests/adapters.py",
+      "expected_function": "send",
+      "hit_rank": 2,
+      "r1": 0,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 0.5,
+      "top5": [
+        "__init__",
+        "cert_verify",
+        "get_connection_with_tls_context",
+        "request",
+        "_urllib3_request_context"
+      ]
+    },
+    {
+      "id": "C10",
+      "category": "C_fuzzy",
+      "query": "我想在每次请求发出前做点处理，有没有钩子之类的机制？",
+      "expected_file": "requests/hooks.py → requests/models.py",
+      "expected_function": "dispatch_hook",
+      "hit_rank": null,
+      "r1": 0,
+      "r3": 0,
+      "r5": 0,
+      "mrr": 0.0,
+      "top5": [
+        "prepare_hooks",
+        "send",
+        "__init__",
+        "request",
+        "prepare"
+      ]
+    },
+    {
+      "id": "C11",
+      "category": "C_fuzzy",
+      "query": "服务器不接受我的请求，说认证失败，requests怎么处理这种情况？",
+      "expected_file": "requests/auth.py → requests/sessions.py",
+      "expected_function": "HTTPDigestAuth.handle_401",
+      "hit_rank": null,
+      "r1": 0,
+      "r3": 0,
+      "r5": 0,
+      "mrr": 0.0,
+      "top5": [
+        "__init__",
+        "_urllib3_request_context",
+        "request",
+        "cert_verify",
+        "send"
+      ]
+    },
+    {
+      "id": "C12",
+      "category": "C_fuzzy",
+      "query": "怎么知道我的请求最终被重定向了多少次？",
+      "expected_file": "requests/models.py → requests/sessions.py",
+      "expected_function": "Response.history",
+      "hit_rank": null,
+      "r1": 0,
+      "r3": 0,
+      "r5": 0,
+      "mrr": 0.0,
+      "top5": [
+        "resolve_redirects",
+        "rewind_body",
+        "rebuild_method",
+        "SessionRedirectMixin",
+        "get_redirect_target"
+      ]
+    },
+    {
+      "id": "D01",
+      "category": "D_edge",
+      "query": "requests.get和Session.get有什么区别？",
+      "expected_file": "requests/api.py vs requests/sessions.py",
+      "expected_function": "api.get vs Session.get",
+      "hit_rank": null,
+      "r1": 0,
+      "r3": 0,
+      "r5": 0,
+      "mrr": 0.0,
+      "top5": [
+        "Session",
+        "get",
+        "__enter__",
+        "__setstate__",
+        "__getstate__"
+      ]
+    },
+    {
+      "id": "D02",
+      "category": "D_edge",
+      "query": "timeout参数设成一个数字和设成元组有什么不同？",
+      "expected_file": "requests/adapters.py",
+      "expected_function": "send",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "BaseAdapter",
+        "send",
+        "request",
+        "send",
+        "Timeout"
+      ]
+    },
+    {
+      "id": "D03",
+      "category": "D_edge",
+      "query": "requests.compat模块是做什么的？",
+      "expected_file": "requests/compat.py",
+      "expected_function": "compat",
+      "hit_rank": null,
+      "r1": 0,
+      "r3": 0,
+      "r5": 0,
+      "mrr": 0.0,
+      "top5": [
+        "patch",
+        "request",
+        "prepare_request",
+        "patch",
+        "_urllib3_request_context"
+      ]
+    },
+    {
+      "id": "D04",
+      "category": "D_edge",
+      "query": "CaseInsensitiveDict是什么，为什么HTTP头要用它？",
+      "expected_file": "requests/structures.py",
+      "expected_function": "CaseInsensitiveDict",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "CaseInsensitiveDict",
+        "build_response",
+        "default_headers",
+        "__getitem__",
+        "__eq__"
+      ]
+    },
+    {
+      "id": "D05",
+      "category": "D_edge",
+      "query": "如果我问requests怎么做WebSocket连接，它支持吗？",
+      "expected_file": "N/A",
+      "expected_function": "N/A",
+      "hit_rank": null,
+      "r1": 0,
+      "r3": 0,
+      "r5": 0,
+      "mrr": 0.0,
+      "top5": [
+        "get_adapter",
+        "get_connection",
+        "__init__",
+        "get_connection_with_tls_context",
+        "request_url"
+      ]
+    },
+    {
+      "id": "D06",
+      "category": "D_edge",
+      "query": "requests库本身有没有实现异步请求？",
+      "expected_file": "N/A",
+      "expected_function": "N/A",
+      "hit_rank": null,
+      "r1": 0,
+      "r3": 0,
+      "r5": 0,
+      "mrr": 0.0,
+      "top5": [
+        "send",
+        "get",
+        "options",
+        "prepare_request",
+        "head"
+      ]
+    },
+    {
+      "id": "D07",
+      "category": "D_edge",
+      "query": "PreparedRequest的prepare方法和Session.prepare_request有什么关系？",
+      "expected_file": "requests/models.py vs requests/sessions.py",
+      "expected_function": "PreparedRequest.prepare vs Session.prepare_request",
+      "hit_rank": null,
+      "r1": 0,
+      "r3": 0,
+      "r5": 0,
+      "mrr": 0.0,
+      "top5": [
+        "prepare_request",
+        "prepare_method",
+        "rebuild_method",
+        "prepare",
+        "prepare"
+      ]
+    },
+    {
+      "id": "D08",
+      "category": "D_edge",
+      "query": "发送请求时data参数传了一个生成器（generator）会发生什么？",
+      "expected_file": "requests/models.py",
+      "expected_function": "prepare_body",
+      "hit_rank": 5,
+      "r1": 0,
+      "r3": 0,
+      "r5": 1,
+      "mrr": 0.2,
+      "top5": [
+        "request",
+        "post",
+        "send",
+        "request",
+        "prepare"
+      ]
+    },
+    {
+      "id": "AUTO_001",
+      "category": "auto_generated",
+      "query": "如何用Python发送一个GET请求到指定网址？",
+      "expected_file": "requests/api.py",
+      "expected_function": "request",
+      "hit_rank": 2,
+      "r1": 0,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 0.5,
+      "top5": [
+        "get",
+        "get",
+        "send",
+        "request",
+        "put"
+      ]
+    },
+    {
+      "id": "AUTO_002",
+      "category": "auto_generated",
+      "query": "我想从某个网址获取数据，并带上一些查询参数。",
+      "expected_file": "requests/api.py",
+      "expected_function": "get",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "get",
+        "get_auth_from_url",
+        "get",
+        "get_adapter",
+        "__getstate__"
+      ]
+    },
+    {
+      "id": "AUTO_003",
+      "category": "auto_generated",
+      "query": "我想查看某个网址支持哪些HTTP请求方法，怎么查？",
+      "expected_file": "requests/api.py",
+      "expected_function": "options",
+      "hit_rank": null,
+      "r1": 0,
+      "r3": 0,
+      "r5": 0,
+      "mrr": 0.0,
+      "top5": [
+        "request_url",
+        "_urllib3_request_context",
+        "get_connection",
+        "request",
+        "build_digest_header"
+      ]
+    },
+    {
+      "id": "AUTO_004",
+      "category": "auto_generated",
+      "query": "我想用Python发送一个HTTP HEAD请求，该怎么写代码？",
+      "expected_file": "requests/api.py",
+      "expected_function": "head",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "head",
+        "head",
+        "request",
+        "prepare_headers",
+        "add_headers"
+      ]
+    },
+    {
+      "id": "AUTO_005",
+      "category": "auto_generated",
+      "query": "我想用Python发送一个POST请求，该怎么做？",
+      "expected_file": "requests/api.py",
+      "expected_function": "post",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "post",
+        "post",
+        "request",
+        "put",
+        "put"
+      ]
+    },
+    {
+      "id": "AUTO_006",
+      "category": "auto_generated",
+      "query": "我想用HTTP的PUT方法向某个URL发送数据，该怎么做？",
+      "expected_file": "requests/api.py",
+      "expected_function": "put",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "put",
+        "put",
+        "request",
+        "request",
+        "request_url"
+      ]
+    },
+    {
+      "id": "AUTO_007",
+      "category": "auto_generated",
+      "query": "我想用PATCH方法更新服务器上的资源数据，该怎么做？",
+      "expected_file": "requests/api.py",
+      "expected_function": "patch",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "patch",
+        "patch",
+        "request",
+        "request",
+        "send"
+      ]
+    },
+    {
+      "id": "AUTO_008",
+      "category": "auto_generated",
+      "query": "怎么用Python发送一个HTTP DELETE请求并获取响应？",
+      "expected_file": "requests/api.py",
+      "expected_function": "delete",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "delete",
+        "delete",
+        "request",
+        "request",
+        "patch"
+      ]
+    },
+    {
+      "id": "AUTO_009",
+      "category": "auto_generated",
+      "query": "我想用Python发送一个HTTP请求到指定网址该怎么写",
+      "expected_file": "requests/models.py",
+      "expected_function": "Request",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "prepare_url",
+        "request_url",
+        "request",
+        "prepare",
+        "request"
+      ]
+    },
+    {
+      "id": "AUTO_010",
+      "category": "auto_generated",
+      "query": "我想修改一个即将发送的HTTP请求的原始字节内容，该怎么做？",
+      "expected_file": "requests/models.py",
+      "expected_function": "PreparedRequest",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "prepare_auth",
+        "prepare_headers",
+        "prepare_url",
+        "prepare_content_length",
+        "request"
+      ]
+    },
+    {
+      "id": "AUTO_011",
+      "category": "auto_generated",
+      "query": "如何获取HTTP请求返回的响应对象中的内容？",
+      "expected_file": "requests/models.py",
+      "expected_function": "Response",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "content",
+        "__init__",
+        "links",
+        "__repr__",
+        "Response"
+      ]
+    },
+    {
+      "id": "AUTO_012",
+      "category": "auto_generated",
+      "query": "我想合并请求中的字典参数和会话中的默认设置，该怎么做？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "merge_setting",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "merge_setting",
+        "merge_environment_settings",
+        "get",
+        "prepare_request",
+        "get"
+      ]
+    },
+    {
+      "id": "AUTO_013",
+      "category": "auto_generated",
+      "query": "我在使用requests库时，钩子函数合并后失效了怎么办？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "merge_hooks",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "merge_hooks",
+        "RequestHooksMixin",
+        "deregister_hook",
+        "register_hook",
+        "merge_setting"
+      ]
+    },
+    {
+      "id": "AUTO_014",
+      "category": "auto_generated",
+      "query": "我想用Python爬取网页时保持登录状态和cookie，应该怎么做？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "Session",
+      "hit_rank": 2,
+      "r1": 0,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 0.5,
+      "top5": [
+        "MockRequest",
+        "__getstate__",
+        "__enter__",
+        "Session",
+        "__init__"
+      ]
+    },
+    {
+      "id": "AUTO_015",
+      "category": "auto_generated",
+      "query": "如何使用Python的requests库创建可自动关闭的会话对象",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "session",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "__exit__",
+        "PreparedRequest",
+        "close",
+        "delete",
+        "session"
+      ]
+    },
+    {
+      "id": "AUTO_016",
+      "category": "auto_generated",
+      "query": "我想了解requests库中基础传输适配器的作用是什么。",
+      "expected_file": "requests/adapters.py",
+      "expected_function": "BaseAdapter",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "BaseAdapter",
+        "get_adapter",
+        "HTTPAdapter",
+        "send",
+        "get_connection"
+      ]
+    },
+    {
+      "id": "AUTO_017",
+      "category": "auto_generated",
+      "query": "在Python的requests库中，如何设置默认的HTTP适配器来处理请求？",
+      "expected_file": "requests/adapters.py",
+      "expected_function": "HTTPAdapter",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "__setstate__",
+        "HTTPAdapter",
+        "proxy_manager_for",
+        "add_headers",
+        "request_url"
+      ]
+    },
+    {
+      "id": "AUTO_018",
+      "category": "auto_generated",
+      "query": "我想了解requests库中认证功能的基础类是怎么用的。",
+      "expected_file": "requests/auth.py",
+      "expected_function": "AuthBase",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "AuthBase",
+        "HTTPBasicAuth",
+        "_urllib3_request_context",
+        "Session",
+        "__call__"
+      ]
+    },
+    {
+      "id": "AUTO_019",
+      "category": "auto_generated",
+      "query": "怎么用Python的requests库给HTTP请求添加基本的用户名密码认证？",
+      "expected_file": "requests/auth.py",
+      "expected_function": "HTTPBasicAuth",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "__init__",
+        "HTTPBasicAuth",
+        "__init__",
+        "__init__",
+        "__call__"
+      ]
+    },
+    {
+      "id": "AUTO_020",
+      "category": "auto_generated",
+      "query": "如何在发送HTTP请求时添加代理认证信息来访问受限资源？",
+      "expected_file": "requests/auth.py",
+      "expected_function": "HTTPProxyAuth",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "__call__",
+        "HTTPProxyAuth",
+        "proxy_headers",
+        "get_connection_with_tls_context",
+        "_urllib3_request_context"
+      ]
+    },
+    {
+      "id": "AUTO_021",
+      "category": "auto_generated",
+      "query": "如何在Python的Requests库中启用HTTP摘要认证来发送请求？",
+      "expected_file": "requests/auth.py",
+      "expected_function": "HTTPDigestAuth",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "__call__",
+        "_urllib3_request_context",
+        "request",
+        "get_connection_with_tls_context",
+        "__call__"
+      ]
+    },
+    {
+      "id": "AUTO_022",
+      "category": "auto_generated",
+      "query": "我想模拟一个urllib2请求对象，用来测试cookie策略怎么办？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "MockRequest",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "MockRequest",
+        "__init__",
+        "get_host",
+        "host",
+        "get_header"
+      ]
+    },
+    {
+      "id": "AUTO_023",
+      "category": "auto_generated",
+      "query": "如何从HTTP响应头中提取Cookiejar需要的格式？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "MockResponse",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "extract_cookies_to_jar",
+        "getheaders",
+        "__init__",
+        "get_full_url",
+        "MockResponse"
+      ]
+    },
+    {
+      "id": "AUTO_024",
+      "category": "auto_generated",
+      "query": "怎么把HTTP响应的cookie提取并保存到指定的cookie容器里？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "extract_cookies_to_jar",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "extract_cookies_to_jar",
+        "__init__",
+        "MockResponse",
+        "getheaders",
+        "prepare_cookies"
+      ]
+    },
+    {
+      "id": "AUTO_025",
+      "category": "auto_generated",
+      "query": "怎么从cookie对象生成请求用的Cookie请求头字符串？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "get_cookie_header",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "get_cookie_header",
+        "prepare_cookies",
+        "add_header",
+        "MockRequest",
+        "get_header"
+      ]
+    },
+    {
+      "id": "AUTO_026",
+      "category": "auto_generated",
+      "query": "如何删除指定名称的Cookie？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "remove_cookie_by_name",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "__delitem__",
+        "remove_cookie_by_name",
+        "set",
+        "__setitem__",
+        "__getitem__"
+      ]
+    },
+    {
+      "id": "AUTO_027",
+      "category": "auto_generated",
+      "query": "在Cookie Jar里遇到同名Cookie冲突时，如何指定域名和路径来获取正确的值？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "CookieConflictError",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "_find",
+        "get",
+        "CookieConflictError",
+        "set",
+        "_find_no_duplicates"
+      ]
+    },
+    {
+      "id": "AUTO_028",
+      "category": "auto_generated",
+      "query": "如何在Python中像字典一样操作HTTP响应返回的Cookie容器？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "RequestsCookieJar",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "__init__",
+        "MockResponse",
+        "items",
+        "getheaders",
+        "extract_cookies_to_jar"
+      ]
+    },
+    {
+      "id": "AUTO_029",
+      "category": "auto_generated",
+      "query": "怎么创建一个只在当前域名下生效的简单cookie？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "create_cookie",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "create_cookie",
+        "get_dict",
+        "set",
+        "_find",
+        "multiple_domains"
+      ]
+    },
+    {
+      "id": "AUTO_030",
+      "category": "auto_generated",
+      "query": "如何把Morsel对象转换成包含单一键值对的Cookie？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "morsel_to_cookie",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "morsel_to_cookie",
+        "set",
+        "__setitem__",
+        "create_cookie",
+        "itervalues"
+      ]
+    },
+    {
+      "id": "AUTO_031",
+      "category": "auto_generated",
+      "query": "如何用字典格式的键值对快速生成一个CookieJar对象？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "cookiejar_from_dict",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "cookiejar_from_dict",
+        "add_dict_to_cookiejar",
+        "dict_from_cookiejar",
+        "keys",
+        "itervalues"
+      ]
+    },
+    {
+      "id": "AUTO_032",
+      "category": "auto_generated",
+      "query": "如何把新cookie合并到现有的cookie容器里？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "merge_cookies",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "merge_cookies",
+        "cookiejar_from_dict",
+        "prepare_request",
+        "update",
+        "add_dict_to_cookiejar"
+      ]
+    },
+    {
+      "id": "AUTO_033",
+      "category": "auto_generated",
+      "query": "处理网络请求时遇到不明确的错误该怎么解决",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "RequestException",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "RequestException",
+        "raise_for_status",
+        "resolve_redirects",
+        "get_netrc_auth",
+        "get_adapter"
+      ]
+    },
+    {
+      "id": "AUTO_034",
+      "category": "auto_generated",
+      "query": "发送了一个无效的JSON数据，请求报错了怎么办？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "InvalidJSONError",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "InvalidJSONError",
+        "__init__",
+        "JSONDecodeError",
+        "patch",
+        "guess_json_utf"
+      ]
+    },
+    {
+      "id": "AUTO_035",
+      "category": "auto_generated",
+      "query": "我在用requests库时，返回的内容不是合法的JSON格式，怎么处理？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "JSONDecodeError",
+      "hit_rank": 3,
+      "r1": 0,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 0.3333333333333333,
+      "top5": [
+        "json",
+        "post",
+        "InvalidJSONError",
+        "JSONDecodeError",
+        "__init__"
+      ]
+    },
+    {
+      "id": "AUTO_036",
+      "category": "auto_generated",
+      "query": "在请求接口时返回了HTTP错误，怎么捕获这种异常？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "HTTPError",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "HTTPError",
+        "raise_for_status",
+        "request",
+        "get_connection_with_tls_context",
+        "get_connection"
+      ]
+    },
+    {
+      "id": "AUTO_037",
+      "category": "auto_generated",
+      "query": "我在用requests库时遇到连接失败，怎么捕获这种异常？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "ConnectionError",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "Timeout",
+        "ConnectionError",
+        "ConnectTimeout",
+        "ProxyError",
+        "send"
+      ]
+    },
+    {
+      "id": "AUTO_038",
+      "category": "auto_generated",
+      "query": "为什么我通过代理发送请求时会报错，提示代理错误？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "ProxyError",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "ProxyError",
+        "InvalidProxyURL",
+        "BaseAdapter",
+        "_urllib3_request_context",
+        "proxy_manager_for"
+      ]
+    },
+    {
+      "id": "AUTO_039",
+      "category": "auto_generated",
+      "query": "我在用Python的requests库时遇到了SSL证书错误，该怎么排查？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "SSLError",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "SSLError",
+        "__init__",
+        "cert_verify",
+        "build_connection_pool_key_attributes",
+        "get_connection_with_tls_context"
+      ]
+    },
+    {
+      "id": "AUTO_040",
+      "category": "auto_generated",
+      "query": "我发送请求后长时间没有响应，如何捕获超时相关的异常？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "Timeout",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "Timeout",
+        "__init__",
+        "BaseAdapter",
+        "send",
+        "send"
+      ]
+    },
+    {
+      "id": "AUTO_041",
+      "category": "auto_generated",
+      "query": "发送请求时连接远程服务器超时了，重试能解决吗？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "ConnectTimeout",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "ConnectTimeout",
+        "BaseAdapter",
+        "request",
+        "send",
+        "send"
+      ]
+    },
+    {
+      "id": "AUTO_042",
+      "category": "auto_generated",
+      "query": "我在发送请求时服务器超时没有返回数据，该怎么处理这个异常？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "ReadTimeout",
+      "hit_rank": 2,
+      "r1": 0,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 0.5,
+      "top5": [
+        "BaseAdapter",
+        "ReadTimeout",
+        "Timeout",
+        "request",
+        "ConnectTimeout"
+      ]
+    },
+    {
+      "id": "AUTO_043",
+      "category": "auto_generated",
+      "query": "发送请求时提示需要提供有效的网址，该怎么解决？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "URLRequired",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "URLRequired",
+        "request_url",
+        "_urllib3_request_context",
+        "__init__",
+        "request"
+      ]
+    },
+    {
+      "id": "AUTO_044",
+      "category": "auto_generated",
+      "query": "在爬取网页时遇到重定向次数过多，应该如何处理这个异常？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "TooManyRedirects",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "TooManyRedirects",
+        "resolve_redirects",
+        "rebuild_method",
+        "SessionRedirectMixin",
+        "should_strip_auth"
+      ]
+    },
+    {
+      "id": "AUTO_045",
+      "category": "auto_generated",
+      "query": "我访问一个网址时提示缺少协议头，这是怎么回事？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "MissingSchema",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "MissingSchema",
+        "get_adapter",
+        "prepend_scheme_if_needed",
+        "add_headers",
+        "build_digest_header"
+      ]
+    },
+    {
+      "id": "AUTO_046",
+      "category": "auto_generated",
+      "query": "用了一个无效的URL协议，访问网站时提示出错怎么办",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "InvalidSchema",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "InvalidURL",
+        "InvalidSchema",
+        "InvalidProxyURL",
+        "prepare_url",
+        "MissingSchema"
+      ]
+    },
+    {
+      "id": "AUTO_047",
+      "category": "auto_generated",
+      "query": "为什么我输入的网址会提示无效，是不是格式有问题？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "InvalidURL",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "InvalidURL",
+        "InvalidSchema",
+        "InvalidProxyURL",
+        "_urllib3_request_context",
+        "MissingSchema"
+      ]
+    },
+    {
+      "id": "AUTO_048",
+      "category": "auto_generated",
+      "query": "为什么我传了一个请求头但提示我头部信息无效？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "InvalidHeader",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "InvalidHeader",
+        "head",
+        "head",
+        "default_headers",
+        "request"
+      ]
+    },
+    {
+      "id": "AUTO_049",
+      "category": "auto_generated",
+      "query": "设置代理后请求报错，提示代理地址格式不对怎么办？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "InvalidProxyURL",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "InvalidProxyURL",
+        "_urllib3_request_context",
+        "prepare_url",
+        "proxy_manager_for",
+        "get_adapter"
+      ]
+    },
+    {
+      "id": "AUTO_050",
+      "category": "auto_generated",
+      "query": "我在用requests下载文件时遇到分块编码错误，该怎么处理？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "ChunkedEncodingError",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "ChunkedEncodingError",
+        "JSONDecodeError",
+        "ContentDecodingError",
+        "_encode_files",
+        "RequestEncodingMixin"
+      ]
+    },
+    {
+      "id": "AUTO_051",
+      "category": "auto_generated",
+      "query": "我请求一个网页时遇到内容解码失败的错误，该怎么处理？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "ContentDecodingError",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "ContentDecodingError",
+        "JSONDecodeError",
+        "json",
+        "raise_for_status",
+        "handle_401"
+      ]
+    },
+    {
+      "id": "AUTO_052",
+      "category": "auto_generated",
+      "query": "为什么读取响应内容时报错说数据已经被消费了？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "StreamConsumedError",
+      "hit_rank": 2,
+      "r1": 0,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 0.5,
+      "top5": [
+        "content",
+        "StreamConsumedError",
+        "__getstate__",
+        "__init__",
+        "iter_content"
+      ]
+    },
+    {
+      "id": "AUTO_053",
+      "category": "auto_generated",
+      "query": "我在使用requests库时，重试机制失败了，如何捕获这个异常？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "RetryError",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "RetryError",
+        "Timeout",
+        "__init__",
+        "RequestException",
+        "UnrewindableBodyError"
+      ]
+    },
+    {
+      "id": "AUTO_054",
+      "category": "auto_generated",
+      "query": "请求重试时遇到请求体无法重置的错误，怎么办？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "UnrewindableBodyError",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "UnrewindableBodyError",
+        "rewind_body",
+        "RetryError",
+        "ConnectTimeout",
+        "get_adapter"
+      ]
+    },
+    {
+      "id": "AUTO_055",
+      "category": "auto_generated",
+      "query": "我想知道在Requests库中处理警告信息时应该捕获哪种警告基类。",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "RequestsWarning",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "RequestsWarning",
+        "RequestsDependencyWarning",
+        "__init__",
+        "BaseAdapter",
+        "CaseInsensitiveDict"
+      ]
+    },
+    {
+      "id": "AUTO_056",
+      "category": "auto_generated",
+      "query": "为什么打开文本文件时提示二进制长度不匹配？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "FileModeWarning",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "FileModeWarning",
+        "super_len",
+        "guess_json_utf",
+        "_validate_header_part",
+        "build_digest_header"
+      ]
+    },
+    {
+      "id": "AUTO_057",
+      "category": "auto_generated",
+      "query": "我在用requests库时收到版本不匹配的警告，该怎么处理？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "RequestsDependencyWarning",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "RequestsDependencyWarning",
+        "RequestsWarning",
+        "get_adapter",
+        "_urllib3_request_context",
+        "merge_environment_settings"
+      ]
+    },
+    {
+      "id": "AUTO_058",
+      "category": "auto_generated",
+      "query": "如何在发送请求时让钩子函数自动处理返回的数据？",
+      "expected_file": "requests/hooks.py",
+      "expected_function": "dispatch_hook",
+      "hit_rank": null,
+      "r1": 0,
+      "r3": 0,
+      "r5": 0,
+      "mrr": 0.0,
+      "top5": [
+        "send",
+        "request",
+        "is_redirect",
+        "patch",
+        "send"
+      ]
+    },
+    {
+      "id": "AUTO_059",
+      "category": "auto_generated",
+      "query": "如何创建一个不区分大小写的字典来存储HTTP请求头？",
+      "expected_file": "requests/structures.py",
+      "expected_function": "CaseInsensitiveDict",
+      "hit_rank": null,
+      "r1": 0,
+      "r3": 0,
+      "r5": 0,
+      "mrr": 0.0,
+      "top5": [
+        "request",
+        "build_digest_header",
+        "proxy_headers",
+        "request",
+        "add_headers"
+      ]
+    },
+    {
+      "id": "AUTO_060",
+      "category": "auto_generated",
+      "query": "我想查一个字典对象，但希望访问不存在的键时返回默认值而不是报错。",
+      "expected_file": "requests/structures.py",
+      "expected_function": "LookupDict",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "__getitem__",
+        "LookupDict",
+        "get",
+        "get",
+        "get"
+      ]
+    },
+    {
+      "id": "AUTO_061",
+      "category": "auto_generated",
+      "query": "怎么把一个字典转换成更新请求头用的内部序列格式？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "dict_to_sequence",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "dict_to_sequence",
+        "get",
+        "get",
+        "__getitem__",
+        "dotted_netmask"
+      ]
+    },
+    {
+      "id": "AUTO_062",
+      "category": "auto_generated",
+      "query": "怎么从netrc文件里获取某个网址的登录认证信息？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "get_netrc_auth",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "get_netrc_auth",
+        "rebuild_auth",
+        "get_auth_from_url",
+        "_urllib3_request_context",
+        "urldefragauth"
+      ]
+    },
+    {
+      "id": "AUTO_063",
+      "category": "auto_generated",
+      "query": "怎么从响应对象里猜出下载文件的原始文件名？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "guess_filename",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "guess_filename",
+        "json",
+        "__init__",
+        "text",
+        "content"
+      ]
+    },
+    {
+      "id": "AUTO_064",
+      "category": "auto_generated",
+      "query": "如何在解压zip文件后获取内部文件的真实路径？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "extract_zipped_paths",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "extract_zipped_paths",
+        "urldefragauth",
+        "build_digest_header",
+        "guess_filename",
+        "parse_header_links"
+      ]
+    },
+    {
+      "id": "AUTO_065",
+      "category": "auto_generated",
+      "query": "如何以原子操作的方式安全地将文件写入磁盘避免数据损坏",
+      "expected_file": "requests/utils.py",
+      "expected_function": "atomic_open",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "atomic_open",
+        "prepare_body",
+        "_encode_files",
+        "__getitem__",
+        "send"
+      ]
+    },
+    {
+      "id": "AUTO_066",
+      "category": "auto_generated",
+      "query": "怎么把键值对列表转成有序字典？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "from_key_val_list",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "from_key_val_list",
+        "to_key_val_list",
+        "__getitem__",
+        "get",
+        "__setitem__"
+      ]
+    },
+    {
+      "id": "AUTO_067",
+      "category": "auto_generated",
+      "query": "如何将一个列表或对象转换成键值对元组的列表形式？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "to_key_val_list",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "to_key_val_list",
+        "to_key_val_list",
+        "__getitem__",
+        "__setitem__",
+        "items"
+      ]
+    },
+    {
+      "id": "AUTO_068",
+      "category": "auto_generated",
+      "query": "怎么解析可能含引号逗号的逗号分隔列表字符串",
+      "expected_file": "requests/utils.py",
+      "expected_function": "parse_list_header",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "parse_list_header",
+        "to_key_val_list",
+        "from_key_val_list",
+        "_encode_params",
+        "parse_header_links"
+      ]
+    },
+    {
+      "id": "AUTO_069",
+      "category": "auto_generated",
+      "query": "如何将类似foo=\"is a fish\"的键值对字符串转换成字典",
+      "expected_file": "requests/utils.py",
+      "expected_function": "parse_dict_header",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "parse_dict_header",
+        "__getitem__",
+        "from_key_val_list",
+        "unquote_header_value",
+        "LookupDict"
+      ]
+    },
+    {
+      "id": "AUTO_070",
+      "category": "auto_generated",
+      "query": "怎么把HTTP响应头里的引号去掉，还原成原始值？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "unquote_header_value",
+      "hit_rank": null,
+      "r1": 0,
+      "r3": 0,
+      "r5": 0,
+      "mrr": 0.0,
+      "top5": [
+        "__init__",
+        "links",
+        "add_headers",
+        "request",
+        "raise_for_status"
+      ]
+    },
+    {
+      "id": "AUTO_071",
+      "category": "auto_generated",
+      "query": "怎么把CookieJar对象转换成字典格式的键值对？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "dict_from_cookiejar",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "dict_from_cookiejar",
+        "cookiejar_from_dict",
+        "add_dict_to_cookiejar",
+        "items",
+        "__setitem__"
+      ]
+    },
+    {
+      "id": "AUTO_072",
+      "category": "auto_generated",
+      "query": "怎么把字典格式的cookie数据添加到CookieJar对象里？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "add_dict_to_cookiejar",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "add_dict_to_cookiejar",
+        "merge_cookies",
+        "cookiejar_from_dict",
+        "dict_from_cookiejar",
+        "set_cookie"
+      ]
+    },
+    {
+      "id": "AUTO_073",
+      "category": "auto_generated",
+      "query": "怎么从网页返回的二进制内容中自动检测出字符编码格式",
+      "expected_file": "requests/utils.py",
+      "expected_function": "get_encodings_from_content",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "get_encodings_from_content",
+        "text",
+        "guess_json_utf",
+        "get_encoding_from_headers",
+        "iter_content"
+      ]
+    },
+    {
+      "id": "AUTO_074",
+      "category": "auto_generated",
+      "query": "怎么从HTTP响应头里提取出字符编码信息？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "get_encoding_from_headers",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "get_encoding_from_headers",
+        "text",
+        "getheaders",
+        "info",
+        "__init__"
+      ]
+    },
+    {
+      "id": "AUTO_075",
+      "category": "auto_generated",
+      "query": "怎么让从网络请求返回的迭代器内容自动解码成中文？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "stream_decode_response_unicode",
+      "hit_rank": 3,
+      "r1": 0,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 0.3333333333333333,
+      "top5": [
+        "iter_content",
+        "text",
+        "get_unicode_from_response",
+        "get_encodings_from_content",
+        "resolve_redirects"
+      ]
+    },
+    {
+      "id": "AUTO_076",
+      "category": "auto_generated",
+      "query": "如何把一个字符串按固定长度分段，逐段处理？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "iter_slices",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "iter_slices",
+        "iter_slices",
+        "iter_slices",
+        "iter_lines",
+        "iter_lines"
+      ]
+    },
+    {
+      "id": "AUTO_077",
+      "category": "auto_generated",
+      "query": "如何从HTTP响应中获取Unicode编码的文本内容",
+      "expected_file": "requests/utils.py",
+      "expected_function": "get_unicode_from_response",
+      "hit_rank": 2,
+      "r1": 0,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 0.5,
+      "top5": [
+        "text",
+        "get_unicode_from_response",
+        "iter_content",
+        "iter_content",
+        "iter_content"
+      ]
+    },
+    {
+      "id": "AUTO_078",
+      "category": "auto_generated",
+      "query": "我想把URL中非保留字符的百分号编码还原成原始字符。",
+      "expected_file": "requests/utils.py",
+      "expected_function": "unquote_unreserved",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "unquote_unreserved",
+        "requote_uri",
+        "urldefragauth",
+        "prepare_url",
+        "get_encodings_from_content"
+      ]
+    },
+    {
+      "id": "AUTO_079",
+      "category": "auto_generated",
+      "query": "我有个网址被转义了，怎么才能把它恢复成标准格式？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "requote_uri",
+      "hit_rank": 3,
+      "r1": 0,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 0.3333333333333333,
+      "top5": [
+        "prepare_url",
+        "rebuild_proxies",
+        "get_unicode_from_response",
+        "get_adapter",
+        "get_connection"
+      ]
+    },
+    {
+      "id": "AUTO_080",
+      "category": "auto_generated",
+      "query": "我想检查某个IP地址是否属于指定的子网范围，应该怎么做？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "address_in_network",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "address_in_network",
+        "is_ipv4_address",
+        "should_bypass_proxies",
+        "is_valid_cidr",
+        "_urllib3_request_context"
+      ]
+    },
+    {
+      "id": "AUTO_081",
+      "category": "auto_generated",
+      "query": "如何将子网掩码的位数格式转换为点分十进制格式？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "dotted_netmask",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "dotted_netmask",
+        "is_valid_cidr",
+        "unquote_unreserved",
+        "build_digest_header",
+        "_get_idna_encoded_host"
+      ]
+    },
+    {
+      "id": "AUTO_082",
+      "category": "auto_generated",
+      "query": "如何判断一个字符串是不是合法的IPv4地址？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "is_ipv4_address",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "is_ipv4_address",
+        "should_bypass_proxies",
+        "is_valid_cidr",
+        "address_in_network",
+        "__bool__"
+      ]
+    },
+    {
+      "id": "AUTO_083",
+      "category": "auto_generated",
+      "query": "如何判断一个IP地址段是否属于有效的CIDR格式？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "is_valid_cidr",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "is_valid_cidr",
+        "address_in_network",
+        "is_ipv4_address",
+        "_urllib3_request_context",
+        "handle_401"
+      ]
+    },
+    {
+      "id": "AUTO_084",
+      "category": "auto_generated",
+      "query": "我想临时修改一个环境变量，用完再恢复原值，怎么实现？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "set_environ",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "set_environ",
+        "rebuild_proxies",
+        "merge_environment_settings",
+        "__getitem__",
+        "__setitem__"
+      ]
+    },
+    {
+      "id": "AUTO_085",
+      "category": "auto_generated",
+      "query": "怎么判断某个地址是否需要绕过代理直接连接？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "should_bypass_proxies",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "should_bypass_proxies",
+        "proxy_headers",
+        "address_in_network",
+        "_urllib3_request_context",
+        "proxy_manager_for"
+      ]
+    },
+    {
+      "id": "AUTO_086",
+      "category": "auto_generated",
+      "query": "如何在Python中获取当前系统环境变量中设置的代理信息？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "get_environ_proxies",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "resolve_proxies",
+        "merge_environment_settings",
+        "get_environ_proxies",
+        "set_environ",
+        "default_user_agent"
+      ]
+    },
+    {
+      "id": "AUTO_087",
+      "category": "auto_generated",
+      "query": "我在请求某个链接时，想根据代理配置自动选择合适的代理。",
+      "expected_file": "requests/utils.py",
+      "expected_function": "select_proxy",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "select_proxy",
+        "proxy_manager_for",
+        "get_adapter",
+        "_urllib3_request_context",
+        "__setstate__"
+      ]
+    },
+    {
+      "id": "AUTO_088",
+      "category": "auto_generated",
+      "query": "如何在请求中根据NO_PROXY设置自动排除不需要代理的地址？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "resolve_proxies",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "resolve_proxies",
+        "should_bypass_proxies",
+        "rebuild_proxies",
+        "get_environ_proxies",
+        "select_proxy"
+      ]
+    },
+    {
+      "id": "AUTO_089",
+      "category": "auto_generated",
+      "query": "怎么查看Python的requests库默认发送的用户代理字符串是什么？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "default_user_agent",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "default_user_agent",
+        "proxy_headers",
+        "__init__",
+        "_urllib3_request_context",
+        "proxy_manager_for"
+      ]
+    },
+    {
+      "id": "AUTO_090",
+      "category": "auto_generated",
+      "query": "如何在Python中获取Requests库默认请求头的不区分大小写的字典格式？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "default_headers",
+      "hit_rank": null,
+      "r1": 0,
+      "r3": 0,
+      "r5": 0,
+      "mrr": 0.0,
+      "top5": [
+        "get",
+        "get",
+        "get",
+        "__getitem__",
+        "default_hooks"
+      ]
+    },
+    {
+      "id": "AUTO_091",
+      "category": "auto_generated",
+      "query": "如何从HTTP响应头中解析出多个链接及其属性信息？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "parse_header_links",
+      "hit_rank": 5,
+      "r1": 0,
+      "r3": 0,
+      "r5": 1,
+      "mrr": 0.2,
+      "top5": [
+        "links",
+        "getheaders",
+        "info",
+        "MockResponse",
+        "parse_header_links"
+      ]
+    },
+    {
+      "id": "AUTO_092",
+      "category": "auto_generated",
+      "query": "怎么猜测一段文本的JSON编码格式并返回字符串结果",
+      "expected_file": "requests/utils.py",
+      "expected_function": "guess_json_utf",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "guess_json_utf",
+        "json",
+        "text",
+        "get_encoding_from_headers",
+        "apparent_encoding"
+      ]
+    },
+    {
+      "id": "AUTO_093",
+      "category": "auto_generated",
+      "query": "我有个网址可能没写协议头，怎么给它自动加上https？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "prepend_scheme_if_needed",
+      "hit_rank": null,
+      "r1": 0,
+      "r3": 0,
+      "r5": 0,
+      "mrr": 0.0,
+      "top5": [
+        "add_headers",
+        "get_adapter",
+        "cert_verify",
+        "__init__",
+        "proxy_headers"
+      ]
+    },
+    {
+      "id": "AUTO_094",
+      "category": "auto_generated",
+      "query": "我想从带用户名密码的URL中提取出登录信息。",
+      "expected_file": "requests/utils.py",
+      "expected_function": "get_auth_from_url",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "get_auth_from_url",
+        "get_netrc_auth",
+        "urldefragauth",
+        "__init__",
+        "__init__"
+      ]
+    },
+    {
+      "id": "AUTO_095",
+      "category": "auto_generated",
+      "query": "我想检查HTTP请求头中是否含有非法字符或空格。",
+      "expected_file": "requests/utils.py",
+      "expected_function": "check_header_validity",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "check_header_validity",
+        "prepare_headers",
+        "_validate_header_part",
+        "build_digest_header",
+        "has_header"
+      ]
+    },
+    {
+      "id": "AUTO_096",
+      "category": "auto_generated",
+      "query": "怎么去掉网址里的锚点和登录验证信息？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "urldefragauth",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "urldefragauth",
+        "should_strip_auth",
+        "rebuild_auth",
+        "__init__",
+        "rebuild_proxies"
+      ]
+    },
+    {
+      "id": "AUTO_097",
+      "category": "auto_generated",
+      "query": "怎么让请求的文件在重定向时重新从头读取？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "rewind_body",
+      "hit_rank": 1,
+      "r1": 1,
+      "r3": 1,
+      "r5": 1,
+      "mrr": 1.0,
+      "top5": [
+        "rewind_body",
+        "rebuild_method",
+        "head",
+        "resolve_redirects",
+        "rebuild_auth"
+      ]
+    }
+  ]
+}

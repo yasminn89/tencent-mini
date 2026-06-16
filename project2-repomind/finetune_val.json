@@ -1,0 +1,1327 @@
+[
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "构造一个“用户名:密码”这样的身份凭证，就像在网站登录框里填写信息那样，然后把它加到请求头里，这个过程具体是怎么做的？",
+    "output": "在 requests/auth.py 的 _basic_auth_str 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "构造一个“用户名:密码”这样的身份凭证，就像在网站登录框里填写信息那样，然后把它加到请求头里，这个过程具体是怎么做的？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/auth.py 的 _basic_auth_str 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "PARA2_034",
+      "category": "para2_ext_with_doc",
+      "expected_file": "requests/auth.py",
+      "expected_function": "_basic_auth_str"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "如何在反序列化时恢复HTTP适配器的状态？",
+    "output": "在 requests/adapters.py 的 __setstate__ 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "如何在反序列化时恢复HTTP适配器的状态？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/adapters.py 的 __setstate__ 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "EXT_028",
+      "category": "ext_no_doc",
+      "expected_file": "requests/adapters.py",
+      "expected_function": "__setstate__"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "怎么把键值对列表转成有序字典？",
+    "output": "在 requests/utils.py 的 from_key_val_list 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "怎么把键值对列表转成有序字典？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/utils.py 的 from_key_val_list 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "AUTO_066",
+      "category": "auto_generated",
+      "expected_file": "requests/utils.py",
+      "expected_function": "from_key_val_list"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "我有个网址被转义了，怎么才能把它恢复成标准格式？",
+    "output": "在 requests/utils.py 的 requote_uri 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "我有个网址被转义了，怎么才能把它恢复成标准格式？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/utils.py 的 requote_uri 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "AUTO_079",
+      "category": "auto_generated",
+      "expected_file": "requests/utils.py",
+      "expected_function": "requote_uri"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "把超时设成单个数值和设成元组，效果上有什么区别？",
+    "output": "在 requests/adapters.py 的 send 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "把超时设成单个数值和设成元组，效果上有什么区别？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/adapters.py 的 send 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "PARA_048",
+      "category": "para_D_edge",
+      "expected_file": "requests/adapters.py",
+      "expected_function": "send"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "怎样把像{'Content-Type': 'application/json'}这样的配置，变成底层网络请求里一行一行能直接发出去的文本格式？",
+    "output": "在 requests/utils.py 的 dict_to_sequence 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "怎样把像{'Content-Type': 'application/json'}这样的配置，变成底层网络请求里一行一行能直接发出去的文本格式？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/utils.py 的 dict_to_sequence 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "PARA2_000",
+      "category": "para2_auto_generated",
+      "expected_file": "requests/utils.py",
+      "expected_function": "dict_to_sequence"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "怎么通过自定义请求头来构造一个能解析cookiejar的假响应对象",
+    "output": "在 requests/cookies.py 的 __init__ 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "怎么通过自定义请求头来构造一个能解析cookiejar的假响应对象"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/cookies.py 的 __init__ 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "PARA_104",
+      "category": "para_ext_with_doc",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "__init__"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "我在发送请求时服务器超时没有返回数据，该怎么处理这个异常？",
+    "output": "在 requests/exceptions.py 的 ReadTimeout 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "我在发送请求时服务器超时没有返回数据，该怎么处理这个异常？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/exceptions.py 的 ReadTimeout 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "AUTO_042",
+      "category": "auto_generated",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "ReadTimeout"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "当服务器返回的数据不是文本而是二进制文件（比如图片或视频）时，Python 代码要去哪里找到这些原始数据？",
+    "output": "在 requests/models.py 的 content 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "当服务器返回的数据不是文本而是二进制文件（比如图片或视频）时，Python 代码要去哪里找到这些原始数据？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/models.py 的 content 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "PARA2_022",
+      "category": "para2_ext_with_doc",
+      "expected_file": "requests/models.py",
+      "expected_function": "content"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "怎么把请求对象转成可发送的格式？",
+    "output": "在 requests/sessions.py 的 prepare_request 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "怎么把请求对象转成可发送的格式？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/sessions.py 的 prepare_request 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "EXT_009",
+      "category": "ext_with_doc",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "prepare_request"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "在发起请求时，URL里的查询参数是怎么被处理并加进去的？",
+    "output": "在 requests/models.py 的 prepare_url 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "在发起请求时，URL里的查询参数是怎么被处理并加进去的？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/models.py 的 prepare_url 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "PARA_000",
+      "category": "para_A_simple",
+      "expected_file": "requests/models.py",
+      "expected_function": "prepare_url"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "Session的Cookie靠什么机制在连续请求中自行维持？",
+    "output": "涉及调用链：requests/sessions.py → requests/cookies.py → Session → merge_cookies",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "Session的Cookie靠什么机制在连续请求中自行维持？"
+      },
+      {
+        "role": "assistant",
+        "content": "涉及调用链：requests/sessions.py → requests/cookies.py → Session → merge_cookies"
+      }
+    ],
+    "_meta": {
+      "id": "PARA_023",
+      "category": "para_B_cross_file",
+      "expected_file": "requests/sessions.py → requests/cookies.py",
+      "expected_function": "Session → merge_cookies"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "获取唯一匹配的 cookie 值",
+    "output": "在 requests/cookies.py 的 _find_no_duplicates 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "获取唯一匹配的 cookie 值"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/cookies.py 的 _find_no_duplicates 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "EXT_151",
+      "category": "ext_with_doc",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "_find_no_duplicates"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "如何恢复会话对象的状态？",
+    "output": "在 requests/sessions.py 的 __setstate__ 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "如何恢复会话对象的状态？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/sessions.py 的 __setstate__ 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "EXT_022",
+      "category": "ext_no_doc",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "__setstate__"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "我发送请求后长时间没有响应，如何捕获超时相关的异常？",
+    "output": "在 requests/exceptions.py 的 Timeout 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "我发送请求后长时间没有响应，如何捕获超时相关的异常？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/exceptions.py 的 Timeout 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "AUTO_040",
+      "category": "auto_generated",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "Timeout"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "怎么把HTTP响应头里的引号去掉，还原成原始值？",
+    "output": "在 requests/utils.py 的 unquote_header_value 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "怎么把HTTP响应头里的引号去掉，还原成原始值？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/utils.py 的 unquote_header_value 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "AUTO_070",
+      "category": "auto_generated",
+      "expected_file": "requests/utils.py",
+      "expected_function": "unquote_header_value"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "Python requests 里怎样判断一个HTTP请求返回的状态码是正常的（也就是2xx）？",
+    "output": "在 requests/models.py 的 raise_for_status 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "Python requests 里怎样判断一个HTTP请求返回的状态码是正常的（也就是2xx）？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/models.py 的 raise_for_status 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "PARA_013",
+      "category": "para_A_simple",
+      "expected_file": "requests/models.py",
+      "expected_function": "raise_for_status"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "如何设置HTTP请求的身份认证信息？",
+    "output": "在 requests/auth.py 的 __init__ 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "如何设置HTTP请求的身份认证信息？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/auth.py 的 __init__ 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "EXT_099",
+      "category": "ext_no_doc",
+      "expected_file": "requests/auth.py",
+      "expected_function": "__init__"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "如何保存当前会话的状态以便后续恢复？",
+    "output": "在 requests/sessions.py 的 __getstate__ 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "如何保存当前会话的状态以便后续恢复？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/sessions.py 的 __getstate__ 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "EXT_021",
+      "category": "ext_no_doc",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "__getstate__"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "Session的mount机制是如何决定用哪个adapter处理请求的？",
+    "output": "在 requests/sessions.py 的 get_adapter 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "Session的mount机制是如何决定用哪个adapter处理请求的？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/sessions.py 的 get_adapter 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "B13",
+      "category": "B_cross_file",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "get_adapter"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "获取重定向链中的下一个请求",
+    "output": "在 requests/models.py 的 next 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "获取重定向链中的下一个请求"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/models.py 的 next 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "EXT_077",
+      "category": "ext_with_doc",
+      "expected_file": "requests/models.py",
+      "expected_function": "next"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "如何让一个认证对象像函数一样被调用？",
+    "output": "在 requests/auth.py 的 __call__ 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "如何让一个认证对象像函数一样被调用？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/auth.py 的 __call__ 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "EXT_097",
+      "category": "ext_no_doc",
+      "expected_file": "requests/auth.py",
+      "expected_function": "__call__"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "用Morsel对象怎样得到一个只含一对键和值的Cookie？",
+    "output": "在 requests/cookies.py 的 morsel_to_cookie 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "用Morsel对象怎样得到一个只含一对键和值的Cookie？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/cookies.py 的 morsel_to_cookie 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "PARA_062",
+      "category": "para_auto_generated",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "morsel_to_cookie"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "查看某个键是否在cookie中",
+    "output": "在 requests/cookies.py 的 __contains__ 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "查看某个键是否在cookie中"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/cookies.py 的 __contains__ 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "EXT_144",
+      "category": "ext_no_doc",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "__contains__"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "检查HTTP响应是否成功怎么判断",
+    "output": "在 requests/models.py 的 __bool__ 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "检查HTTP响应是否成功怎么判断"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/models.py 的 __bool__ 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "EXT_071",
+      "category": "ext_with_doc",
+      "expected_file": "requests/models.py",
+      "expected_function": "__bool__"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "如何复制一个cookie容器对象？",
+    "output": "在 requests/cookies.py 的 _copy_cookie_jar 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "如何复制一个cookie容器对象？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/cookies.py 的 _copy_cookie_jar 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "EXT_113",
+      "category": "ext_no_doc",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "_copy_cookie_jar"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "requests库本身有没有实现异步请求？",
+    "output": "requests 不支持该功能。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "requests库本身有没有实现异步请求？"
+      },
+      {
+        "role": "assistant",
+        "content": "requests 不支持该功能。"
+      }
+    ],
+    "_meta": {
+      "id": "D06",
+      "category": "D_edge",
+      "expected_file": "N/A",
+      "expected_function": "N/A"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "如何检查HTTP响应是否成功（2xx状态码）？",
+    "output": "在 requests/models.py 的 raise_for_status 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "如何检查HTTP响应是否成功（2xx状态码）？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/models.py 的 raise_for_status 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "A14",
+      "category": "A_simple",
+      "expected_file": "requests/models.py",
+      "expected_function": "raise_for_status"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "怎样根据索引来获取自定义结构中的数据？",
+    "output": "在 requests/structures.py 的 __getitem__ 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "怎样根据索引来获取自定义结构中的数据？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/structures.py 的 __getitem__ 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "PARA_124",
+      "category": "para_ext_no_doc",
+      "expected_file": "requests/structures.py",
+      "expected_function": "__getitem__"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "在 Python 的 requests 库中，要实现登录状态的保持，该调用哪个方法或特性？",
+    "output": "在 requests/sessions.py 的 Session 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "在 Python 的 requests 库中，要实现登录状态的保持，该调用哪个方法或特性？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/sessions.py 的 Session 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "PARA_030",
+      "category": "para_C_fuzzy",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "Session"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "认证对象在判断身份时，用的是哪种“认人”标准？",
+    "output": "在 requests/auth.py 的 __eq__ 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "认证对象在判断身份时，用的是哪种“认人”标准？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/auth.py 的 __eq__ 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "PARA2_019",
+      "category": "para2_ext_no_doc",
+      "expected_file": "requests/auth.py",
+      "expected_function": "__eq__"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "如何初始化一个自定义的HTTP适配器？",
+    "output": "在 requests/adapters.py 的 __init__ 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "如何初始化一个自定义的HTTP适配器？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/adapters.py 的 __init__ 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "EXT_026",
+      "category": "ext_no_doc",
+      "expected_file": "requests/adapters.py",
+      "expected_function": "__init__"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "为什么读取响应内容时报错说数据已经被消费了？",
+    "output": "在 requests/exceptions.py 的 StreamConsumedError 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "为什么读取响应内容时报错说数据已经被消费了？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/exceptions.py 的 StreamConsumedError 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "AUTO_052",
+      "category": "auto_generated",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "StreamConsumedError"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "怎样把一个会话对象的状态重新设置回去",
+    "output": "在 requests/sessions.py 的 __setstate__ 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "怎样把一个会话对象的状态重新设置回去"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/sessions.py 的 __setstate__ 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "PARA_119",
+      "category": "para_ext_no_doc",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "__setstate__"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "怎么把HTTP响应的cookie提取并保存到指定的cookie容器里？",
+    "output": "在 requests/cookies.py 的 extract_cookies_to_jar 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "怎么把HTTP响应的cookie提取并保存到指定的cookie容器里？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/cookies.py 的 extract_cookies_to_jar 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "AUTO_024",
+      "category": "auto_generated",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "extract_cookies_to_jar"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "关闭所有适配器并结束会话",
+    "output": "在 requests/sessions.py 的 close 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "关闭所有适配器并结束会话"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/sessions.py 的 close 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "EXT_019",
+      "category": "ext_with_doc",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "close"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "我在请求某个链接时，想根据代理配置自动选择合适的代理。",
+    "output": "在 requests/utils.py 的 select_proxy 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "我在请求某个链接时，想根据代理配置自动选择合适的代理。"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/utils.py 的 select_proxy 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "AUTO_087",
+      "category": "auto_generated",
+      "expected_file": "requests/utils.py",
+      "expected_function": "select_proxy"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "如何初始化一个认证器对象？",
+    "output": "在 requests/auth.py 的 __init__ 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "如何初始化一个认证器对象？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/auth.py 的 __init__ 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "EXT_098",
+      "category": "ext_no_doc",
+      "expected_file": "requests/auth.py",
+      "expected_function": "__init__"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "怎么根据指定长度把字符串切成小段，然后一段一段地操作",
+    "output": "在 requests/utils.py 的 iter_slices 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "怎么根据指定长度把字符串切成小段，然后一段一段地操作"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/utils.py 的 iter_slices 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "PARA_080",
+      "category": "para_auto_generated",
+      "expected_file": "requests/utils.py",
+      "expected_function": "iter_slices"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "怎么给每个请求都加上同样的请求头，比如API key？",
+    "output": "在 requests/sessions.py 的 Session 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "怎么给每个请求都加上同样的请求头，比如API key？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/sessions.py 的 Session 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "C06",
+      "category": "C_fuzzy",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "Session"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "怎么让Requests的CookieJar支持pickle序列化",
+    "output": "在 requests/cookies.py 的 __setstate__ 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "怎么让Requests的CookieJar支持pickle序列化"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/cookies.py 的 __setstate__ 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "EXT_153",
+      "category": "ext_with_doc",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "__setstate__"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "用代理发请求总报代理错误是咋回事",
+    "output": "在 requests/exceptions.py 的 ProxyError 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "用代理发请求总报代理错误是咋回事"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/exceptions.py 的 ProxyError 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "PARA_053",
+      "category": "para_auto_generated",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "ProxyError"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "如何创建一个能用来发送请求的请求对象",
+    "output": "在 requests/models.py 的 prepare 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "如何创建一个能用来发送请求的请求对象"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/models.py 的 prepare 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "PARA_106",
+      "category": "para_ext_with_doc",
+      "expected_file": "requests/models.py",
+      "expected_function": "prepare"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "如何用Python发送一个GET请求到指定网址？",
+    "output": "在 requests/api.py 的 request 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "如何用Python发送一个GET请求到指定网址？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/api.py 的 request 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "AUTO_001",
+      "category": "auto_generated",
+      "expected_file": "requests/api.py",
+      "expected_function": "request"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "SSL证书验证是在哪个环节、哪些文件里处理的？",
+    "output": "涉及调用链：requests/adapters.py → requests/utils.py → send → get_environ_proxies",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "SSL证书验证是在哪个环节、哪些文件里处理的？"
+      },
+      {
+        "role": "assistant",
+        "content": "涉及调用链：requests/adapters.py → requests/utils.py → send → get_environ_proxies"
+      }
+    ],
+    "_meta": {
+      "id": "B03",
+      "category": "B_cross_file",
+      "expected_file": "requests/adapters.py → requests/utils.py",
+      "expected_function": "send → get_environ_proxies"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "如何让请求记住登录状态？",
+    "output": "在 requests/cookies.py 的 set_cookie 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "如何让请求记住登录状态？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/cookies.py 的 set_cookie 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "EXT_148",
+      "category": "ext_no_doc",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "set_cookie"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "hooks 参数该怎么预处理",
+    "output": "在 requests/models.py 的 prepare_hooks 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "hooks 参数该怎么预处理"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/models.py 的 prepare_hooks 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "EXT_064",
+      "category": "ext_with_doc",
+      "expected_file": "requests/models.py",
+      "expected_function": "prepare_hooks"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "Python requests库中，SSL证书的校验是在什么阶段、通过哪些文件来完成的？",
+    "output": "涉及调用链：requests/adapters.py → requests/utils.py → send → get_environ_proxies",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "Python requests库中，SSL证书的校验是在什么阶段、通过哪些文件来完成的？"
+      },
+      {
+        "role": "assistant",
+        "content": "涉及调用链：requests/adapters.py → requests/utils.py → send → get_environ_proxies"
+      }
+    ],
+    "_meta": {
+      "id": "PARA_029",
+      "category": "para_B_cross_file",
+      "expected_file": "requests/adapters.py → requests/utils.py",
+      "expected_function": "send → get_environ_proxies"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "如何判断一个IP地址在不在我指定的子网里，用哪个方法？",
+    "output": "在 requests/utils.py 的 address_in_network 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "如何判断一个IP地址在不在我指定的子网里，用哪个方法？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/utils.py 的 address_in_network 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "PARA_055",
+      "category": "para_auto_generated",
+      "expected_file": "requests/utils.py",
+      "expected_function": "address_in_network"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "怎么删除之前注册的钩子函数",
+    "output": "在 requests/models.py 的 deregister_hook 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "怎么删除之前注册的钩子函数"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/models.py 的 deregister_hook 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "EXT_051",
+      "category": "ext_with_doc",
+      "expected_file": "requests/models.py",
+      "expected_function": "deregister_hook"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "怎样获取CookieJar里所有cookie的名称",
+    "output": "在 requests/cookies.py 的 keys 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "怎样获取CookieJar里所有cookie的名称"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/cookies.py 的 keys 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "EXT_134",
+      "category": "ext_with_doc",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "keys"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "如何把响应内容解析成JSON格式？",
+    "output": "在 requests/models.py 的 json 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "如何把响应内容解析成JSON格式？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/models.py 的 json 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "A09",
+      "category": "A_simple",
+      "expected_file": "requests/models.py",
+      "expected_function": "json"
+    }
+  },
+  {
+    "instruction": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释",
+    "input": "怎么从netrc文件里获取某个网址的登录认证信息？",
+    "output": "在 requests/utils.py 的 get_netrc_auth 中实现。",
+    "messages": [
+      {
+        "role": "system",
+        "content": "你是 psf/requests 库源码检索专家。请根据用户的自然语言查询，定位到 requests 库中具体的文件和函数/类。\n\n输出格式：\n- 明确给出文件名（格式 requests/xxx.py）\n- 明确给出函数名或类名\n- 简洁回答，不要冗长解释"
+      },
+      {
+        "role": "user",
+        "content": "怎么从netrc文件里获取某个网址的登录认证信息？"
+      },
+      {
+        "role": "assistant",
+        "content": "在 requests/utils.py 的 get_netrc_auth 中实现。"
+      }
+    ],
+    "_meta": {
+      "id": "AUTO_062",
+      "category": "auto_generated",
+      "expected_file": "requests/utils.py",
+      "expected_function": "get_netrc_auth"
+    }
+  }
+]

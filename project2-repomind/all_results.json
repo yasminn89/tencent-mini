@@ -1,0 +1,1337 @@
+{
+  "summary": {
+    "percentage": 77.2,
+    "by_category": {
+      "A_simple": 73.3,
+      "B_cross_file": 80.0,
+      "C_fuzzy": 54.2,
+      "D_edge": 56.2,
+      "auto_generated": 82.0
+    }
+  },
+  "details": [
+    {
+      "id": "A01",
+      "category": "A_simple",
+      "query": "requests库里发送GET请求的核心函数在哪里？",
+      "expected_file": "requests/api.py",
+      "expected_function": "get",
+      "score": 2,
+      "response": "在 requests/api.py 的 get 中实现。"
+    },
+    {
+      "id": "A02",
+      "category": "A_simple",
+      "query": "如何在requests中设置请求超时时间？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "request",
+      "score": 0,
+      "response": "在 requests/adapters.py 的 HTTPAdapter 中实现。"
+    },
+    {
+      "id": "A03",
+      "category": "A_simple",
+      "query": "POST请求的实现函数是什么？",
+      "expected_file": "requests/api.py",
+      "expected_function": "post",
+      "score": 2,
+      "response": "在 requests/api.py 的 post 中实现。"
+    },
+    {
+      "id": "A04",
+      "category": "A_simple",
+      "query": "请求响应的状态码在哪个类里存储？",
+      "expected_file": "requests/models.py",
+      "expected_function": "Response",
+      "score": 2,
+      "response": "在 requests/models.py 的 Response 中实现。"
+    },
+    {
+      "id": "A05",
+      "category": "A_simple",
+      "query": "如何获取响应体的文本内容？",
+      "expected_file": "requests/models.py",
+      "expected_function": "text",
+      "score": 2,
+      "response": "在 requests/models.py 的 text 中实现。"
+    },
+    {
+      "id": "A06",
+      "category": "A_simple",
+      "query": "HTTP Basic Auth认证是怎么实现的？",
+      "expected_file": "requests/auth.py",
+      "expected_function": "HTTPBasicAuth",
+      "score": 2,
+      "response": "在 requests/auth.py 的 HTTPBasicAuth 中实现。"
+    },
+    {
+      "id": "A07",
+      "category": "A_simple",
+      "query": "请求头Headers是在哪里被设置的？",
+      "expected_file": "requests/models.py",
+      "expected_function": "prepare_headers",
+      "score": 2,
+      "response": "在 requests/models.py 的 prepare_headers 中实现。"
+    },
+    {
+      "id": "A08",
+      "category": "A_simple",
+      "query": "Cookie是如何被处理和存储的？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "RequestsCookieJar",
+      "score": 1,
+      "response": "在 requests/cookies.py 的 merge_cookies 中实现。"
+    },
+    {
+      "id": "A09",
+      "category": "A_simple",
+      "query": "如何把响应内容解析成JSON格式？",
+      "expected_file": "requests/models.py",
+      "expected_function": "json",
+      "score": 2,
+      "response": "在 requests/models.py 的 json 中实现。"
+    },
+    {
+      "id": "A10",
+      "category": "A_simple",
+      "query": "Session对象是在哪里定义的？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "Session",
+      "score": 2,
+      "response": "在 requests/sessions.py 的 Session 中定义。"
+    },
+    {
+      "id": "A11",
+      "category": "A_simple",
+      "query": "URL参数是如何编码和拼接到请求里的？",
+      "expected_file": "requests/models.py",
+      "expected_function": "prepare_url",
+      "score": 1,
+      "response": "在 requests/models.py 的 RequestEncodingMixin 中实现。"
+    },
+    {
+      "id": "A12",
+      "category": "A_simple",
+      "query": "怎么上传文件（multipart/form-data）？",
+      "expected_file": "requests/models.py",
+      "expected_function": "prepare_body",
+      "score": 1,
+      "response": "在 requests/models.py 的 _encode_files 中实现。"
+    },
+    {
+      "id": "A13",
+      "category": "A_simple",
+      "query": "DELETE请求的函数实现在哪？",
+      "expected_file": "requests/api.py",
+      "expected_function": "delete",
+      "score": 2,
+      "response": "在 requests/api.py 的 delete 中实现。"
+    },
+    {
+      "id": "A14",
+      "category": "A_simple",
+      "query": "如何检查HTTP响应是否成功（2xx状态码）？",
+      "expected_file": "requests/models.py",
+      "expected_function": "raise_for_status",
+      "score": 1,
+      "response": "在 requests/models.py 的 Response 中实现。"
+    },
+    {
+      "id": "A15",
+      "category": "A_simple",
+      "query": "代理设置是在哪里被应用到请求里的？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "rebuild_proxies",
+      "score": 0,
+      "response": "在 requests/adapters.py 的 proxy_headers 中实现。"
+    },
+    {
+      "id": "B01",
+      "category": "B_cross_file",
+      "query": "当我调用requests.get()时，底层完整的调用链是什么？",
+      "expected_file": "requests/api.py → requests/sessions.py",
+      "expected_function": "get → request → send",
+      "score": 2,
+      "response": "在 requests/sessions.py 的 get 中实现。"
+    },
+    {
+      "id": "B02",
+      "category": "B_cross_file",
+      "query": "HTTP连接池是如何被Session管理的？",
+      "expected_file": "requests/sessions.py → requests/adapters.py",
+      "expected_function": "HTTPAdapter → get_connection",
+      "score": 1,
+      "response": "在 requests/sessions.py 的 Session 中实现。"
+    },
+    {
+      "id": "B03",
+      "category": "B_cross_file",
+      "query": "SSL证书验证是在哪个环节、哪些文件里处理的？",
+      "expected_file": "requests/adapters.py → requests/utils.py",
+      "expected_function": "send → get_environ_proxies",
+      "score": 1,
+      "response": "在 requests/adapters.py 的 cert_verify 中实现。"
+    },
+    {
+      "id": "B04",
+      "category": "B_cross_file",
+      "query": "请求重定向是怎么被检测和处理的？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "resolve_redirects",
+      "score": 2,
+      "response": "在 requests/sessions.py 的 resolve_redirects 中实现。"
+    },
+    {
+      "id": "B05",
+      "category": "B_cross_file",
+      "query": "PreparedRequest和Request这两个类有什么关系？",
+      "expected_file": "requests/models.py",
+      "expected_function": "Request.prepare → PreparedRequest",
+      "score": 2,
+      "response": "在 requests/models.py 的 PreparedRequest 和 Request 中，PreparedRequest 是 Request 的子类。"
+    },
+    {
+      "id": "B06",
+      "category": "B_cross_file",
+      "query": "Session的Cookie是如何在多次请求之间自动保持的？",
+      "expected_file": "requests/sessions.py → requests/cookies.py",
+      "expected_function": "Session → merge_cookies",
+      "score": 2,
+      "response": "涉及调用链：requests/sessions.py → Session → prepare_request → merge_cookies → requests/cookies.py → merge_cookies"
+    },
+    {
+      "id": "B07",
+      "category": "B_cross_file",
+      "query": "HTTPDigestAuth的工作原理是什么，涉及哪些文件？",
+      "expected_file": "requests/auth.py",
+      "expected_function": "HTTPDigestAuth",
+      "score": 2,
+      "response": "在 requests/auth.py 的 HTTPDigestAuth 中实现。"
+    },
+    {
+      "id": "B08",
+      "category": "B_cross_file",
+      "query": "异常体系是怎么组织的，ConnectionError和Timeout是什么关系？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "ConnectionError, Timeout",
+      "score": 2,
+      "response": "在 requests/exceptions.py 的 ConnectionError 和 Timeout 之间建立关联。"
+    },
+    {
+      "id": "B09",
+      "category": "B_cross_file",
+      "query": "请求体（body）从用户传入data参数到最终发出经过哪些处理步骤？",
+      "expected_file": "requests/models.py → requests/adapters.py",
+      "expected_function": "prepare_body → send",
+      "score": 2,
+      "response": "在 requests/models.py 的 prepare_body 中实现。"
+    },
+    {
+      "id": "B10",
+      "category": "B_cross_file",
+      "query": "环境变量（如HTTP_PROXY）是如何被requests自动读取并应用的？",
+      "expected_file": "requests/utils.py → requests/sessions.py",
+      "expected_function": "get_environ_proxies → merge_environment_settings",
+      "score": 2,
+      "response": "在 requests/utils.py 的 get_environ_proxies 中实现。"
+    },
+    {
+      "id": "B11",
+      "category": "B_cross_file",
+      "query": "HTTPAdapter是如何与urllib3交互来实际发送HTTP请求的？",
+      "expected_file": "requests/adapters.py",
+      "expected_function": "HTTPAdapter.send",
+      "score": 2,
+      "response": "在 requests/adapters.py 的 HTTPAdapter 中实现。"
+    },
+    {
+      "id": "B12",
+      "category": "B_cross_file",
+      "query": "响应内容的字符编码是如何自动检测的？",
+      "expected_file": "requests/models.py → requests/utils.py",
+      "expected_function": "Response.text → get_encoding_from_headers",
+      "score": 1,
+      "response": "在 requests/models.py 的 CharsetNormalizer 中实现。"
+    },
+    {
+      "id": "B13",
+      "category": "B_cross_file",
+      "query": "Session的mount机制是如何决定用哪个adapter处理请求的？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "get_adapter",
+      "score": 1,
+      "response": "在 requests/sessions.py 的 mount 中实现。"
+    },
+    {
+      "id": "B14",
+      "category": "B_cross_file",
+      "query": "钩子（hooks）系统是如何实现的，response钩子在哪里被触发？",
+      "expected_file": "requests/models.py → requests/sessions.py → requests/hooks.py",
+      "expected_function": "dispatch_hook",
+      "score": 1,
+      "response": "在 requests/hooks.py 的 dispatch_hook 中实现。"
+    },
+    {
+      "id": "B15",
+      "category": "B_cross_file",
+      "query": "流式响应（stream=True）和普通响应在处理上有什么区别？",
+      "expected_file": "requests/models.py → requests/adapters.py",
+      "expected_function": "iter_content, Response",
+      "score": 1,
+      "response": "涉及的文件和函数：\n\n- 明确给出文件名：requests/models.py → iter_lines\n- 明确给出函数名：requests/models.py → iter_lines"
+    },
+    {
+      "id": "C01",
+      "category": "C_fuzzy",
+      "query": "我想让requests记住我登录的状态，用哪个功能？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "Session",
+      "score": 2,
+      "response": "在 requests/sessions.py 的 __getstate__ 中实现。"
+    },
+    {
+      "id": "C02",
+      "category": "C_fuzzy",
+      "query": "网络请求卡住了怎么让它自动停止？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "request",
+      "score": 2,
+      "response": "在 requests/sessions.py 的 __exit__ 中实现。"
+    },
+    {
+      "id": "C03",
+      "category": "C_fuzzy",
+      "query": "怎么让所有请求都走代理服务器？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "Session.request / proxies",
+      "score": 0,
+      "response": "在 requests/adapters.py 的 proxy_manager_for 中实现。"
+    },
+    {
+      "id": "C04",
+      "category": "C_fuzzy",
+      "query": "服务器返回的数据我想一边下载一边处理，不想等全部下完",
+      "expected_file": "requests/models.py",
+      "expected_function": "iter_content / iter_lines",
+      "score": 2,
+      "response": "在 requests/models.py 的 iter_content 中实现。"
+    },
+    {
+      "id": "C05",
+      "category": "C_fuzzy",
+      "query": "我不想让requests自动跳转到新地址",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "request / resolve_redirects",
+      "score": 1,
+      "response": "在 requests/sessions.py 的 should_strip_auth 中实现。"
+    },
+    {
+      "id": "C06",
+      "category": "C_fuzzy",
+      "query": "怎么给每个请求都加上同样的请求头，比如API key？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "Session",
+      "score": 0,
+      "response": "在 requests/models.py 的 prepare 中实现。"
+    },
+    {
+      "id": "C07",
+      "category": "C_fuzzy",
+      "query": "请求失败的时候能不能自动重试？",
+      "expected_file": "requests/adapters.py",
+      "expected_function": "HTTPAdapter",
+      "score": 0,
+      "response": "在 requests/exceptions.py 的 RetryError 中实现。"
+    },
+    {
+      "id": "C08",
+      "category": "C_fuzzy",
+      "query": "发送JSON数据和发送表单数据有什么区别？",
+      "expected_file": "requests/models.py",
+      "expected_function": "prepare_body",
+      "score": 2,
+      "response": "在 requests/models.py 的 PreparedRequest.prepare_body 中实现。"
+    },
+    {
+      "id": "C09",
+      "category": "C_fuzzy",
+      "query": "能不能让requests忽略HTTPS证书错误？",
+      "expected_file": "requests/adapters.py",
+      "expected_function": "send",
+      "score": 1,
+      "response": "在 requests/adapters.py 的 cert_verify 中实现。"
+    },
+    {
+      "id": "C10",
+      "category": "C_fuzzy",
+      "query": "我想在每次请求发出前做点处理，有没有钩子之类的机制？",
+      "expected_file": "requests/hooks.py → requests/models.py",
+      "expected_function": "dispatch_hook",
+      "score": 1,
+      "response": "涉及调用链：requests/models.py → PreparedRequest → prepare_hooks"
+    },
+    {
+      "id": "C11",
+      "category": "C_fuzzy",
+      "query": "服务器不接受我的请求，说认证失败，requests怎么处理这种情况？",
+      "expected_file": "requests/auth.py → requests/sessions.py",
+      "expected_function": "HTTPDigestAuth.handle_401",
+      "score": 1,
+      "response": "在 requests/auth.py 的 HTTPAdapter 中实现。"
+    },
+    {
+      "id": "C12",
+      "category": "C_fuzzy",
+      "query": "怎么知道我的请求最终被重定向了多少次？",
+      "expected_file": "requests/models.py → requests/sessions.py",
+      "expected_function": "Response.history",
+      "score": 1,
+      "response": "在 requests/sessions.py 的 resolve_redirects 中实现。"
+    },
+    {
+      "id": "D01",
+      "category": "D_edge",
+      "query": "requests.get和Session.get有什么区别？",
+      "expected_file": "requests/api.py vs requests/sessions.py",
+      "expected_function": "api.get vs Session.get",
+      "score": 2,
+      "response": "在 requests/sessions.py 的 get 中实现。"
+    },
+    {
+      "id": "D02",
+      "category": "D_edge",
+      "query": "timeout参数设成一个数字和设成元组有什么不同？",
+      "expected_file": "requests/adapters.py",
+      "expected_function": "send",
+      "score": 0,
+      "response": "在 requests/exceptions.py 的 Timeout 中实现。"
+    },
+    {
+      "id": "D03",
+      "category": "D_edge",
+      "query": "requests.compat模块是做什么的？",
+      "expected_file": "requests/compat.py",
+      "expected_function": "compat",
+      "score": 2,
+      "response": "在 requests/compat.py 的 __init__ 中实现。"
+    },
+    {
+      "id": "D04",
+      "category": "D_edge",
+      "query": "CaseInsensitiveDict是什么，为什么HTTP头要用它？",
+      "expected_file": "requests/structures.py",
+      "expected_function": "CaseInsensitiveDict",
+      "score": 2,
+      "response": "在 requests/structures.py 的 CaseInsensitiveDict 中实现。"
+    },
+    {
+      "id": "D05",
+      "category": "D_edge",
+      "query": "如果我问requests怎么做WebSocket连接，它支持吗？",
+      "expected_file": "N/A",
+      "expected_function": "N/A",
+      "score": 0,
+      "response": "在 requests/models.py 的 WebSocketResponse 中实现。"
+    },
+    {
+      "id": "D06",
+      "category": "D_edge",
+      "query": "requests库本身有没有实现异步请求？",
+      "expected_file": "N/A",
+      "expected_function": "N/A",
+      "score": 0,
+      "response": "在 requests/models.py 的 __await__ 中实现。"
+    },
+    {
+      "id": "D07",
+      "category": "D_edge",
+      "query": "PreparedRequest的prepare方法和Session.prepare_request有什么关系？",
+      "expected_file": "requests/models.py vs requests/sessions.py",
+      "expected_function": "PreparedRequest.prepare vs Session.prepare_request",
+      "score": 2,
+      "response": "在 requests/models.py 的 PreparedRequest.prepare 中实现。"
+    },
+    {
+      "id": "D08",
+      "category": "D_edge",
+      "query": "发送请求时data参数传了一个生成器（generator）会发生什么？",
+      "expected_file": "requests/models.py",
+      "expected_function": "prepare_body",
+      "score": 1,
+      "response": "在 requests/models.py 的 prepare 中实现。"
+    },
+    {
+      "id": "AUTO_001",
+      "category": "auto_generated",
+      "query": "如何用Python发送一个GET请求到指定网址？",
+      "expected_file": "requests/api.py",
+      "expected_function": "request",
+      "score": 2,
+      "response": "在 requests/api.py 的 get 中实现。"
+    },
+    {
+      "id": "AUTO_002",
+      "category": "auto_generated",
+      "query": "我想从某个网址获取数据，并带上一些查询参数。",
+      "expected_file": "requests/api.py",
+      "expected_function": "get",
+      "score": 2,
+      "response": "在 requests/api.py 的 get 中实现。"
+    },
+    {
+      "id": "AUTO_003",
+      "category": "auto_generated",
+      "query": "我想查看某个网址支持哪些HTTP请求方法，怎么查？",
+      "expected_file": "requests/api.py",
+      "expected_function": "options",
+      "score": 0,
+      "response": "在 requests/models.py 的 methods 中实现。"
+    },
+    {
+      "id": "AUTO_004",
+      "category": "auto_generated",
+      "query": "我想用Python发送一个HTTP HEAD请求，该怎么写代码？",
+      "expected_file": "requests/api.py",
+      "expected_function": "head",
+      "score": 2,
+      "response": "在 requests/api.py 的 head 中实现。"
+    },
+    {
+      "id": "AUTO_005",
+      "category": "auto_generated",
+      "query": "我想用Python发送一个POST请求，该怎么做？",
+      "expected_file": "requests/api.py",
+      "expected_function": "post",
+      "score": 2,
+      "response": "在 requests/api.py 的 post 中实现。"
+    },
+    {
+      "id": "AUTO_006",
+      "category": "auto_generated",
+      "query": "我想用HTTP的PUT方法向某个URL发送数据，该怎么做？",
+      "expected_file": "requests/api.py",
+      "expected_function": "put",
+      "score": 2,
+      "response": "在 requests/api.py 的 put 中实现。"
+    },
+    {
+      "id": "AUTO_007",
+      "category": "auto_generated",
+      "query": "我想用PATCH方法更新服务器上的资源数据，该怎么做？",
+      "expected_file": "requests/api.py",
+      "expected_function": "patch",
+      "score": 1,
+      "response": "在 requests/sessions.py 的 patch 中实现。"
+    },
+    {
+      "id": "AUTO_008",
+      "category": "auto_generated",
+      "query": "怎么用Python发送一个HTTP DELETE请求并获取响应？",
+      "expected_file": "requests/api.py",
+      "expected_function": "delete",
+      "score": 2,
+      "response": "在 requests/api.py 的 delete 中实现。"
+    },
+    {
+      "id": "AUTO_009",
+      "category": "auto_generated",
+      "query": "我想用Python发送一个HTTP请求到指定网址该怎么写",
+      "expected_file": "requests/models.py",
+      "expected_function": "Request",
+      "score": 0,
+      "response": "在 requests/api.py 的 request 中实现。"
+    },
+    {
+      "id": "AUTO_010",
+      "category": "auto_generated",
+      "query": "我想修改一个即将发送的HTTP请求的原始字节内容，该怎么做？",
+      "expected_file": "requests/models.py",
+      "expected_function": "PreparedRequest",
+      "score": 1,
+      "response": "在 requests/models.py 的 prepare_content_length 中实现。"
+    },
+    {
+      "id": "AUTO_011",
+      "category": "auto_generated",
+      "query": "如何获取HTTP请求返回的响应对象中的内容？",
+      "expected_file": "requests/models.py",
+      "expected_function": "Response",
+      "score": 1,
+      "response": "在 requests/models.py 的 content 中实现。"
+    },
+    {
+      "id": "AUTO_012",
+      "category": "auto_generated",
+      "query": "我想合并请求中的字典参数和会话中的默认设置，该怎么做？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "merge_setting",
+      "score": 1,
+      "response": "在 requests/structures.py 的 merge_setting 中实现。"
+    },
+    {
+      "id": "AUTO_013",
+      "category": "auto_generated",
+      "query": "我在使用requests库时，钩子函数合并后失效了怎么办？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "merge_hooks",
+      "score": 1,
+      "response": "在 requests/hooks.py 的 merge_hooks 中实现。"
+    },
+    {
+      "id": "AUTO_014",
+      "category": "auto_generated",
+      "query": "我想用Python爬取网页时保持登录状态和cookie，应该怎么做？",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "Session",
+      "score": 2,
+      "response": "在 requests/sessions.py 的 Session 中实现。"
+    },
+    {
+      "id": "AUTO_015",
+      "category": "auto_generated",
+      "query": "如何使用Python的requests库创建可自动关闭的会话对象",
+      "expected_file": "requests/sessions.py",
+      "expected_function": "session",
+      "score": 2,
+      "response": "在 requests/sessions.py 的 session 中实现。"
+    },
+    {
+      "id": "AUTO_016",
+      "category": "auto_generated",
+      "query": "我想了解requests库中基础传输适配器的作用是什么。",
+      "expected_file": "requests/adapters.py",
+      "expected_function": "BaseAdapter",
+      "score": 2,
+      "response": "在 requests/adapters.py 的 BaseAdapter 中实现。"
+    },
+    {
+      "id": "AUTO_017",
+      "category": "auto_generated",
+      "query": "在Python的requests库中，如何设置默认的HTTP适配器来处理请求？",
+      "expected_file": "requests/adapters.py",
+      "expected_function": "HTTPAdapter",
+      "score": 2,
+      "response": "涉及调用链：requests/adapters.py → HTTPAdapter → set_default_adapter"
+    },
+    {
+      "id": "AUTO_018",
+      "category": "auto_generated",
+      "query": "我想了解requests库中认证功能的基础类是怎么用的。",
+      "expected_file": "requests/auth.py",
+      "expected_function": "AuthBase",
+      "score": 2,
+      "response": "在 requests/auth.py 的 AuthBase 中实现。"
+    },
+    {
+      "id": "AUTO_019",
+      "category": "auto_generated",
+      "query": "怎么用Python的requests库给HTTP请求添加基本的用户名密码认证？",
+      "expected_file": "requests/auth.py",
+      "expected_function": "HTTPBasicAuth",
+      "score": 2,
+      "response": "在 requests/auth.py 的 HTTPBasicAuth 中实现。"
+    },
+    {
+      "id": "AUTO_020",
+      "category": "auto_generated",
+      "query": "如何在发送HTTP请求时添加代理认证信息来访问受限资源？",
+      "expected_file": "requests/auth.py",
+      "expected_function": "HTTPProxyAuth",
+      "score": 0,
+      "response": "涉及的文件和函数："
+    },
+    {
+      "id": "AUTO_021",
+      "category": "auto_generated",
+      "query": "如何在Python的Requests库中启用HTTP摘要认证来发送请求？",
+      "expected_file": "requests/auth.py",
+      "expected_function": "HTTPDigestAuth",
+      "score": 2,
+      "response": "在 requests/auth.py 的 HTTPDigestAuth 中实现。"
+    },
+    {
+      "id": "AUTO_022",
+      "category": "auto_generated",
+      "query": "我想模拟一个urllib2请求对象，用来测试cookie策略怎么办？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "MockRequest",
+      "score": 2,
+      "response": "在 requests/cookies.py 的 MockRequest 中实现。"
+    },
+    {
+      "id": "AUTO_023",
+      "category": "auto_generated",
+      "query": "如何从HTTP响应头中提取Cookiejar需要的格式？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "MockResponse",
+      "score": 1,
+      "response": "在 requests/cookies.py 的 extract_cookies_to_jar 中实现。"
+    },
+    {
+      "id": "AUTO_024",
+      "category": "auto_generated",
+      "query": "怎么把HTTP响应的cookie提取并保存到指定的cookie容器里？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "extract_cookies_to_jar",
+      "score": 2,
+      "response": "在 requests/cookies.py 的 extract_cookies_to_jar 中实现。"
+    },
+    {
+      "id": "AUTO_025",
+      "category": "auto_generated",
+      "query": "怎么从cookie对象生成请求用的Cookie请求头字符串？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "get_cookie_header",
+      "score": 2,
+      "response": "在 requests/cookies.py 的 get_cookie_header 中实现。"
+    },
+    {
+      "id": "AUTO_026",
+      "category": "auto_generated",
+      "query": "如何删除指定名称的Cookie？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "remove_cookie_by_name",
+      "score": 1,
+      "response": "在 requests/cookies.py 的 __delitem__ 中实现。"
+    },
+    {
+      "id": "AUTO_027",
+      "category": "auto_generated",
+      "query": "在Cookie Jar里遇到同名Cookie冲突时，如何指定域名和路径来获取正确的值？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "CookieConflictError",
+      "score": 0,
+      "response": "涉及的代码段落："
+    },
+    {
+      "id": "AUTO_028",
+      "category": "auto_generated",
+      "query": "如何在Python中像字典一样操作HTTP响应返回的Cookie容器？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "RequestsCookieJar",
+      "score": 1,
+      "response": "涉及调用链：requests/cookies.py → MockResponse → MockRequest → MockResponse → Cookies → iteritems → dict"
+    },
+    {
+      "id": "AUTO_029",
+      "category": "auto_generated",
+      "query": "怎么创建一个只在当前域名下生效的简单cookie？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "create_cookie",
+      "score": 2,
+      "response": "在 requests/cookies.py 的 create_cookie 中实现。"
+    },
+    {
+      "id": "AUTO_030",
+      "category": "auto_generated",
+      "query": "如何把Morsel对象转换成包含单一键值对的Cookie？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "morsel_to_cookie",
+      "score": 2,
+      "response": "在 requests/cookies.py 的 morsel_to_cookie 中实现。"
+    },
+    {
+      "id": "AUTO_031",
+      "category": "auto_generated",
+      "query": "如何用字典格式的键值对快速生成一个CookieJar对象？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "cookiejar_from_dict",
+      "score": 1,
+      "response": "在 requests/cookies.py 的 __init__ 中实现。"
+    },
+    {
+      "id": "AUTO_032",
+      "category": "auto_generated",
+      "query": "如何把新cookie合并到现有的cookie容器里？",
+      "expected_file": "requests/cookies.py",
+      "expected_function": "merge_cookies",
+      "score": 2,
+      "response": "在 requests/cookies.py 的 merge_cookies 中实现。"
+    },
+    {
+      "id": "AUTO_033",
+      "category": "auto_generated",
+      "query": "处理网络请求时遇到不明确的错误该怎么解决",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "RequestException",
+      "score": 2,
+      "response": "在 requests/exceptions.py 的 RequestException 中实现。"
+    },
+    {
+      "id": "AUTO_034",
+      "category": "auto_generated",
+      "query": "发送了一个无效的JSON数据，请求报错了怎么办？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "InvalidJSONError",
+      "score": 2,
+      "response": "在 requests/exceptions.py 的 InvalidJSONError 中实现。"
+    },
+    {
+      "id": "AUTO_035",
+      "category": "auto_generated",
+      "query": "我在用requests库时，返回的内容不是合法的JSON格式，怎么处理？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "JSONDecodeError",
+      "score": 1,
+      "response": "在 requests/exceptions.py 的 InvalidJSONError 中实现。"
+    },
+    {
+      "id": "AUTO_036",
+      "category": "auto_generated",
+      "query": "在请求接口时返回了HTTP错误，怎么捕获这种异常？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "HTTPError",
+      "score": 2,
+      "response": "在 requests/exceptions.py 的 HTTPError 中实现。"
+    },
+    {
+      "id": "AUTO_037",
+      "category": "auto_generated",
+      "query": "我在用requests库时遇到连接失败，怎么捕获这种异常？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "ConnectionError",
+      "score": 1,
+      "response": "在 requests/exceptions.py 的 ConnectTimeout 中实现。"
+    },
+    {
+      "id": "AUTO_038",
+      "category": "auto_generated",
+      "query": "为什么我通过代理发送请求时会报错，提示代理错误？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "ProxyError",
+      "score": 2,
+      "response": "在 requests/exceptions.py 的 ProxyError 中实现。"
+    },
+    {
+      "id": "AUTO_039",
+      "category": "auto_generated",
+      "query": "我在用Python的requests库时遇到了SSL证书错误，该怎么排查？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "SSLError",
+      "score": 2,
+      "response": "在 requests/exceptions.py 的 SSLError 中实现。"
+    },
+    {
+      "id": "AUTO_040",
+      "category": "auto_generated",
+      "query": "我发送请求后长时间没有响应，如何捕获超时相关的异常？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "Timeout",
+      "score": 2,
+      "response": "在 requests/exceptions.py 的 Timeout 中实现。"
+    },
+    {
+      "id": "AUTO_041",
+      "category": "auto_generated",
+      "query": "发送请求时连接远程服务器超时了，重试能解决吗？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "ConnectTimeout",
+      "score": 2,
+      "response": "在 requests/exceptions.py 的 ConnectTimeout 中实现。"
+    },
+    {
+      "id": "AUTO_042",
+      "category": "auto_generated",
+      "query": "我在发送请求时服务器超时没有返回数据，该怎么处理这个异常？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "ReadTimeout",
+      "score": 2,
+      "response": "在 requests/exceptions.py 的 ReadTimeout 中实现。"
+    },
+    {
+      "id": "AUTO_043",
+      "category": "auto_generated",
+      "query": "发送请求时提示需要提供有效的网址，该怎么解决？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "URLRequired",
+      "score": 2,
+      "response": "在 requests/exceptions.py 的 URLRequired 中实现。"
+    },
+    {
+      "id": "AUTO_044",
+      "category": "auto_generated",
+      "query": "在爬取网页时遇到重定向次数过多，应该如何处理这个异常？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "TooManyRedirects",
+      "score": 2,
+      "response": "在 requests/exceptions.py 的 TooManyRedirects 中实现。"
+    },
+    {
+      "id": "AUTO_045",
+      "category": "auto_generated",
+      "query": "我访问一个网址时提示缺少协议头，这是怎么回事？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "MissingSchema",
+      "score": 2,
+      "response": "在 requests/exceptions.py 的 MissingSchema 中实现。"
+    },
+    {
+      "id": "AUTO_046",
+      "category": "auto_generated",
+      "query": "用了一个无效的URL协议，访问网站时提示出错怎么办",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "InvalidSchema",
+      "score": 1,
+      "response": "在 requests/exceptions.py 的 MissingSchema 中实现。"
+    },
+    {
+      "id": "AUTO_047",
+      "category": "auto_generated",
+      "query": "为什么我输入的网址会提示无效，是不是格式有问题？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "InvalidURL",
+      "score": 2,
+      "response": "在 requests/exceptions.py 的 InvalidURL 中实现。"
+    },
+    {
+      "id": "AUTO_048",
+      "category": "auto_generated",
+      "query": "为什么我传了一个请求头但提示我头部信息无效？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "InvalidHeader",
+      "score": 2,
+      "response": "在 requests/exceptions.py 的 InvalidHeader 中实现。"
+    },
+    {
+      "id": "AUTO_049",
+      "category": "auto_generated",
+      "query": "设置代理后请求报错，提示代理地址格式不对怎么办？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "InvalidProxyURL",
+      "score": 2,
+      "response": "在 requests/exceptions.py 的 InvalidProxyURL 中实现。"
+    },
+    {
+      "id": "AUTO_050",
+      "category": "auto_generated",
+      "query": "我在用requests下载文件时遇到分块编码错误，该怎么处理？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "ChunkedEncodingError",
+      "score": 2,
+      "response": "在 requests/exceptions.py 的 ChunkedEncodingError 中实现。"
+    },
+    {
+      "id": "AUTO_051",
+      "category": "auto_generated",
+      "query": "我请求一个网页时遇到内容解码失败的错误，该怎么处理？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "ContentDecodingError",
+      "score": 2,
+      "response": "在 requests/exceptions.py 的 ContentDecodingError 中实现。"
+    },
+    {
+      "id": "AUTO_052",
+      "category": "auto_generated",
+      "query": "为什么读取响应内容时报错说数据已经被消费了？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "StreamConsumedError",
+      "score": 2,
+      "response": "在 requests/exceptions.py 的 StreamConsumedError 中实现。"
+    },
+    {
+      "id": "AUTO_053",
+      "category": "auto_generated",
+      "query": "我在使用requests库时，重试机制失败了，如何捕获这个异常？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "RetryError",
+      "score": 2,
+      "response": "在 requests/exceptions.py 的 RetryError 中实现。"
+    },
+    {
+      "id": "AUTO_054",
+      "category": "auto_generated",
+      "query": "请求重试时遇到请求体无法重置的错误，怎么办？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "UnrewindableBodyError",
+      "score": 1,
+      "response": "在 requests/exceptions.py 的 RetryError 中实现。"
+    },
+    {
+      "id": "AUTO_055",
+      "category": "auto_generated",
+      "query": "我想知道在Requests库中处理警告信息时应该捕获哪种警告基类。",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "RequestsWarning",
+      "score": 2,
+      "response": "在 requests/exceptions.py 的 RequestsWarning 中实现。"
+    },
+    {
+      "id": "AUTO_056",
+      "category": "auto_generated",
+      "query": "为什么打开文本文件时提示二进制长度不匹配？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "FileModeWarning",
+      "score": 2,
+      "response": "在 requests/exceptions.py 的 FileModeWarning 中实现。"
+    },
+    {
+      "id": "AUTO_057",
+      "category": "auto_generated",
+      "query": "我在用requests库时收到版本不匹配的警告，该怎么处理？",
+      "expected_file": "requests/exceptions.py",
+      "expected_function": "RequestsDependencyWarning",
+      "score": 2,
+      "response": "在 requests/exceptions.py 的 RequestsDependencyWarning 中实现。"
+    },
+    {
+      "id": "AUTO_058",
+      "category": "auto_generated",
+      "query": "如何在发送请求时让钩子函数自动处理返回的数据？",
+      "expected_file": "requests/hooks.py",
+      "expected_function": "dispatch_hook",
+      "score": 2,
+      "response": "涉及调用链：requests/models.py → requests/sessions.py → requests/adapters.py → requests/hooks.py → dispatch_hook"
+    },
+    {
+      "id": "AUTO_059",
+      "category": "auto_generated",
+      "query": "如何创建一个不区分大小写的字典来存储HTTP请求头？",
+      "expected_file": "requests/structures.py",
+      "expected_function": "CaseInsensitiveDict",
+      "score": 1,
+      "response": "在 requests/utils.py 的 CaseInsensitiveDict 中实现。"
+    },
+    {
+      "id": "AUTO_060",
+      "category": "auto_generated",
+      "query": "我想查一个字典对象，但希望访问不存在的键时返回默认值而不是报错。",
+      "expected_file": "requests/structures.py",
+      "expected_function": "LookupDict",
+      "score": 2,
+      "response": "在 requests/structures.py 的 LookupDict 中实现。"
+    },
+    {
+      "id": "AUTO_061",
+      "category": "auto_generated",
+      "query": "怎么把一个字典转换成更新请求头用的内部序列格式？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "dict_to_sequence",
+      "score": 2,
+      "response": "在 requests/utils.py 的 dict_to_sequence 中实现。"
+    },
+    {
+      "id": "AUTO_062",
+      "category": "auto_generated",
+      "query": "怎么从netrc文件里获取某个网址的登录认证信息？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "get_netrc_auth",
+      "score": 2,
+      "response": "在 requests/utils.py 的 get_netrc_auth 中实现。"
+    },
+    {
+      "id": "AUTO_063",
+      "category": "auto_generated",
+      "query": "怎么从响应对象里猜出下载文件的原始文件名？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "guess_filename",
+      "score": 2,
+      "response": "在 requests/utils.py 的 guess_filename 中实现。"
+    },
+    {
+      "id": "AUTO_064",
+      "category": "auto_generated",
+      "query": "如何在解压zip文件后获取内部文件的真实路径？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "extract_zipped_paths",
+      "score": 2,
+      "response": "在 requests/utils.py 的 extract_zipped_paths 中实现。"
+    },
+    {
+      "id": "AUTO_065",
+      "category": "auto_generated",
+      "query": "如何以原子操作的方式安全地将文件写入磁盘避免数据损坏",
+      "expected_file": "requests/utils.py",
+      "expected_function": "atomic_open",
+      "score": 2,
+      "response": "在 requests/utils.py 的 atomic_open 中实现。"
+    },
+    {
+      "id": "AUTO_066",
+      "category": "auto_generated",
+      "query": "怎么把键值对列表转成有序字典？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "from_key_val_list",
+      "score": 2,
+      "response": "在 requests/utils.py 的 from_key_val_list 中实现。"
+    },
+    {
+      "id": "AUTO_067",
+      "category": "auto_generated",
+      "query": "如何将一个列表或对象转换成键值对元组的列表形式？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "to_key_val_list",
+      "score": 2,
+      "response": "在 requests/utils.py 的 to_key_val_list 中实现。"
+    },
+    {
+      "id": "AUTO_068",
+      "category": "auto_generated",
+      "query": "怎么解析可能含引号逗号的逗号分隔列表字符串",
+      "expected_file": "requests/utils.py",
+      "expected_function": "parse_list_header",
+      "score": 2,
+      "response": "在 requests/utils.py 的 parse_list_header 中实现。"
+    },
+    {
+      "id": "AUTO_069",
+      "category": "auto_generated",
+      "query": "如何将类似foo=\"is a fish\"的键值对字符串转换成字典",
+      "expected_file": "requests/utils.py",
+      "expected_function": "parse_dict_header",
+      "score": 2,
+      "response": "在 requests/utils.py 的 parse_dict_header 中实现。"
+    },
+    {
+      "id": "AUTO_070",
+      "category": "auto_generated",
+      "query": "怎么把HTTP响应头里的引号去掉，还原成原始值？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "unquote_header_value",
+      "score": 1,
+      "response": "在 requests/utils.py 的 unquote_header 中实现。"
+    },
+    {
+      "id": "AUTO_071",
+      "category": "auto_generated",
+      "query": "怎么把CookieJar对象转换成字典格式的键值对？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "dict_from_cookiejar",
+      "score": 2,
+      "response": "在 requests/utils.py 的 dict_from_cookiejar 中实现。"
+    },
+    {
+      "id": "AUTO_072",
+      "category": "auto_generated",
+      "query": "怎么把字典格式的cookie数据添加到CookieJar对象里？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "add_dict_to_cookiejar",
+      "score": 0,
+      "response": "在 requests/cookies.py 的 merge_cookies 中实现。"
+    },
+    {
+      "id": "AUTO_073",
+      "category": "auto_generated",
+      "query": "怎么从网页返回的二进制内容中自动检测出字符编码格式",
+      "expected_file": "requests/utils.py",
+      "expected_function": "get_encodings_from_content",
+      "score": 1,
+      "response": "在 requests/utils.py 的 guess_json_utf 中实现。"
+    },
+    {
+      "id": "AUTO_074",
+      "category": "auto_generated",
+      "query": "怎么从HTTP响应头里提取出字符编码信息？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "get_encoding_from_headers",
+      "score": 2,
+      "response": "在 requests/utils.py 的 get_encoding_from_headers 中实现。"
+    },
+    {
+      "id": "AUTO_075",
+      "category": "auto_generated",
+      "query": "怎么让从网络请求返回的迭代器内容自动解码成中文？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "stream_decode_response_unicode",
+      "score": 0,
+      "response": "在 requests/models.py 的 iter_content 中实现。"
+    },
+    {
+      "id": "AUTO_076",
+      "category": "auto_generated",
+      "query": "如何把一个字符串按固定长度分段，逐段处理？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "iter_slices",
+      "score": 2,
+      "response": "在 requests/utils.py 的 iter_slices 中实现。"
+    },
+    {
+      "id": "AUTO_077",
+      "category": "auto_generated",
+      "query": "如何从HTTP响应中获取Unicode编码的文本内容",
+      "expected_file": "requests/utils.py",
+      "expected_function": "get_unicode_from_response",
+      "score": 0,
+      "response": "在 requests/models.py 的 text 中实现。"
+    },
+    {
+      "id": "AUTO_078",
+      "category": "auto_generated",
+      "query": "我想把URL中非保留字符的百分号编码还原成原始字符。",
+      "expected_file": "requests/utils.py",
+      "expected_function": "unquote_unreserved",
+      "score": 2,
+      "response": "在 requests/utils.py 的 unquote_unreserved 中实现。"
+    },
+    {
+      "id": "AUTO_079",
+      "category": "auto_generated",
+      "query": "我有个网址被转义了，怎么才能把它恢复成标准格式？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "requote_uri",
+      "score": 1,
+      "response": "在 requests/utils.py 的 get_unicode_from_response 中实现。"
+    },
+    {
+      "id": "AUTO_080",
+      "category": "auto_generated",
+      "query": "我想检查某个IP地址是否属于指定的子网范围，应该怎么做？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "address_in_network",
+      "score": 2,
+      "response": "在 requests/utils.py 的 address_in_network 中实现。"
+    },
+    {
+      "id": "AUTO_081",
+      "category": "auto_generated",
+      "query": "如何将子网掩码的位数格式转换为点分十进制格式？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "dotted_netmask",
+      "score": 2,
+      "response": "在 requests/utils.py 的 dotted_netmask 中实现。"
+    },
+    {
+      "id": "AUTO_082",
+      "category": "auto_generated",
+      "query": "如何判断一个字符串是不是合法的IPv4地址？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "is_ipv4_address",
+      "score": 2,
+      "response": "在 requests/utils.py 的 is_ipv4_address 中实现。"
+    },
+    {
+      "id": "AUTO_083",
+      "category": "auto_generated",
+      "query": "如何判断一个IP地址段是否属于有效的CIDR格式？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "is_valid_cidr",
+      "score": 2,
+      "response": "在 requests/utils.py 的 is_valid_cidr 中实现。"
+    },
+    {
+      "id": "AUTO_084",
+      "category": "auto_generated",
+      "query": "我想临时修改一个环境变量，用完再恢复原值，怎么实现？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "set_environ",
+      "score": 2,
+      "response": "在 requests/utils.py 的 set_environ 中实现。"
+    },
+    {
+      "id": "AUTO_085",
+      "category": "auto_generated",
+      "query": "怎么判断某个地址是否需要绕过代理直接连接？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "should_bypass_proxies",
+      "score": 2,
+      "response": "在 requests/utils.py 的 should_bypass_proxies 中实现。"
+    },
+    {
+      "id": "AUTO_086",
+      "category": "auto_generated",
+      "query": "如何在Python中获取当前系统环境变量中设置的代理信息？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "get_environ_proxies",
+      "score": 2,
+      "response": "在 requests/utils.py 的 get_environ_proxies 中实现。"
+    },
+    {
+      "id": "AUTO_087",
+      "category": "auto_generated",
+      "query": "我在请求某个链接时，想根据代理配置自动选择合适的代理。",
+      "expected_file": "requests/utils.py",
+      "expected_function": "select_proxy",
+      "score": 2,
+      "response": "在 requests/utils.py 的 select_proxy 中实现。"
+    },
+    {
+      "id": "AUTO_088",
+      "category": "auto_generated",
+      "query": "如何在请求中根据NO_PROXY设置自动排除不需要代理的地址？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "resolve_proxies",
+      "score": 1,
+      "response": "涉及调用链：requests/utils.py → should_bypass_proxies → requests/sessions.py → rebuild_proxies"
+    },
+    {
+      "id": "AUTO_089",
+      "category": "auto_generated",
+      "query": "怎么查看Python的requests库默认发送的用户代理字符串是什么？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "default_user_agent",
+      "score": 2,
+      "response": "在 requests/utils.py 的 default_user_agent 中实现。"
+    },
+    {
+      "id": "AUTO_090",
+      "category": "auto_generated",
+      "query": "如何在Python中获取Requests库默认请求头的不区分大小写的字典格式？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "default_headers",
+      "score": 0,
+      "response": "涉及调用链：requests/hooks.py → default_hooks"
+    },
+    {
+      "id": "AUTO_091",
+      "category": "auto_generated",
+      "query": "如何从HTTP响应头中解析出多个链接及其属性信息？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "parse_header_links",
+      "score": 2,
+      "response": "在 requests/utils.py 的 parse_header_links 中实现。"
+    },
+    {
+      "id": "AUTO_092",
+      "category": "auto_generated",
+      "query": "怎么猜测一段文本的JSON编码格式并返回字符串结果",
+      "expected_file": "requests/utils.py",
+      "expected_function": "guess_json_utf",
+      "score": 2,
+      "response": "在 requests/utils.py 的 guess_json_utf 中实现。"
+    },
+    {
+      "id": "AUTO_093",
+      "category": "auto_generated",
+      "query": "我有个网址可能没写协议头，怎么给它自动加上https？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "prepend_scheme_if_needed",
+      "score": 1,
+      "response": "在 requests/utils.py 的 resolve_scheme 中实现。"
+    },
+    {
+      "id": "AUTO_094",
+      "category": "auto_generated",
+      "query": "我想从带用户名密码的URL中提取出登录信息。",
+      "expected_file": "requests/utils.py",
+      "expected_function": "get_auth_from_url",
+      "score": 2,
+      "response": "在 requests/utils.py 的 get_auth_from_url 中实现。"
+    },
+    {
+      "id": "AUTO_095",
+      "category": "auto_generated",
+      "query": "我想检查HTTP请求头中是否含有非法字符或空格。",
+      "expected_file": "requests/utils.py",
+      "expected_function": "check_header_validity",
+      "score": 2,
+      "response": "在 requests/utils.py 的 check_header_validity 中实现。"
+    },
+    {
+      "id": "AUTO_096",
+      "category": "auto_generated",
+      "query": "怎么去掉网址里的锚点和登录验证信息？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "urldefragauth",
+      "score": 2,
+      "response": "在 requests/utils.py 的 urldefragauth 中实现。"
+    },
+    {
+      "id": "AUTO_097",
+      "category": "auto_generated",
+      "query": "怎么让请求的文件在重定向时重新从头读取？",
+      "expected_file": "requests/utils.py",
+      "expected_function": "rewind_body",
+      "score": 2,
+      "response": "在 requests/utils.py 的 rewind_body 中实现。"
+    }
+  ]
+}
